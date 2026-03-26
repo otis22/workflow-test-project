@@ -37,4 +37,4 @@ jobs:
 
       - name: Run Infection
         if: steps.check_code.outputs.php_files != '0'
-        run: vendor/bin/infection --min-msi=0 --min-covered-msi=0 --threads=4 --no-progress --test-framework-options="--testsuite=Unit"
+        run: vendor/bin/infection --threads=4 --no-progress --test-framework-options="--testsuite=Unit" --show-mutations

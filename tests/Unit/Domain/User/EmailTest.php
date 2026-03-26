@@ -36,6 +36,14 @@ final class EmailTest extends TestCase
     }
 
     #[Test]
+    public function it_trims_whitespace(): void
+    {
+        $email = new Email('  user@example.com  ');
+
+        $this->assertSame('user@example.com', $email->value());
+    }
+
+    #[Test]
     public function it_compares_equality(): void
     {
         $email1 = new Email('user@example.com');

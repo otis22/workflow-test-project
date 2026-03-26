@@ -26,7 +26,7 @@ final class Project
 
     public function isMember(int $userId): bool
     {
-        return isset($this->memberIds[$userId]);
+        return ($this->memberIds[$userId] ?? false) === true;
     }
 
     public function addMember(int $userId): void
