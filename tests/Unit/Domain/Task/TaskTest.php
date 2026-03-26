@@ -61,6 +61,19 @@ final class TaskTest extends TestCase
     }
 
     #[Test]
+    public function it_rejects_whitespace_only_title(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Task::create(
+            id: 1,
+            project: $this->makeProject(),
+            creatorId: 1,
+            title: '   ',
+        );
+    }
+
+    #[Test]
     public function it_rejects_non_member_creator(): void
     {
         $this->expectException(DomainException::class);

@@ -9,6 +9,6 @@
     "logs": {
         "text": "storage/logs/infection.log"
     },
-    "minMsi": 0,
-    "minCoveredMsi": 0
+    "minMsi": 90,
+    "minCoveredMsi": 90
 }

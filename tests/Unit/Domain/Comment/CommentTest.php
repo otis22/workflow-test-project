@@ -69,4 +69,18 @@ final class CommentTest extends TestCase
             project: $this->makeProject(ownerId: 1),
         );
     }
+
+    #[Test]
+    public function it_rejects_whitespace_only_body(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        Comment::create(
+            id: 1,
+            taskId: 10,
+            authorId: 1,
+            body: '   ',
+            project: $this->makeProject(ownerId: 1),
+        );
+    }
 }

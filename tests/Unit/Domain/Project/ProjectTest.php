@@ -36,6 +36,14 @@ final class ProjectTest extends TestCase
     }
 
     #[Test]
+    public function it_rejects_whitespace_only_name(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        new Project(id: 1, ownerId: 10, name: '   ', description: '');
+    }
+
+    #[Test]
     public function it_allows_empty_description(): void
     {
         $project = new Project(id: 1, ownerId: 10, name: 'Test', description: '');
@@ -75,5 +83,15 @@ final class ProjectTest extends TestCase
         $project->addMember(10);
 
         $this->assertTrue($project->isMember(10));
+    }
+
+    #[Test]
+    public function added_member_is_recognized(): void
+    {
+        $project = new Project(id: 1, ownerId: 10, name: 'Test', description: '');
+        $project->addMember(20);
+
+        $this->assertTrue($project->isMember(20));
+        $this->assertFalse($project->isMember(30));
     }
 }
