@@ -53,6 +53,19 @@
 - Smoke tests workflow — только ручной запуск (workflow_dispatch), запускается после завершения этапа по воркфлоу.
 - E2E workflow будет создан в задаче 8.1 когда появятся Blade-шаблоны и маршруты для тестирования.
 
+## Задачи 3.1–3.6: Аутентификация
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- Application services (RegisterUser, LoginUser, LogoutUser) — тонкие обёртки над Laravel Auth, бизнес-логика минимальна.
+- Blade layout с inline CSS — без Tailwind/Vite для простоты MVP.
+- Пароль минимум 8 символов, confirmed.
+- `/` редиректит на `/login`.
+- Guest middleware на login/register, auth middleware на остальное.
+- `projects.index` — временный заглушечный маршрут, будет заменён в этапе 4.
+
 ## Задача 2.1: Сущность User
 
 **Дата:** 2026-03-26
