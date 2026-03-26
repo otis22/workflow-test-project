@@ -52,3 +52,14 @@
 - Mutation tests workflow запускается на каждый push/PR, но пропускает Infection если нет PHP-файлов в Domain/Application (graceful skip).
 - Smoke tests workflow — только ручной запуск (workflow_dispatch), запускается после завершения этапа по воркфлоу.
 - E2E workflow будет создан в задаче 8.1 когда появятся Blade-шаблоны и маршруты для тестирования.
+
+## Задача 2.1: Сущность User
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- User — readonly доменная сущность (не Eloquent). Eloquent model останется в app/Models как инфраструктурный слой.
+- Email — value object с валидацией через filter_var и реализацией Stringable.
+- ID — int (соответствует auto-increment в PostgreSQL). UUID можно добавить позже без изменения домена.
+- password_hash не хранится в доменной сущности — это ответственность инфраструктуры (Eloquent model).
