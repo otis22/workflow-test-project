@@ -40,7 +40,8 @@ final class ProjectTest extends TestCase
 
         $response->assertRedirect('/projects');
         $this->assertDatabaseHas('projects', ['name' => 'My Project', 'owner_id' => $user->id]);
-        $this->assertDatabaseHas('project_members', ['project_id' => 1, 'user_id' => $user->id]);
+        $project = Project::where('name', 'My Project')->first();
+        $this->assertDatabaseHas('project_members', ['project_id' => $project->id, 'user_id' => $user->id]);
     }
 
     #[Test]

@@ -13,14 +13,21 @@
 <div style="margin:0.5rem 0 1rem;">
     <a href="{{ route('projects.show', $project) }}" style="{{ !request('status') ? 'font-weight:bold' : '' }}">All</a>
     @foreach(\App\Domain\Task\TaskStatus::cases() as $s)
-        | <a href="{{ route('projects.show', ['project' => $project, 'status' => $s->value]) }}"
+        | <a href="{{ route('projects.show', ['project' => $project, 'status' => $s->value, 'due' => request('due')]) }}"
              style="{{ request('status') === $s->value ? 'font-weight:bold' : '' }}">{{ ucfirst(str_replace('_', ' ', $s->value)) }}</a>
     @endforeach
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="{{ route('projects.show', ['project' => $project, 'status' => request('status'), 'due' => 'upcoming']) }}"
+       style="{{ request('due') === 'upcoming' ? 'font-weight:bold' : '' }}">Upcoming</a>
+    | <a href="{{ route('projects.show', ['project' => $project, 'status' => request('status'), 'due' => 'overdue']) }}"
+         style="{{ request('due') === 'overdue' ? 'font-weight:bold' : '' }}">Overdue</a>
 </div>
 
 @php
     $tasks = $project->tasks()
         ->when(request('status'), fn($q) => $q->where('status', request('status')))
+        ->when(request('due') === 'upcoming', fn($q) => $q->whereNotNull('due_date')->where('due_date', '>=', now())->orderBy('due_date'))
+        ->when(request('due') === 'overdue', fn($q) => $q->whereNotNull('due_date')->where('due_date', '<', now()))
         ->latest()
         ->get();
 @endphp
