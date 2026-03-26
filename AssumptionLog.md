@@ -93,3 +93,15 @@
 ### Допущения
 
 - Project.memberIds — in-memory коллекция, не персистентная. При реализации infrastructure слоя потребуется загрузка из БД.
+
+## Задачи 4.1–4.5: Проекты
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- Eloquent model Project с BelongsToMany для members (pivot: project_members).
+- CreateProject service автоматически attach'ит владельца как участника.
+- ListUserProjects фильтрует по whereHas members.
+- project_members.created_at nullable (SQLite не поддерживает useCurrent в миграциях).
+- PHPStan parallel mode вызывал OOM в Docker — ограничен до 1 процесса в phpstan.neon.
