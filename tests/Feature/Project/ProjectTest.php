@@ -78,4 +78,15 @@ final class ProjectTest extends TestCase
 
         $this->actingAs($user)->get("/projects/{$project->id}")->assertStatus(200)->assertSee($project->name);
     }
+
+    #[Test]
+    public function non_member_cannot_view_project(): void
+    {
+        $owner = User::factory()->create();
+        $stranger = User::factory()->create();
+        $project = Project::factory()->create(['owner_id' => $owner->id]);
+        $project->members()->attach($owner->id);
+
+        $this->actingAs($stranger)->get("/projects/{$project->id}")->assertStatus(403);
+    }
 }

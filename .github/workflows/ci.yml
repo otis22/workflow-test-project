@@ -56,7 +56,7 @@ jobs:
         run: vendor/bin/pint --test
 
       - name: Static analysis (PHPStan)
-        run: vendor/bin/phpstan analyse --no-progress
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M
 
       - name: Copy-paste detection (PHPCPD)
         run: php vendor/systemsdk/phpcpd/phpcpd app/

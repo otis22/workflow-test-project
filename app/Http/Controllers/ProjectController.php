@@ -25,8 +25,12 @@ final class ProjectController extends Controller
         return view('projects.create');
     }
 
-    public function show(Project $project): View
+    public function show(Request $request, Project $project): View
     {
+        if (! $project->members()->where('user_id', $request->user()->id)->exists()) {
+            abort(403);
+        }
+
         return view('projects.show', ['project' => $project]);
     }
 

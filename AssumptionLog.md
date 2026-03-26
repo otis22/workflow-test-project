@@ -64,7 +64,7 @@
 - Пароль минимум 8 символов, confirmed.
 - `/` редиректит на `/login`.
 - Guest middleware на login/register, auth middleware на остальное.
-- `projects.index` — временный заглушечный маршрут, будет заменён в этапе 4.
+- Маршруты проектов реализованы в этапе 4 (index, create, store, show).
 
 ## Задача 2.1: Сущность User
 
@@ -103,5 +103,28 @@
 - Eloquent model Project с BelongsToMany для members (pivot: project_members).
 - CreateProject service автоматически attach'ит владельца как участника.
 - ListUserProjects фильтрует по whereHas members.
-- project_members.created_at nullable (SQLite не поддерживает useCurrent в миграциях).
+- project_members.created_at nullable (для совместимости с SQLite в тестах через RefreshDatabase).
 - PHPStan parallel mode вызывал OOM в Docker — ограничен до 1 процесса в phpstan.neon.
+
+## Периодический Review (после этапов 1–4)
+
+**Дата:** 2026-03-26
+
+### Исправлено сразу
+
+- **CRITICAL**: ProjectController@show() не проверял membership — добавлена проверка + тест на 403.
+- README.md заменён с generic Laravel boilerplate на описание TaskFlow с setup и quality checks.
+- AssumptionLog: исправлена устаревшая ссылка на SQLite, удалена пометка о заглушке projects.index.
+- PHPStan: добавлен --memory-limit=512M в CI workflow.
+
+### Добавлено в Roadmap [review]
+
+- Авторизация membership на все будущие project-scoped routes.
+- Автоматизация permissions storage/bootstrap/cache в Dockerfile.
+
+### Оценка
+
+- Архитектура: Domain слой чистый (0 framework deps), Application слой использует Eloquent напрямую — допустимо per tech requirements "pragmatic Laravel-structure".
+- CI: все инструменты покрыты, CI стабильно зелёный.
+- Безопасность: CSRF ок, session security ок, auth flow ок. Найденная дыра в show() исправлена.
+- 42 теста, 0 warnings.
