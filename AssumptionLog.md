@@ -128,3 +128,16 @@
 - CI: все инструменты покрыты, CI стабильно зелёный.
 - Безопасность: CSRF ок, session security ок, auth flow ок. Найденная дыра в show() исправлена.
 - 42 теста, 0 warnings.
+
+## Задачи 5.1–5.8 + 6.1–6.4: Задачи и Комментарии
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- Этапы 5 и 6 объединены — страница задачи показывает комментарии, поэтому comments migration нужна для тестов задач.
+- Все project-scoped маршруты (tasks, comments) проверяют membership через authorizeProjectMember().
+- Assignee валидируется через in: список member IDs (а не просто exists:users).
+- UpdateTask application service проверяет membership assignee.
+- Status filter на странице проекта через query parameter `?status=done`.
+- Comment model: UPDATED_AT = null (comments immutable по дизайну).
