@@ -31,3 +31,24 @@
 - Rector настроен с `php83`, `deadCode`, `codeQuality`, `typeDeclarations` — применил `#[Override]` атрибуты.
 - Infection MSI пороги 0/0 — будут подняты после появления доменного кода (задача 8.2).
 - Laravel Pint уже был в проекте из коробки — конфигурация по умолчанию (Laravel preset).
+
+## Задача 1.4: CI-пайплайн
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- PHPUnit в CI работает на SQLite in-memory (стандарт phpunit.xml) — достаточно для unit/feature тестов, PostgreSQL доступен для будущих интеграционных тестов.
+- Coverage check пока информационный — порог 80% будет блокировать merge после задачи 8.3.
+- PostgreSQL 16 service в CI настроен и готов к использованию.
+- PHPCPD запускается через `php vendor/systemsdk/phpcpd/phpcpd` (нет symlink в vendor/bin).
+
+## Задача 1.5: Дополнительные CI workflows
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- Mutation tests workflow запускается на каждый push/PR, но пропускает Infection если нет PHP-файлов в Domain/Application (graceful skip).
+- Smoke tests workflow — только ручной запуск (workflow_dispatch), запускается после завершения этапа по воркфлоу.
+- E2E workflow будет создан в задаче 8.1 когда появятся Blade-шаблоны и маршруты для тестирования.

@@ -1,0 +1,40 @@
+name: Mutation Tests
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: ['**']
+
+jobs:
+  mutation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_sqlite, zip, bcmath, xdebug
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Check for domain/application code
+        id: check_code
+        run: |
+          count=$(find app/Domain app/Application -name "*.php" ! -name ".gitkeep" 2>/dev/null | wc -l)
+          echo "php_files=$count" >> "$GITHUB_OUTPUT"
+
+      - name: Run Infection
+        if: steps.check_code.outputs.php_files != '0'
+        run: vendor/bin/infection --min-msi=0 --min-covered-msi=0 --threads=4 --no-progress
