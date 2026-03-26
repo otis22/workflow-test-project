@@ -4,7 +4,7 @@
 
 - [x] 1.1 Инициализация Laravel-проекта — создать Laravel-приложение, настроить структуру каталогов с разделением на domain/application/infrastructure/web слои
 - [x] 1.2 Docker Compose — настроить контейнеры для приложения, веб-сервера и базы данных
-- [ ] 1.3 Инструменты качества — подключить Pint, PHPStan, Rector, PHPCPD, Infection, настроить конфигурации
+- [x] 1.3 Инструменты качества — подключить Pint, PHPStan, Rector, PHPCPD, Infection, настроить конфигурации
 - [ ] 1.4 CI-пайплайн — настроить GitHub Actions: lint, unit tests с coverage, phpstan, phpcpd, rector dry-run, composer audit
 - [ ] 1.5 Дополнительные CI workflows — настроить workflows для E2E, smoke tests, mutation tests
 

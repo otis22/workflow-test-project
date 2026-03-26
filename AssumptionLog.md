@@ -19,3 +19,15 @@
 
 - Docker Compose `docker compose up` требует предварительного `chmod 777 storage bootstrap/cache` — нужно автоматизировать в Dockerfile или entrypoint.
 - SQLite удалён, проект использует только PostgreSQL.
+
+## Задача 1.3: Инструменты качества
+
+**Дата:** 2026-03-26
+
+### Решения
+
+- `sebastian/phpcpd` abandoned и несовместим с Symfony Console 7 — заменён на `systemsdk/phpcpd` v8.3.0 (совместимый форк).
+- PHPStan уровень 5 — достаточный для MVP, можно повысить позже.
+- Rector настроен с `php83`, `deadCode`, `codeQuality`, `typeDeclarations` — применил `#[Override]` атрибуты.
+- Infection MSI пороги 0/0 — будут подняты после появления доменного кода (задача 8.2).
+- Laravel Pint уже был в проекте из коробки — конфигурация по умолчанию (Laravel preset).
