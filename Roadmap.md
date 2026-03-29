@@ -23,7 +23,7 @@
 | Task 3.2 Create project flow | Implement project creation for authenticated users. | done |
 | Task 3.3 Project list page | Implement the list of projects available to the current user. | done |
 | Task 3.4 Project navigation coverage | Add automated tests for creating and opening projects. | done |
-| Task 3.5 Review stage 3 | Review the project stage for consistency with the domain model and UI spec. | todo |
+| Task 3.5 Review stage 3 | Review the project stage for consistency with the domain model and UI spec. | done |
 | Task 3.6 Smoke test stage 3 | Verify project creation and navigation in the running application. | todo |
 | Task 3.7 Changelog stage 3 | Record the completed project work in `CHANGELOG.md`. | todo |
 | Stage 4. Tasks core | Deliver task creation, editing, assignment, and state management inside projects. | todo |

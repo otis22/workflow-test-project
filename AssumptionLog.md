@@ -45,3 +45,6 @@
 - Project access is currently guarded inline in the project controller with a simple membership existence check; this keeps the MVP small and can later move into a policy once project actions grow.
 - Task 3.4 adds project navigation coverage as a dedicated e2e-style scenario so the create/open project path is verified as one user journey instead of only isolated screen tests.
 - The e2e project navigation flow remains request-driven, which is still sufficient for the current server-rendered MVP stage and keeps the pipeline lightweight.
+- Stage 3 review confirmed that the projects slice matches the domain artifact: a project has an owner, membership is stored separately, the owner is automatically a member, and the authenticated UI exposes project list/create/open flows.
+- Stage 3 security review did not reveal unauthorized access gaps beyond the intentionally simple inline membership guard on `projects.show`; `composer audit` also remained clean during the review.
+- The review found one documentation mismatch: `README.md` did not yet describe the current functional progress through projects, so it was updated immediately during the review task.
