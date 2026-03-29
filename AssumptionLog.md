@@ -25,3 +25,5 @@
 - Task 2.1 implements registration with a small application action (`App\Application\Auth\RegisterUser`) so user creation is not embedded in the web controller.
 - A minimal authenticated `/dashboard` page was added in Task 2.1 as the required post-registration destination; Task 2.3 will expand it into the real application shell instead of replacing the route.
 - Test commands were made explicit with `APP_ENV=testing` and in-memory SQLite overrides because local containerized development keeps a Postgres `.env`, and stable automated tests must not depend on the developer database state.
+- Task 2.2 implements login and logout directly with Laravel session auth; the first session controller stays framework-thin while credential validation and attempt throttling live in `LoginUserRequest`.
+- The login request uses Laravel rate limiting on the email/IP throttle key to keep the MVP auth flow safer without introducing extra infrastructure.

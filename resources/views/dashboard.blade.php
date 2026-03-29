@@ -9,5 +9,12 @@
                 Signed in as {{ auth()->user()->name }}. Project, task, and personal workspace widgets will be added in the next roadmap tasks.
             </p>
         </div>
+
+        <div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">Log out</button>
+            </form>
+        </div>
     </section>
 @endsection
