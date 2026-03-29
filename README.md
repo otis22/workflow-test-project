@@ -10,13 +10,6 @@ TaskFlow is a Laravel-based demo project for a strict agent workflow. The reposi
 - `AssumptionLog.md` records assumptions and architectural decisions.
 - `artifacts/` contains the source product, technical, domain, and UI documents.
 
-## Architecture Layers
-
-- `app/Domain` contains pure domain entities, enums, and rule enforcement.
-- `app/Application` contains use-case services and repository contracts.
-- `app/Infrastructure` contains concrete technical adapters, currently in-memory repositories for isolated tests.
-- `app/Http` remains the web layer entry point for future HTTP delivery.
-
 ## Local Start
 
 1. Create the local environment file:
