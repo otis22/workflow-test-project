@@ -9,3 +9,6 @@
 - Task 1.1 was implemented with Laravel 12 on PHP 8.4 as the initial application baseline, which satisfies the technical requirement of PHP 8.3+ and Laravel.
 - Bootstrap verification was executed through the existing `taskflow-app` container because the host machine does not have local `php` or `composer`.
 - The repository keeps workflow artifacts at the root and overlays the Laravel skeleton around them instead of replacing repository-level documentation files.
+- Task 1.2 uses Docker Compose with three required services: `app` (PHP-FPM), `web` (Nginx), and `db` (PostgreSQL 17).
+- The application container runs with host UID/GID mapping to keep Laravel writable directories compatible with the bind-mounted workspace during local development.
+- The default landing page was simplified to avoid a false dependency on built Vite assets during infrastructure smoke tests.
