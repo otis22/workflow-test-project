@@ -1,20 +1,78 @@
-# Демонстрационный проект агентного workflow
+# TaskFlow
 
-Это демонстрационный проект для знакомства с работой автономного агента.
+TaskFlow is a Laravel-based demo project for a strict agent workflow. The repository combines product artifacts with an executable application bootstrap so the roadmap can be implemented top-down without breaking the process described in `AGENTS.md`.
 
-Демо-проект внутри репозитория — `TaskFlow`, небольшой веб-сервис для управления личными и командными задачами: с регистрацией пользователей, проектами, задачами, комментариями, дедлайнами и базовой фильтрацией.
+## Project Artifacts
 
-Проект показывает базовый процесс работы через:
+- `AGENTS.md` defines the mandatory workflow for roadmap execution.
+- `Roadmap.md` is the only queue of work.
+- `PRD/` stores per-task PRD documents and decomposition.
+- `AssumptionLog.md` records assumptions and architectural decisions.
+- `artifacts/` contains the source product, technical, domain, and UI documents.
 
-- `AGENTS.md` с правилами workflow
-- `Roadmap.md` с очередью работ
-- `PRD/` с описаниями задач
-- `AssumptionLog.md` с допущениями и решениями
-- `artifacts/` с исходными материалами проекта
+## Local Start
 
-Репозиторий intentionally минимален: структура создана для демонстрации процесса, а содержимое можно наполнять по мере развития сценария.
+1. Create the local environment file:
 
-## Как начать
+   ```bash
+   cp .env.example .env
+   ```
 
-1. В первом промпте направьте агента на `AGENTS.md` и попросите написать `Roadmap.md`, опираясь на артефакты из `artifacts/`, начиная с подготовки окружения и до завершения проекта.
-2. Дальше работайте в цикле: просите агента брать следующую задачу из `Roadmap.md` и выполнять её по workflow.
+2. Build and start the stack:
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+3. Install PHP and frontend dependencies inside the app container:
+
+   ```bash
+   docker compose exec app composer install
+   docker compose exec app npm install
+   ```
+
+4. Generate the app key and run migrations:
+
+   ```bash
+   docker compose exec app php artisan key:generate
+   docker compose exec app php artisan migrate
+   ```
+
+5. Build frontend assets:
+
+   ```bash
+   docker compose exec app npm run build
+   ```
+
+6. Open the application:
+
+   `http://localhost`
+
+## Quality Commands
+
+Run commands inside the `app` container:
+
+```bash
+docker compose exec app composer test
+docker compose exec app composer test:coverage
+docker compose exec app composer lint
+docker compose exec app composer analyse
+docker compose exec app composer rector
+docker compose exec app composer cpd
+docker compose exec app composer audit:deps
+docker compose exec app composer qa
+docker compose exec app composer qa:ci
+```
+
+## Smoke Check
+
+```bash
+docker compose up -d --build
+curl -fsS http://localhost
+```
+
+The expected response body is:
+
+```text
+TaskFlow bootstrap ready
+```
