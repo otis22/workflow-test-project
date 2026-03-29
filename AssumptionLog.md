@@ -43,3 +43,5 @@
 - A minimal projects index was introduced as the post-create destination so authenticated users have a stable landing page for the next project-list task instead of redirecting to an unfinished detail page.
 - Task 3.3 turns the projects index into the main project workspace entry by listing only projects available through membership and linking each card to a membership-guarded project page.
 - Project access is currently guarded inline in the project controller with a simple membership existence check; this keeps the MVP small and can later move into a policy once project actions grow.
+- Task 3.4 adds project navigation coverage as a dedicated e2e-style scenario so the create/open project path is verified as one user journey instead of only isolated screen tests.
+- The e2e project navigation flow remains request-driven, which is still sufficient for the current server-rendered MVP stage and keeps the pipeline lightweight.

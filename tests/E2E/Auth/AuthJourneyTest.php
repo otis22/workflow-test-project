@@ -11,15 +11,11 @@ class AuthJourneyTest extends TestCase
 
     public function test_guest_can_complete_the_auth_journey(): void
     {
-        $registrationResponse = $this
-            ->withSession(['_token' => 'register-token'])
-            ->post(route('register.store'), [
-                '_token' => 'register-token',
-                'name' => 'Ada Lovelace',
-                'email' => 'ada@example.com',
-                'password' => 'password123',
-                'password_confirmation' => 'password123',
-            ]);
+        $registrationResponse = $this->registerUser(
+            name: 'Ada Lovelace',
+            email: 'ada@example.com',
+            password: 'password123',
+        );
 
         $registrationResponse->assertRedirect(route('dashboard'));
         $this->assertAuthenticated();
@@ -39,13 +35,10 @@ class AuthJourneyTest extends TestCase
         $logoutResponse->assertRedirect(route('login'));
         $this->assertGuest();
 
-        $loginResponse = $this
-            ->withSession(['_token' => 'login-token'])
-            ->post(route('login.store'), [
-                '_token' => 'login-token',
-                'email' => 'ada@example.com',
-                'password' => 'password123',
-            ]);
+        $loginResponse = $this->loginUser(
+            email: 'ada@example.com',
+            password: 'password123',
+        );
 
         $loginResponse->assertRedirect(route('dashboard'));
         $this->assertAuthenticated();
