@@ -35,3 +35,5 @@
 - Stage 2 architecture review did not reveal fat controllers or misplaced auth logic; registration is isolated in an application action, while session-specific validation remains in request classes close to the web layer.
 - Stage 2 security review covered guest-only access to registration/login, auth-only access to dashboard/logout, login throttling, and current dependency health through `composer audit`, which reported no known advisories.
 - The review found one documentation mismatch: `README.md` did not yet list the dedicated `composer run test:e2e` command, so it was updated immediately during the review task.
+- Stage 2 smoke validation was executed with `docker compose up -d --build`, `curl -I http://127.0.0.1/`, and route inspection inside the app container; the stack remained healthy and the auth entry routes were still registered.
+- Stage 2 was closed in `CHANGELOG.md` after registration, login/logout, dashboard shell, stage review, and dedicated auth e2e coverage were all completed.
