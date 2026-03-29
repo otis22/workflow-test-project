@@ -31,3 +31,7 @@
 - Navigation entries for projects and personal work are present as shell placeholders before their feature stages; they intentionally do not point to routes yet to avoid advertising unfinished pages as live functionality.
 - Task 2.4 introduces a dedicated `E2E` testsuite so end-to-end style coverage has explicit scope and does not silently depend on the broader feature suite.
 - The current e2e implementation remains browserless and request-driven; this is acceptable for the MVP auth stage and keeps the pipeline fast until richer user journeys justify heavier tooling.
+- Stage 2 review confirmed that the implemented authentication slice matches the source artifacts: guests can register and log in, authenticated users land in a dashboard shell, and the main auth journey is covered by both feature and dedicated e2e tests.
+- Stage 2 architecture review did not reveal fat controllers or misplaced auth logic; registration is isolated in an application action, while session-specific validation remains in request classes close to the web layer.
+- Stage 2 security review covered guest-only access to registration/login, auth-only access to dashboard/logout, login throttling, and current dependency health through `composer audit`, which reported no known advisories.
+- The review found one documentation mismatch: `README.md` did not yet list the dedicated `composer run test:e2e` command, so it was updated immediately during the review task.

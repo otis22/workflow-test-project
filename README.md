@@ -71,6 +71,7 @@ docker compose exec -T app vendor/bin/pint --test
 docker compose exec -T app vendor/bin/phpstan analyse --memory-limit=1G
 docker compose exec -T app php artisan test
 docker compose exec -T app php -d pcov.enabled=1 artisan test --coverage --min=80
+docker compose exec -T app composer run test:e2e
 docker compose exec -T app npx jscpd app tests routes --silent --config .jscpd.json
 docker compose exec -T app vendor/bin/rector process --dry-run
 docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer audit'

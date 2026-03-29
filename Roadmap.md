@@ -15,7 +15,7 @@
 | Task 2.2 Login and logout flow | Implement authentication session handling for sign-in and sign-out. | done |
 | Task 2.3 Authenticated layout and dashboard shell | Add the first authenticated layout with navigation and dashboard entry point. | done |
 | Task 2.4 E2E auth scenarios | Cover registration, login, and dashboard access with end-to-end tests. | done |
-| Task 2.5 Review stage 2 | Review the authentication stage for security, architecture, and artifact accuracy. | todo |
+| Task 2.5 Review stage 2 | Review the authentication stage for security, architecture, and artifact accuracy. | done |
 | Task 2.6 Smoke test stage 2 | Verify the authenticated shell works in the running application. | todo |
 | Task 2.7 Changelog stage 2 | Record the completed authentication work in `CHANGELOG.md`. | todo |
 | Stage 3. Projects | Deliver project creation and project membership foundations. | todo |
