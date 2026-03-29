@@ -17,3 +17,8 @@
 - Duplicate detection currently targets `app`, `tests`, and `routes`; framework-heavy config boilerplate is intentionally excluded to keep the signal focused on project-owned code.
 - Task 1.4 uses a main `ci.yml` workflow plus separate `smoke.yml`, `mutation.yml`, and `e2e.yml` workflows to match the technical requirements for additional pipelines.
 - The current e2e workflow is wired to the feature test suite as a temporary executable placeholder until browser-level scenarios are implemented later in the roadmap.
+- Stage 1 review confirmed that the implemented foundation still matches the source artifacts: Laravel on PHP 8.3+, Docker Compose local environment, PostgreSQL, and explicit quality gates in CI.
+- The review found one documentation gap: `README.md` did not yet describe the actual local bootstrap and verification commands, so it was updated immediately within the review task.
+- Stage 1 dependency review was executed with `composer audit`; no known security advisories were reported at the time of review.
+- Stage 1 smoke validation was executed with `docker compose up -d --build` and `curl -I http://127.0.0.1/`; the stack started successfully and the root URL returned `HTTP/1.1 200 OK`.
+- `CHANGELOG.md` was introduced at the end of Stage 1 because the workflow requires a stage-level progress log in the repository root.

@@ -2,14 +2,14 @@
 
 | Stage / Task | Description | Status |
 |---|---|---|
-| Stage 1. Environment and skeleton | Prepare the Laravel project skeleton, local Docker Compose environment, and baseline CI quality pipeline. | todo |
+| Stage 1. Environment and skeleton | Prepare the Laravel project skeleton, local Docker Compose environment, and baseline CI quality pipeline. | done |
 | Task 1.1 Bootstrap application | Create the base Laravel application structure and dependency management for TaskFlow. | done |
 | Task 1.2 Prepare local environment | Add Docker Compose services for app, web server, and relational database for local development. | done |
 | Task 1.3 Configure quality toolchain | Add linting, static analysis, coverage, duplication, rector, mutation, and dependency audit commands. | done |
 | Task 1.4 Configure CI workflows | Add GitHub Actions workflows for the required checks and supporting pipelines. | done |
-| Task 1.5 Review stage 1 | Review artifacts, architecture, CI stability, and documentation after the foundation stage. | todo |
-| Task 1.6 Smoke test stage 1 | Verify the application starts in Docker Compose and the main URLs respond correctly. | todo |
-| Task 1.7 Changelog stage 1 | Record the completed foundation work in `CHANGELOG.md`. | todo |
+| Task 1.5 Review stage 1 | Review artifacts, architecture, CI stability, and documentation after the foundation stage. | done |
+| Task 1.6 Smoke test stage 1 | Verify the application starts in Docker Compose and the main URLs respond correctly. | done |
+| Task 1.7 Changelog stage 1 | Record the completed foundation work in `CHANGELOG.md`. | done |
 | Stage 2. Authentication and shell UI | Deliver guest flows and the first authenticated application shell. | todo |
 | Task 2.1 Registration flow | Implement user registration with validation and automated coverage for the main path. | todo |
 | Task 2.2 Login and logout flow | Implement authentication session handling for sign-in and sign-out. | todo |
