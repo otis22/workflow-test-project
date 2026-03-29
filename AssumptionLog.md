@@ -37,3 +37,5 @@
 - The review found one documentation mismatch: `README.md` did not yet list the dedicated `composer run test:e2e` command, so it was updated immediately during the review task.
 - Stage 2 smoke validation was executed with `docker compose up -d --build`, `curl -I http://127.0.0.1/`, and route inspection inside the app container; the stack remained healthy and the auth entry routes were still registered.
 - Stage 2 was closed in `CHANGELOG.md` after registration, login/logout, dashboard shell, stage review, and dedicated auth e2e coverage were all completed.
+- Task 3.1 models project ownership and membership explicitly with separate `projects` and `project_members` tables, matching the domain artifact rather than collapsing membership into a single owner-only field.
+- Automatic owner participation is enforced in the `CreateProject` application action so future project creation flows cannot forget the owner-membership rule.

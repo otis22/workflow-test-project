@@ -19,7 +19,7 @@
 | Task 2.6 Smoke test stage 2 | Verify the authenticated shell works in the running application. | done |
 | Task 2.7 Changelog stage 2 | Record the completed authentication work in `CHANGELOG.md`. | done |
 | Stage 3. Projects | Deliver project creation and project membership foundations. | todo |
-| Task 3.1 Model project domain | Implement project and project-member domain rules, including owner membership. | todo |
+| Task 3.1 Model project domain | Implement project and project-member domain rules, including owner membership. | done |
 | Task 3.2 Create project flow | Implement project creation for authenticated users. | todo |
 | Task 3.3 Project list page | Implement the list of projects available to the current user. | todo |
 | Task 3.4 Project navigation coverage | Add automated tests for creating and opening projects. | todo |
