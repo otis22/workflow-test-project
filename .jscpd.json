@@ -1,0 +1,6 @@
+{
+  "exclude": [
+    "config/database.php"
+  ],
+  "threshold": 0
+}

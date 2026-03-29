@@ -10,6 +10,8 @@ RUN apt-get update \
         libpq-dev \
         libxml2-dev \
         libzip-dev \
+        nodejs \
+        npm \
         unzip \
         zip \
     && docker-php-ext-install -j"$(nproc)" \

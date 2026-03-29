@@ -5,7 +5,7 @@
 | Stage 1. Environment and skeleton | Prepare the Laravel project skeleton, local Docker Compose environment, and baseline CI quality pipeline. | todo |
 | Task 1.1 Bootstrap application | Create the base Laravel application structure and dependency management for TaskFlow. | done |
 | Task 1.2 Prepare local environment | Add Docker Compose services for app, web server, and relational database for local development. | done |
-| Task 1.3 Configure quality toolchain | Add linting, static analysis, coverage, duplication, rector, mutation, and dependency audit commands. | todo |
+| Task 1.3 Configure quality toolchain | Add linting, static analysis, coverage, duplication, rector, mutation, and dependency audit commands. | done |
 | Task 1.4 Configure CI workflows | Add GitHub Actions workflows for the required checks and supporting pipelines. | todo |
 | Task 1.5 Review stage 1 | Review artifacts, architecture, CI stability, and documentation after the foundation stage. | todo |
 | Task 1.6 Smoke test stage 1 | Verify the application starts in Docker Compose and the main URLs respond correctly. | todo |

@@ -18,7 +18,10 @@
 /public/storage
 /storage/*.key
 /storage/pail
+/storage/infection
+/storage/phpstan
 /vendor
+coverage.xml
 Homestead.json
 Homestead.yaml
 Thumbs.db

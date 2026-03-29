@@ -12,3 +12,6 @@
 - Task 1.2 uses Docker Compose with three required services: `app` (PHP-FPM), `web` (Nginx), and `db` (PostgreSQL 17).
 - The application container runs with host UID/GID mapping to keep Laravel writable directories compatible with the bind-mounted workspace during local development.
 - The default landing page was simplified to avoid a false dependency on built Vite assets during infrastructure smoke tests.
+- Task 1.3 uses Laravel Pint, PHPStan with Larastan, Rector, Infection, and Composer audit as the PHP quality baseline.
+- Copy-paste detection was switched from abandoned `sebastian/phpcpd` to `jscpd`, because the former is incompatible with the current Symfony Console stack.
+- Duplicate detection currently targets `app`, `tests`, and `routes`; framework-heavy config boilerplate is intentionally excluded to keep the signal focused on project-owned code.

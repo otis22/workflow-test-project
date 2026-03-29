@@ -1,0 +1,19 @@
+{
+  "$schema": "https://infection.github.io/schema.json",
+  "source": {
+    "directories": [
+      "app"
+    ],
+    "excludes": [
+      "Http/Controllers/Controller.php",
+      "Providers/AppServiceProvider.php"
+    ]
+  },
+  "tmpDir": "storage/infection",
+  "phpUnit": {
+    "configDir": "."
+  },
+  "mutators": {
+    "@default": true
+  }
+}
