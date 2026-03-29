@@ -18,14 +18,14 @@
 | Task 2.5 Review stage 2 | Review the authentication stage for security, architecture, and artifact accuracy. | done |
 | Task 2.6 Smoke test stage 2 | Verify the authenticated shell works in the running application. | done |
 | Task 2.7 Changelog stage 2 | Record the completed authentication work in `CHANGELOG.md`. | done |
-| Stage 3. Projects | Deliver project creation and project membership foundations. | todo |
+| Stage 3. Projects | Deliver project creation and project membership foundations. | done |
 | Task 3.1 Model project domain | Implement project and project-member domain rules, including owner membership. | done |
 | Task 3.2 Create project flow | Implement project creation for authenticated users. | done |
 | Task 3.3 Project list page | Implement the list of projects available to the current user. | done |
 | Task 3.4 Project navigation coverage | Add automated tests for creating and opening projects. | done |
 | Task 3.5 Review stage 3 | Review the project stage for consistency with the domain model and UI spec. | done |
 | Task 3.6 Smoke test stage 3 | Verify project creation and navigation in the running application. | done |
-| Task 3.7 Changelog stage 3 | Record the completed project work in `CHANGELOG.md`. | todo |
+| Task 3.7 Changelog stage 3 | Record the completed project work in `CHANGELOG.md`. | done |
 | Stage 4. Tasks core | Deliver task creation, editing, assignment, and state management inside projects. | todo |
 | Task 4.1 Model task domain | Implement task rules for project membership, assignee validity, status, priority, and deadlines. | todo |
 | Task 4.2 Create task flow | Implement creating a task inside a project. | todo |

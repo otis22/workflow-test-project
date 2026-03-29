@@ -51,3 +51,4 @@
 - Stage 3 smoke verification was executed on the running Docker Compose stack with `docker compose up -d --build`, `curl` checks for `/`, `/login`, and `/projects`, plus route inspection for the projects endpoints.
 - The guest-facing runtime still behaves correctly after the projects stage: `/` and `/login` return `200`, while `/projects` redirects unauthenticated traffic to `/login`.
 - Project navigation itself was revalidated during the smoke task with the targeted `ProjectNavigationJourneyTest`, which keeps the smoke evidence tied to the actual create/open project journey.
+- Stage 3 was closed in `CHANGELOG.md` only after the project domain, creation flow, listing/navigation coverage, review, and smoke verification were all completed and marked done in `Roadmap.md`.
