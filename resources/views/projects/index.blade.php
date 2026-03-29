@@ -33,6 +33,10 @@
                         @if ($project->description)
                             <p class="muted">{{ $project->description }}</p>
                         @endif
+
+                        <div>
+                            <a href="{{ route('projects.show', $project) }}" class="button button-secondary">Open project</a>
+                        </div>
                     </article>
                 @endforeach
             </div>

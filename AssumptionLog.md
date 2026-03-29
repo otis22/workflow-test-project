@@ -41,3 +41,5 @@
 - Automatic owner participation is enforced in the `CreateProject` application action so future project creation flows cannot forget the owner-membership rule.
 - Task 3.2 reuses the same `CreateProject` application action from the web layer, keeping the create-project controller thin and ensuring the owner-membership rule stays centralized.
 - A minimal projects index was introduced as the post-create destination so authenticated users have a stable landing page for the next project-list task instead of redirecting to an unfinished detail page.
+- Task 3.3 turns the projects index into the main project workspace entry by listing only projects available through membership and linking each card to a membership-guarded project page.
+- Project access is currently guarded inline in the project controller with a simple membership existence check; this keeps the MVP small and can later move into a policy once project actions grow.

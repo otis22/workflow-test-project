@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Application\Projects\CreateProject;
 use App\Http\Requests\Projects\StoreProjectRequest;
+use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -27,6 +28,18 @@ class ProjectController extends Controller
     public function create(): View
     {
         return view('projects.create');
+    }
+
+    public function show(Request $request, Project $project): View
+    {
+        abort_unless(
+            $project->members()->whereKey($request->user()->id)->exists(),
+            403,
+        );
+
+        return view('projects.show', [
+            'project' => $project->load(['owner', 'members']),
+        ]);
     }
 
     public function store(StoreProjectRequest $request, CreateProject $createProject): RedirectResponse
