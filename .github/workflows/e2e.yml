@@ -29,5 +29,5 @@ jobs:
           cp .env.example .env
           php artisan key:generate --ansi
 
-      - name: Run current e2e placeholder suite
+      - name: Run auth e2e suite
         run: composer run test:e2e

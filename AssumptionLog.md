@@ -29,3 +29,5 @@
 - The login request uses Laravel rate limiting on the email/IP throttle key to keep the MVP auth flow safer without introducing extra infrastructure.
 - Task 2.3 introduces a dedicated authenticated Blade layout so guest pages and authenticated pages can evolve independently without overloading one shared template.
 - Navigation entries for projects and personal work are present as shell placeholders before their feature stages; they intentionally do not point to routes yet to avoid advertising unfinished pages as live functionality.
+- Task 2.4 introduces a dedicated `E2E` testsuite so end-to-end style coverage has explicit scope and does not silently depend on the broader feature suite.
+- The current e2e implementation remains browserless and request-driven; this is acceptable for the MVP auth stage and keeps the pipeline fast until richer user journeys justify heavier tooling.

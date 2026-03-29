@@ -58,7 +58,7 @@
             "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --testsuite=Feature"
         ],
         "test:e2e": [
-            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --testsuite=Feature"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --testsuite=E2E"
         ],
         "test:coverage": [
             "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php -d pcov.enabled=1 artisan test --coverage"
