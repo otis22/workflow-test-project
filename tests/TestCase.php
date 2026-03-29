@@ -2,6 +2,9 @@
 
 namespace Tests;
 
+use App\Models\Project;
+use App\Models\ProjectMember;
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Testing\TestResponse;
 
@@ -40,5 +43,34 @@ abstract class TestCase extends BaseTestCase
                 'name' => $name,
                 'description' => $description,
             ]);
+    }
+
+    protected function addProjectMembers(Project $project, User ...$users): void
+    {
+        foreach ($users as $user) {
+            ProjectMember::factory()->for($project)->for($user)->create();
+        }
+    }
+
+    /**
+     * @return array{project: Project, creator: User, assignee: User}
+     */
+    protected function createTaskParticipantContext(bool $memberAssignee = true): array
+    {
+        $project = Project::factory()->create();
+        $creator = $project->owner;
+        $assignee = User::factory()->create();
+
+        $this->addProjectMembers($project, $creator);
+
+        if ($memberAssignee) {
+            $this->addProjectMembers($project, $assignee);
+        }
+
+        return [
+            'project' => $project,
+            'creator' => $creator,
+            'assignee' => $assignee,
+        ];
     }
 }

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read User $owner
  * @property-read Collection<int, ProjectMember> $memberLinks
  * @property-read Collection<int, User> $members
+ * @property-read Collection<int, Task> $tasks
  */
 class Project extends Model
 {
@@ -43,5 +44,10 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class, 'project_members')
             ->withTimestamps();
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
     }
 }

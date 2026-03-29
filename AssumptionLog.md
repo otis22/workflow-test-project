@@ -52,3 +52,6 @@
 - The guest-facing runtime still behaves correctly after the projects stage: `/` and `/login` return `200`, while `/projects` redirects unauthenticated traffic to `/login`.
 - Project navigation itself was revalidated during the smoke task with the targeted `ProjectNavigationJourneyTest`, which keeps the smoke evidence tied to the actual create/open project journey.
 - Stage 3 was closed in `CHANGELOG.md` only after the project domain, creation flow, listing/navigation coverage, review, and smoke verification were all completed and marked done in `Roadmap.md`.
+- Task 4.1 introduces a dedicated `Task` model and table with string-backed MVP `status` and `priority` values plus a nullable `due_date`, which keeps the domain aligned with the artifacts without introducing premature enum persistence complexity.
+- Creator and assignee membership validation for tasks is centralized in `EnsureTaskParticipantsBelongToProject`, so Stage 4 create/edit flows can reuse one domain rule instead of duplicating project-member checks in controllers.
+- Test helper setup for project memberships was consolidated in `tests/TestCase.php` to keep the zero-duplication quality gate passing while the task domain test surface grows.

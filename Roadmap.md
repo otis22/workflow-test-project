@@ -27,7 +27,7 @@
 | Task 3.6 Smoke test stage 3 | Verify project creation and navigation in the running application. | done |
 | Task 3.7 Changelog stage 3 | Record the completed project work in `CHANGELOG.md`. | done |
 | Stage 4. Tasks core | Deliver task creation, editing, assignment, and state management inside projects. | todo |
-| Task 4.1 Model task domain | Implement task rules for project membership, assignee validity, status, priority, and deadlines. | todo |
+| Task 4.1 Model task domain | Implement task rules for project membership, assignee validity, status, priority, and deadlines. | done |
 | Task 4.2 Create task flow | Implement creating a task inside a project. | todo |
 | Task 4.3 Edit task flow | Implement editing a task, including reassignment, status, priority, and deadline changes. | todo |
 | Task 4.4 Project task list and filters | Implement the project task list with filtering by status and deadline. | todo |
