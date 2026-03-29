@@ -27,3 +27,5 @@
 - Test commands were made explicit with `APP_ENV=testing` and in-memory SQLite overrides because local containerized development keeps a Postgres `.env`, and stable automated tests must not depend on the developer database state.
 - Task 2.2 implements login and logout directly with Laravel session auth; the first session controller stays framework-thin while credential validation and attempt throttling live in `LoginUserRequest`.
 - The login request uses Laravel rate limiting on the email/IP throttle key to keep the MVP auth flow safer without introducing extra infrastructure.
+- Task 2.3 introduces a dedicated authenticated Blade layout so guest pages and authenticated pages can evolve independently without overloading one shared template.
+- Navigation entries for projects and personal work are present as shell placeholders before their feature stages; they intentionally do not point to routes yet to avoid advertising unfinished pages as live functionality.

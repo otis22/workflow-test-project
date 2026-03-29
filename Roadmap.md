@@ -13,7 +13,7 @@
 | Stage 2. Authentication and shell UI | Deliver guest flows and the first authenticated application shell. | todo |
 | Task 2.1 Registration flow | Implement user registration with validation and automated coverage for the main path. | done |
 | Task 2.2 Login and logout flow | Implement authentication session handling for sign-in and sign-out. | done |
-| Task 2.3 Authenticated layout and dashboard shell | Add the first authenticated layout with navigation and dashboard entry point. | todo |
+| Task 2.3 Authenticated layout and dashboard shell | Add the first authenticated layout with navigation and dashboard entry point. | done |
 | Task 2.4 E2E auth scenarios | Cover registration, login, and dashboard access with end-to-end tests. | todo |
 | Task 2.5 Review stage 2 | Review the authentication stage for security, architecture, and artifact accuracy. | todo |
 | Task 2.6 Smoke test stage 2 | Verify the authenticated shell works in the running application. | todo |

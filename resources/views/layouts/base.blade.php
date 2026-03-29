@@ -79,10 +79,82 @@
                 gap: 1.5rem;
                 align-items: start;
             }
+            .app-shell {
+                display: grid;
+                gap: 1.5rem;
+                align-items: start;
+            }
+            .sidebar {
+                position: relative;
+                overflow: hidden;
+            }
+            .sidebar::after {
+                content: "";
+                position: absolute;
+                inset: auto -4rem -4rem auto;
+                width: 10rem;
+                height: 10rem;
+                border-radius: 999px;
+                background: rgba(20, 83, 45, 0.08);
+            }
+            .content-area {
+                min-width: 0;
+            }
+            .nav-links {
+                gap: 0.75rem;
+            }
+            .nav-link {
+                display: inline-flex;
+                align-items: center;
+                min-height: 3rem;
+                padding: 0.75rem 1rem;
+                border-radius: 16px;
+                text-decoration: none;
+                color: var(--text-primary);
+                background: rgba(20, 83, 45, 0.04);
+                border: 1px solid transparent;
+                font-weight: 700;
+            }
+            .nav-link.is-active {
+                background: rgba(20, 83, 45, 0.12);
+                border-color: rgba(20, 83, 45, 0.18);
+            }
+            .nav-link--muted {
+                color: var(--text-muted);
+                background: rgba(93, 100, 112, 0.06);
+            }
+            .profile-card {
+                background: rgba(255, 255, 255, 0.72);
+                backdrop-filter: blur(8px);
+            }
+            .profile-email {
+                margin-bottom: 0;
+            }
+            .app-title {
+                font-size: clamp(1.8rem, 4vw, 2.7rem);
+            }
+            .dashboard-grid {
+                display: grid;
+                gap: 1.5rem;
+            }
+            .section-title {
+                margin: 0;
+                font-size: 1.4rem;
+            }
 
             @media (min-width: 768px) {
                 .hero {
                     grid-template-columns: 1.1fr 0.9fr;
+                }
+                .app-shell {
+                    grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+                }
+                .sidebar {
+                    position: sticky;
+                    top: 1.5rem;
+                }
+                .dashboard-grid {
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
                 }
             }
         </style>
