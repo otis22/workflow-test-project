@@ -40,6 +40,12 @@ jobs:
           node-version: '20'
           cache: npm
 
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Install Node dependencies
+        run: npm ci
+
       - name: Prepare environment
         run: |
           cp .env.example .env
@@ -51,12 +57,6 @@ jobs:
           DB_DATABASE: taskflow
           DB_USERNAME: taskflow
           DB_PASSWORD: taskflow
-
-      - name: Install PHP dependencies
-        run: composer install --no-interaction --prefer-dist
-
-      - name: Install Node dependencies
-        run: npm ci
 
       - name: Run migrations
         run: php artisan migrate --force --ansi
