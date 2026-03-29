@@ -48,3 +48,6 @@
 - Stage 3 review confirmed that the projects slice matches the domain artifact: a project has an owner, membership is stored separately, the owner is automatically a member, and the authenticated UI exposes project list/create/open flows.
 - Stage 3 security review did not reveal unauthorized access gaps beyond the intentionally simple inline membership guard on `projects.show`; `composer audit` also remained clean during the review.
 - The review found one documentation mismatch: `README.md` did not yet describe the current functional progress through projects, so it was updated immediately during the review task.
+- Stage 3 smoke verification was executed on the running Docker Compose stack with `docker compose up -d --build`, `curl` checks for `/`, `/login`, and `/projects`, plus route inspection for the projects endpoints.
+- The guest-facing runtime still behaves correctly after the projects stage: `/` and `/login` return `200`, while `/projects` redirects unauthenticated traffic to `/login`.
+- Project navigation itself was revalidated during the smoke task with the targeted `ProjectNavigationJourneyTest`, which keeps the smoke evidence tied to the actual create/open project journey.
