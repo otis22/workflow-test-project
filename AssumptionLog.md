@@ -39,3 +39,5 @@
 - Stage 2 was closed in `CHANGELOG.md` after registration, login/logout, dashboard shell, stage review, and dedicated auth e2e coverage were all completed.
 - Task 3.1 models project ownership and membership explicitly with separate `projects` and `project_members` tables, matching the domain artifact rather than collapsing membership into a single owner-only field.
 - Automatic owner participation is enforced in the `CreateProject` application action so future project creation flows cannot forget the owner-membership rule.
+- Task 3.2 reuses the same `CreateProject` application action from the web layer, keeping the create-project controller thin and ensuring the owner-membership rule stays centralized.
+- A minimal projects index was introduced as the post-create destination so authenticated users have a stable landing page for the next project-list task instead of redirecting to an unfinished detail page.

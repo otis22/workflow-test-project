@@ -15,7 +15,9 @@
                 <a href="{{ route('dashboard') }}" class="nav-link{{ request()->routeIs('dashboard') ? ' is-active' : '' }}">
                     Dashboard
                 </a>
-                <span class="nav-link nav-link--muted">Projects</span>
+                <a href="{{ route('projects.index') }}" class="nav-link{{ request()->routeIs('projects.*') ? ' is-active' : '' }}">
+                    Projects
+                </a>
                 <span class="nav-link nav-link--muted">My work</span>
             </nav>
 
