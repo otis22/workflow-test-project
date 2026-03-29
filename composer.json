@@ -57,6 +57,9 @@
         "test:feature": [
             "@php artisan test --testsuite=Feature"
         ],
+        "test:e2e": [
+            "@php artisan test --testsuite=Feature"
+        ],
         "test:coverage": [
             "@php -d pcov.enabled=1 artisan test --coverage"
         ],

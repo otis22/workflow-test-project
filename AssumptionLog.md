@@ -15,3 +15,5 @@
 - Task 1.3 uses Laravel Pint, PHPStan with Larastan, Rector, Infection, and Composer audit as the PHP quality baseline.
 - Copy-paste detection was switched from abandoned `sebastian/phpcpd` to `jscpd`, because the former is incompatible with the current Symfony Console stack.
 - Duplicate detection currently targets `app`, `tests`, and `routes`; framework-heavy config boilerplate is intentionally excluded to keep the signal focused on project-owned code.
+- Task 1.4 uses a main `ci.yml` workflow plus separate `smoke.yml`, `mutation.yml`, and `e2e.yml` workflows to match the technical requirements for additional pipelines.
+- The current e2e workflow is wired to the feature test suite as a temporary executable placeholder until browser-level scenarios are implemented later in the roadmap.

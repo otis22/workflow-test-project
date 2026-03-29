@@ -1,0 +1,36 @@
+name: Smoke Tests
+
+on:
+  push:
+    branches:
+      - main
+      - codex
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and start containers
+        run: docker compose up -d --build
+
+      - name: Install dependencies inside app
+        run: docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer install --no-interaction && npm ci --cache /tmp/npm-cache'
+
+      - name: Prepare Laravel app
+        run: docker compose exec -T app sh -lc 'cp .env.example .env && php artisan key:generate --ansi && php artisan migrate --force --ansi'
+
+      - name: Check root URL
+        run: curl -I --retry 10 --retry-delay 3 --retry-connrefused http://127.0.0.1/
+
+      - name: Print logs on failure
+        if: failure()
+        run: docker compose logs --no-color
+
+      - name: Stop containers
+        if: always()
+        run: docker compose down -v
