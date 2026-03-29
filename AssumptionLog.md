@@ -22,3 +22,6 @@
 - Stage 1 dependency review was executed with `composer audit`; no known security advisories were reported at the time of review.
 - Stage 1 smoke validation was executed with `docker compose up -d --build` and `curl -I http://127.0.0.1/`; the stack started successfully and the root URL returned `HTTP/1.1 200 OK`.
 - `CHANGELOG.md` was introduced at the end of Stage 1 because the workflow requires a stage-level progress log in the repository root.
+- Task 2.1 implements registration with a small application action (`App\Application\Auth\RegisterUser`) so user creation is not embedded in the web controller.
+- A minimal authenticated `/dashboard` page was added in Task 2.1 as the required post-registration destination; Task 2.3 will expand it into the real application shell instead of replacing the route.
+- Test commands were made explicit with `APP_ENV=testing` and in-memory SQLite overrides because local containerized development keeps a Postgres `.env`, and stable automated tests must not depend on the developer database state.

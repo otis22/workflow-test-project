@@ -11,7 +11,7 @@
 | Task 1.6 Smoke test stage 1 | Verify the application starts in Docker Compose and the main URLs respond correctly. | done |
 | Task 1.7 Changelog stage 1 | Record the completed foundation work in `CHANGELOG.md`. | done |
 | Stage 2. Authentication and shell UI | Deliver guest flows and the first authenticated application shell. | todo |
-| Task 2.1 Registration flow | Implement user registration with validation and automated coverage for the main path. | todo |
+| Task 2.1 Registration flow | Implement user registration with validation and automated coverage for the main path. | done |
 | Task 2.2 Login and logout flow | Implement authentication session handling for sign-in and sign-out. | todo |
 | Task 2.3 Authenticated layout and dashboard shell | Add the first authenticated layout with navigation and dashboard entry point. | todo |
 | Task 2.4 E2E auth scenarios | Cover registration, login, and dashboard access with end-to-end tests. | todo |

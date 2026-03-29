@@ -49,22 +49,22 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "@php artisan test"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test"
         ],
         "test:unit": [
-            "@php artisan test --testsuite=Unit"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --testsuite=Unit"
         ],
         "test:feature": [
-            "@php artisan test --testsuite=Feature"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --testsuite=Feature"
         ],
         "test:e2e": [
-            "@php artisan test --testsuite=Feature"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --testsuite=Feature"
         ],
         "test:coverage": [
-            "@php -d pcov.enabled=1 artisan test --coverage"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php -d pcov.enabled=1 artisan test --coverage"
         ],
         "test:coverage:gate": [
-            "@php -d pcov.enabled=1 artisan test --coverage --min=80"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php -d pcov.enabled=1 artisan test --coverage --min=80"
         ],
         "lint": [
             "vendor/bin/pint --test"
