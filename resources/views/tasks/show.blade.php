@@ -72,9 +72,41 @@
         <article class="panel stack">
             <p class="eyebrow">Comments</p>
             <h2 class="section-title">Discussion</h2>
-            <p class="muted">
-                Task comments and the add-comment form will appear here in the next roadmap task.
-            </p>
+
+            <form method="POST" action="{{ route('projects.tasks.comments.store', [$project, $task]) }}" class="stack">
+                @csrf
+
+                <div class="field">
+                    <label for="body">Add comment</label>
+                    <textarea id="body" name="body" required>{{ old('body') }}</textarea>
+                </div>
+
+                @error('body')
+                    <ul class="errors">
+                        <li>{{ $message }}</li>
+                    </ul>
+                @enderror
+
+                <div>
+                    <button type="submit">Post comment</button>
+                </div>
+            </form>
+
+            @if ($task->comments->isEmpty())
+                <p class="muted">No comments yet. Add the first note for this task.</p>
+            @else
+                <div class="stack">
+                    @foreach ($task->comments as $comment)
+                        <section class="panel inset-panel stack">
+                            <div>
+                                <strong>{{ $comment->author->name }}</strong>
+                                <p class="muted">{{ $comment->created_at?->format('M j, Y H:i') }}</p>
+                            </div>
+                            <p class="muted">{{ $comment->body }}</p>
+                        </section>
+                    @endforeach
+                </div>
+            @endif
         </article>
     </section>
 @endsection

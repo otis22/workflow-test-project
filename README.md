@@ -34,6 +34,7 @@
 - редактирование задач, включая статус, приоритет, дедлайн и исполнителя
 - фильтрация project task list по статусу и дедлайну
 - отдельная task detail page с основными полями и activity/comments placeholder
+- commenting flow на task detail page с историей обсуждения
 
 ## Как начать
 

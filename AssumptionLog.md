@@ -77,3 +77,6 @@
 - Task 5.2 introduces a dedicated read-only task page instead of overloading the edit form as the default task destination, which keeps project navigation aligned with the UI spec and leaves edit mode as a secondary action.
 - The task detail page already reserves a comments/discussion block with an empty-state message, so Task 5.3 can extend the existing screen instead of replacing the task navigation introduced here.
 - Dashboard cards and the project task list now route through the task detail page before edit, making the MVP navigation shallower and giving one stable URL for future comments/history context.
+- Task 5.3 models comments as a separate persistence slice with a dedicated application action, so the project-membership rule for comment authors is enforced below the controller layer and stays testable in isolation.
+- Comment history is rendered directly on the task detail page in chronological order, which matches the artifact’s discussion-history requirement without introducing a separate activity feed abstraction in the MVP.
+- Comment submission currently validates only a required text body with a pragmatic `max:2000` limit; richer formatting, mentions, and attachments remain outside the MVP boundary.

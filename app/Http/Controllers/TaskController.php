@@ -57,7 +57,7 @@ class TaskController extends Controller
 
         return view('tasks.show', [
             'project' => $project,
-            'task' => $task->load(['assignee', 'creator', 'project']),
+            'task' => $task->load(['assignee', 'comments.author', 'creator', 'project']),
         ]);
     }
 
