@@ -29,7 +29,7 @@
 | Stage 4. Tasks core | Deliver task creation, editing, assignment, and state management inside projects. | todo |
 | Task 4.1 Model task domain | Implement task rules for project membership, assignee validity, status, priority, and deadlines. | done |
 | Task 4.2 Create task flow | Implement creating a task inside a project. | done |
-| Task 4.3 Edit task flow | Implement editing a task, including reassignment, status, priority, and deadline changes. | todo |
+| Task 4.3 Edit task flow | Implement editing a task, including reassignment, status, priority, and deadline changes. | done |
 | Task 4.4 Project task list and filters | Implement the project task list with filtering by status and deadline. | todo |
 | Task 4.5 Review stage 4 | Review the task stage for domain correctness, readability, and test strength. | todo |
 | Task 4.6 Smoke test stage 4 | Verify core task workflows in the running application. | todo |

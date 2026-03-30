@@ -4,6 +4,7 @@ namespace Tests\Unit\Application\Tasks;
 
 use App\Application\Tasks\CreateTask;
 use App\Application\Tasks\Exceptions\InvalidTaskParticipant;
+use App\Application\Tasks\TaskData;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,12 +20,14 @@ class CreateTaskTest extends TestCase
         $task = app(CreateTask::class)(
             project: $project,
             creator: $creator,
-            title: 'Prepare launch checklist',
-            description: 'Capture all release blockers for the first cut.',
-            status: Task::STATUS_TODO,
-            priority: Task::PRIORITY_HIGH,
-            dueDate: '2026-04-10',
-            assignee: $assignee,
+            data: new TaskData(
+                title: 'Prepare launch checklist',
+                description: 'Capture all release blockers for the first cut.',
+                status: Task::STATUS_TODO,
+                priority: Task::PRIORITY_HIGH,
+                dueDate: '2026-04-10',
+                assignee: $assignee,
+            ),
         );
 
         $this->assertSame('Prepare launch checklist', $task->title);
@@ -42,12 +45,14 @@ class CreateTaskTest extends TestCase
         app(CreateTask::class)(
             project: $project,
             creator: $creator,
-            title: 'Prepare launch checklist',
-            description: 'Capture all release blockers for the first cut.',
-            status: Task::STATUS_TODO,
-            priority: Task::PRIORITY_HIGH,
-            dueDate: null,
-            assignee: $assignee,
+            data: new TaskData(
+                title: 'Prepare launch checklist',
+                description: 'Capture all release blockers for the first cut.',
+                status: Task::STATUS_TODO,
+                priority: Task::PRIORITY_HIGH,
+                dueDate: null,
+                assignee: $assignee,
+            ),
         );
     }
 }

@@ -58,3 +58,6 @@
 - Task 4.2 introduces nested project task routes and a dedicated `CreateTask` application action so task creation stays project-scoped and the persistence rule for creator/assignee membership remains outside the controller layer.
 - The project workspace now shows a minimal task list and a create-task entry point without filters; richer task filtering is intentionally deferred to Task 4.4 to keep the roadmap slices distinct.
 - Task creation validation currently requires `due_date` to be today or later, which is a deliberate MVP decision under the artifact’s allowed deadline-validation ambiguity.
+- Task 4.3 reuses a shared task form and a `TaskData` value object across create and update flows, which removes controller duplication and keeps task persistence attributes consistent between both application actions.
+- Nested task edit/update routes now use scoped bindings under the project path, so the application rejects cross-project task URLs without adding custom controller-side relation checks.
+- Update-task validation intentionally allows editing tasks with an already past due date, because blocking such updates would make overdue tasks harder to manage once the deadline has passed.

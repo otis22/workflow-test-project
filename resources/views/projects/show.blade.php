@@ -55,6 +55,10 @@
                             @if ($task->description)
                                 <p class="muted">{{ $task->description }}</p>
                             @endif
+
+                            <div>
+                                <a href="{{ route('projects.tasks.edit', [$project, $task]) }}" class="button button-secondary">Edit task</a>
+                            </div>
                         </article>
                     @endforeach
                 </div>

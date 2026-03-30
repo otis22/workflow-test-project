@@ -4,13 +4,13 @@ namespace App\Http\Requests\Tasks;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class StoreTaskRequest extends TaskDataRequest
+class UpdateTaskRequest extends TaskDataRequest
 {
     /**
      * @return array<int, ValidationRule|string>
      */
     protected function dueDateRules(): array
     {
-        return ['nullable', 'date', 'after_or_equal:today'];
+        return ['nullable', 'date'];
     }
 }

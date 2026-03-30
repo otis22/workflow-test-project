@@ -122,4 +122,45 @@ abstract class TestCase extends BaseTestCase
         $this->assertInstanceOf(CarbonImmutable::class, $task->due_date);
         $this->assertSame($expectedDate, $task->due_date->toDateString());
     }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    protected function updateTask(User $user, Task $task, array $overrides = []): TestResponse
+    {
+        return $this
+            ->actingAs($user)
+            ->from(route('projects.tasks.edit', [$task->project, $task]))
+            ->withSession(['_token' => 'task-token'])
+            ->patch(
+                route('projects.tasks.update', [$task->project, $task]),
+                $this->makeTaskPayload(array_replace(['_method' => 'PATCH'], $overrides)),
+            );
+    }
+
+    /**
+     * @return array{task: Task, creator: User, assignee: User}
+     */
+    protected function createExistingProjectTask(bool $withAssignee = true): array
+    {
+        ['project' => $project, 'creator' => $creator, 'assignee' => $assignee] = $this->createTaskParticipantContext($withAssignee);
+
+        $task = Task::factory()
+            ->for($project)
+            ->for($creator, 'creator')
+            ->when($withAssignee, fn ($factory) => $factory->for($assignee, 'assignee'))
+            ->create([
+                'title' => 'Prepare launch checklist',
+                'description' => 'Capture all release blockers for the first cut.',
+                'status' => Task::STATUS_TODO,
+                'priority' => Task::PRIORITY_HIGH,
+                'due_date' => '2026-04-10',
+            ]);
+
+        return [
+            'task' => $task,
+            'creator' => $creator,
+            'assignee' => $assignee,
+        ];
+    }
 }

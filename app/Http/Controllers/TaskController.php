@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Application\Tasks\CreateTask;
+use App\Application\Tasks\TaskData;
+use App\Application\Tasks\UpdateTask;
 use App\Http\Requests\Tasks\StoreTaskRequest;
+use App\Http\Requests\Tasks\TaskDataRequest;
+use App\Http\Requests\Tasks\UpdateTaskRequest;
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,9 +20,17 @@ class TaskController extends Controller
 {
     public function create(Request $request, Project $project): View
     {
-        abort_unless($project->hasMember($request->user()), Response::HTTP_FORBIDDEN);
+        $this->ensureProjectMember($request, $project);
 
-        return view('tasks.create', [
+        return view('tasks.form', [
+            'formAction' => route('projects.tasks.store', $project),
+            'formMethod' => 'POST',
+            'heading' => 'Create a task',
+            'submitLabel' => 'Create task',
+            'task' => new Task([
+                'status' => Task::STATUS_TODO,
+                'priority' => Task::PRIORITY_MEDIUM,
+            ]),
             'project' => $project->load('members'),
         ]);
     }
@@ -27,25 +40,72 @@ class TaskController extends Controller
         Project $project,
         CreateTask $createTask,
     ): RedirectResponse {
-        abort_unless($project->hasMember($request->user()), Response::HTTP_FORBIDDEN);
-
-        $validated = $request->validated();
-        $assignee = isset($validated['assignee_id'])
-            ? User::query()->findOrFail($validated['assignee_id'])
-            : null;
+        $this->ensureProjectMember($request, $project);
 
         $task = $createTask(
             project: $project,
             creator: $request->user(),
+            data: $this->buildTaskData($request),
+        );
+
+        return $this->redirectToProject($project, "Task \"{$task->title}\" created.");
+    }
+
+    public function edit(Request $request, Project $project, Task $task): View
+    {
+        $this->ensureProjectMember($request, $project);
+
+        return view('tasks.form', [
+            'formAction' => route('projects.tasks.update', [$project, $task]),
+            'formMethod' => 'PATCH',
+            'heading' => 'Edit task',
+            'submitLabel' => 'Save changes',
+            'task' => $task,
+            'project' => $project->load('members'),
+        ]);
+    }
+
+    public function update(
+        UpdateTaskRequest $request,
+        Project $project,
+        Task $task,
+        UpdateTask $updateTask,
+    ): RedirectResponse {
+        $this->ensureProjectMember($request, $project);
+
+        $task = $updateTask(
+            task: $task,
+            actor: $request->user(),
+            data: $this->buildTaskData($request),
+        );
+
+        return $this->redirectToProject($project, "Task \"{$task->title}\" updated.");
+    }
+
+    private function ensureProjectMember(Request $request, Project $project): void
+    {
+        abort_unless($project->hasMember($request->user()), Response::HTTP_FORBIDDEN);
+    }
+
+    private function buildTaskData(TaskDataRequest $request): TaskData
+    {
+        $validated = $request->validated();
+
+        return new TaskData(
             title: $validated['title'],
             description: $validated['description'] ?? null,
             status: $validated['status'],
             priority: $validated['priority'],
             dueDate: $validated['due_date'] ?? null,
-            assignee: $assignee,
+            assignee: isset($validated['assignee_id'])
+                ? User::query()->findOrFail($validated['assignee_id'])
+                : null,
         );
+    }
 
+    private function redirectToProject(Project $project, string $message): RedirectResponse
+    {
         return to_route('projects.show', $project, status: Response::HTTP_FOUND)
-            ->with('status', "Task \"{$task->title}\" created.");
+            ->with('status', $message);
     }
 }
