@@ -34,7 +34,7 @@
 | Task 4.5 Review stage 4 | Review the task stage for domain correctness, readability, and test strength. | done |
 | Task 4.6 Smoke test stage 4 | Verify core task workflows in the running application. | done |
 | Task 4.7 Changelog stage 4 | Record the completed task management work in `CHANGELOG.md`. | done |
-| Stage 5. Personal work view and comments | Deliver personal task visibility, task detail view, and discussion history. | todo |
+| Stage 5. Personal work view and comments | Deliver personal task visibility, task detail view, and discussion history. | done |
 | Task 5.1 My tasks dashboard section | Show tasks assigned to the current user and near-term deadlines on the dashboard. | done |
 | Task 5.2 Task detail page | Implement the task page with the main fields and activity context. | done |
 | Task 5.3 Commenting flow | Implement adding and viewing comments with project membership checks. | done |
@@ -42,7 +42,7 @@
 | Task 5.5 Review stage 5 | Review the stage for workflow completeness, security, and artifact alignment. | done |
 | Task 5.5a [review] Remove CI Node 20 deprecation warnings | Update GitHub Actions usage so the pipelines no longer emit Node 20 runtime deprecation warnings. | done |
 | Task 5.6 Smoke test stage 5 | Verify the end-to-end MVP journey in the running application. | done |
-| Task 5.7 Changelog stage 5 | Record the completed MVP user workflow in `CHANGELOG.md`. | todo |
+| Task 5.7 Changelog stage 5 | Record the completed MVP user workflow in `CHANGELOG.md`. | done |
 | Stage 6. Hardening and release readiness | Finalize quality gates, documentation, and readiness of the MVP baseline. | todo |
 | Task 6.1 Coverage and mutation baseline | Lock the initial coverage gate and mutation baseline for domain and application layers. | todo |
 | Task 6.2 Documentation and command audit | Ensure README and project artifacts describe the actual verification commands and workflows. | todo |

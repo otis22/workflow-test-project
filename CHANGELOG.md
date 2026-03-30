@@ -31,3 +31,11 @@
 - Turned the project workspace into the main project task list with server-rendered filters for task status and deadline state.
 - Expanded automated coverage across task domain rules, create and edit flows, and project task-list filtering scenarios.
 - Reviewed the stage against the source artifacts, updated the README to reflect task-management progress, and revalidated the running stack with a dedicated stage smoke test.
+
+## Stage 5. Personal work view and comments
+
+- Turned the dashboard into a personal work overview with assigned-task snapshots, near-term deadlines, and quick project links.
+- Added a dedicated task detail page with the main task fields, project context, and direct navigation from the dashboard and project workspace.
+- Implemented task comments with project-membership checks, chronological discussion history, and request-level validation on the task page.
+- Expanded end-to-end coverage with a dedicated task workflow journey that exercises project creation, task creation, dashboard visibility, status changes, and commenting.
+- Reviewed the stage against the source artifacts, fixed documentation drift, removed CI Node 20 deprecation warnings by upgrading official GitHub Actions majors, and revalidated the running stack with a stage smoke test.
