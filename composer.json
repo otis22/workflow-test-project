@@ -64,7 +64,7 @@
             "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php -d pcov.enabled=1 artisan test --coverage"
         ],
         "test:coverage:gate": [
-            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php -d pcov.enabled=1 artisan test --coverage --min=80"
+            "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php -d pcov.enabled=1 artisan test --coverage --min=94"
         ],
         "lint": [
             "vendor/bin/pint --test"
@@ -79,7 +79,7 @@
             "vendor/bin/rector process --dry-run"
         ],
         "mutate": [
-            "vendor/bin/infection --threads=2 --min-msi=0 --min-covered-msi=0"
+            "vendor/bin/infection --threads=2 --min-msi=95 --min-covered-msi=95"
         ],
         "deps:audit": [
             "composer audit"

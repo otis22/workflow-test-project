@@ -92,3 +92,5 @@
 - The running stack behaves correctly for the completed Stage 5 MVP slice: `/` returns `200`, unauthenticated access to `/dashboard` redirects to `/login`, and the task detail, edit, update, and comment routes are all registered under the project scope.
 - Stage 5 smoke evidence was tied directly to the delivered user workflow by re-running `DashboardShellTest`, `ShowTaskTest`, `CommentTaskTest`, and `TaskWorkflowJourneyTest` against the live containerized application.
 - Stage 5 was closed in `CHANGELOG.md` only after the personal dashboard, task detail page, comments flow, task-workflow e2e coverage, review follow-up for CI warnings, and stage smoke verification were all completed and marked done in `Roadmap.md`.
+- Task 6.1 ratchets the PHPUnit coverage gate from the bootstrap placeholder `80` to `94`, based on the current measured project coverage of `94.6%`, so future changes cannot silently erode the achieved baseline.
+- Task 6.1 also ratchets the Infection baseline from `0` to `95` for both MSI thresholds; the initial measured covered MSI before the ratchet was `95%`, and a verification rerun after the change still completed above that floor at `96%`.

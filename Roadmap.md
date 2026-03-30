@@ -44,7 +44,7 @@
 | Task 5.6 Smoke test stage 5 | Verify the end-to-end MVP journey in the running application. | done |
 | Task 5.7 Changelog stage 5 | Record the completed MVP user workflow in `CHANGELOG.md`. | done |
 | Stage 6. Hardening and release readiness | Finalize quality gates, documentation, and readiness of the MVP baseline. | todo |
-| Task 6.1 Coverage and mutation baseline | Lock the initial coverage gate and mutation baseline for domain and application layers. | todo |
+| Task 6.1 Coverage and mutation baseline | Lock the initial coverage gate and mutation baseline for domain and application layers. | done |
 | Task 6.2 Documentation and command audit | Ensure README and project artifacts describe the actual verification commands and workflows. | todo |
 | Task 6.3 Final review | Run the required periodic review across artifacts, architecture, security, and dependencies. | todo |
 | Task 6.4 Final smoke test | Verify the completed MVP boots and responds correctly through the main URLs. | todo |
