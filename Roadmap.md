@@ -49,3 +49,7 @@
 | Task 6.3 Final review | Run the required periodic review across artifacts, architecture, security, and dependencies. | done |
 | Task 6.4 Final smoke test | Verify the completed MVP boots and responds correctly through the main URLs. | done |
 | Task 6.5 Final changelog | Publish the cumulative MVP changelog in `CHANGELOG.md`. | done |
+| Stage 7. Review follow-ups | Resolve the issues discovered during the repeated mandatory post-roadmap review. | todo |
+| Task 7.1 [review] Expand smoke coverage for main guest routes | Align smoke automation with the workflow requirement to verify the main URLs, not only the root page. | todo |
+| Task 7.2 [review] Kill escaped application-layer mutants | Strengthen tests around project and task application services so the remaining escaped Infection mutants are eliminated. | todo |
+| Task 7.3 [review] Cover login throttling branches directly | Add focused automated coverage for lockout and throttle-key branches in the login request flow. | todo |
