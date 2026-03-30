@@ -32,7 +32,7 @@
 | Task 4.3 Edit task flow | Implement editing a task, including reassignment, status, priority, and deadline changes. | done |
 | Task 4.4 Project task list and filters | Implement the project task list with filtering by status and deadline. | done |
 | Task 4.5 Review stage 4 | Review the task stage for domain correctness, readability, and test strength. | done |
-| Task 4.6 Smoke test stage 4 | Verify core task workflows in the running application. | todo |
+| Task 4.6 Smoke test stage 4 | Verify core task workflows in the running application. | done |
 | Task 4.7 Changelog stage 4 | Record the completed task management work in `CHANGELOG.md`. | todo |
 | Stage 5. Personal work view and comments | Deliver personal task visibility, task detail view, and discussion history. | todo |
 | Task 5.1 My tasks dashboard section | Show tasks assigned to the current user and near-term deadlines on the dashboard. | todo |

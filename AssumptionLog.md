@@ -67,3 +67,6 @@
 - Stage 4 review confirmed that the task-management slice now covers the artifact-defined MVP core: project-scoped task creation, editing, reassignment, status/priority updates, deadline handling, and project-list filtering.
 - Stage 4 security review did not reveal new authorization gaps beyond the existing project-membership guard pattern; scoped nested task routes and shared participant validation keep cross-project access constrained.
 - The review found one documentation mismatch: `README.md` still described the MVP only through the projects stage, so it was updated immediately to include task creation, editing, and filtering progress.
+- Stage 4 smoke verification was executed on the running Docker Compose stack with `docker compose up -d --build`, `curl` checks for `/` and `/projects`, route inspection for nested task routes, and focused project-task feature suites.
+- The running stack still exposes the expected guest/runtime behavior after the task stage: `/` returns `200`, `/projects` redirects unauthenticated traffic to `/login`, and the nested task routes are registered under the project scope.
+- Task stage smoke evidence was tied directly to the delivered workflows by re-running project task list, task creation, and task editing feature tests against the live containerized application.
