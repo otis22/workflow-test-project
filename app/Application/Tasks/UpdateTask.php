@@ -20,11 +20,6 @@ class UpdateTask
 
         $task->update($data->toPersistenceAttributes());
 
-        $task->refresh();
-
-        /** @var Task $task */
-        $task = $task->load(['project', 'creator', 'assignee']);
-
         return $task;
     }
 }

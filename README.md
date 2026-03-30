@@ -107,7 +107,7 @@ docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && compose
 Текущие quality baselines:
 
 - `composer run test:coverage:gate` требует не менее `94%` общего покрытия.
-- `composer run mutate` проверяет `app/Application` и `app/Models` с порогами `89` для `MSI` и `covered MSI`.
+- `composer run mutate` проверяет `app/Application` и `app/Models` с порогами `100` для `MSI` и `covered MSI`.
 
 ## CI Workflows
 

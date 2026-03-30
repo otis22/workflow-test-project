@@ -21,7 +21,7 @@ class CreateProject
                 'user_id' => $owner->id,
             ]);
 
-            return $project->load(['owner', 'memberLinks.user', 'members']);
+            return $project;
         });
     }
 }
