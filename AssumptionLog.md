@@ -95,3 +95,5 @@
 - Task 6.1 ratchets the PHPUnit coverage gate from the bootstrap placeholder `80` to `94`, based on the current measured project coverage of `94.6%`, so future changes cannot silently erode the achieved baseline.
 - Task 6.1 aligns Infection with the artifact requirement by scoping mutation testing to `app/Application` and domain models rather than the entire web layer.
 - On that intended domain/application slice, the GitHub Actions mutation run currently measures `89.83%` MSI, so both mutation thresholds were ratcheted to `89` to reflect the enforced CI baseline rather than a more optimistic local run.
+- Task 6.2 treats `README.md` as the canonical operator-facing source for local setup and verification, so the documented commands were rewritten to use the maintained `composer run ...` scripts instead of older ad hoc one-offs.
+- Task 6.2 also synchronizes the documented bootstrap flow with the real MVP requirements by explicitly including `npm ci`, database migrations, the four gating GitHub Actions workflows, and the current `94%` coverage / `89` mutation baselines.

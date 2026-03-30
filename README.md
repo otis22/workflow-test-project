@@ -66,7 +66,13 @@ docker compose exec -T app php artisan key:generate --ansi
 5. Установите frontend/npm-зависимости для инфраструктурных проверок:
 
 ```bash
-docker compose exec -T app sh -lc 'npm install --cache /tmp/npm-cache'
+docker compose exec -T app sh -lc 'npm ci --cache /tmp/npm-cache'
+```
+
+6. Примените миграции:
+
+```bash
+docker compose exec -T app php artisan migrate --force --ansi
 ```
 
 После этого приложение доступно на `http://127.0.0.1/`.
@@ -79,15 +85,39 @@ docker compose exec -T app sh -lc 'npm install --cache /tmp/npm-cache'
 docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run quality'
 ```
 
-Отдельные команды:
+Он включает `lint`, `analyse`, основной test suite, coverage gate `94%`, duplicate detection, rector и dependency audit.
+
+Отдельные команды проекта:
 
 ```bash
-docker compose exec -T app vendor/bin/pint --test
-docker compose exec -T app vendor/bin/phpstan analyse --memory-limit=1G
-docker compose exec -T app php artisan test
-docker compose exec -T app php -d pcov.enabled=1 artisan test --coverage --min=80
-docker compose exec -T app composer run test:e2e
-docker compose exec -T app npx jscpd app tests routes --silent --config .jscpd.json
-docker compose exec -T app vendor/bin/rector process --dry-run
-docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer audit'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run lint'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run analyse'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run test'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run test:unit'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run test:feature'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run test:e2e'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run test:coverage'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run test:coverage:gate'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run cpd'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run rector'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run mutate'
+docker compose exec -T app sh -lc 'export COMPOSER_HOME=/tmp/composer && composer run deps:audit'
 ```
+
+Текущие quality baselines:
+
+- `composer run test:coverage:gate` требует не менее `94%` общего покрытия.
+- `composer run mutate` проверяет `app/Application` и `app/Models` с порогами `89` для `MSI` и `covered MSI`.
+
+## CI Workflows
+
+Репозиторий блокируется четырьмя GitHub Actions workflows на каждый push и pull request:
+
+- `CI`:
+  запускает `composer run lint`, `composer run analyse`, `composer run test:coverage:gate`, `composer run cpd`, `composer run rector`, `composer run deps:audit`.
+- `E2E Tests`:
+  запускает `composer run test:e2e`.
+- `Mutation Tests`:
+  запускает `composer run mutate`.
+- `Smoke Tests`:
+  поднимает `docker compose`, подготавливает приложение и проверяет `http://127.0.0.1/`.
