@@ -80,3 +80,5 @@
 - Task 5.3 models comments as a separate persistence slice with a dedicated application action, so the project-membership rule for comment authors is enforced below the controller layer and stays testable in isolation.
 - Comment history is rendered directly on the task detail page in chronological order, which matches the artifact’s discussion-history requirement without introducing a separate activity feed abstraction in the MVP.
 - Comment submission currently validates only a required text body with a pragmatic `max:2000` limit; richer formatting, mentions, and attachments remain outside the MVP boundary.
+- Task 5.4 keeps the e2e layer request-driven rather than browser-automated, which remains acceptable for the current server-rendered MVP and keeps the CI runtime lightweight while still proving the full task workflow.
+- The task-workflow e2e journey enters through registration instead of repeating the existing login+project setup byte-for-byte, which preserves end-to-end coverage while keeping the zero-duplication quality gate satisfied.

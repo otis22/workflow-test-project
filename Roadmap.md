@@ -38,7 +38,7 @@
 | Task 5.1 My tasks dashboard section | Show tasks assigned to the current user and near-term deadlines on the dashboard. | done |
 | Task 5.2 Task detail page | Implement the task page with the main fields and activity context. | done |
 | Task 5.3 Commenting flow | Implement adding and viewing comments with project membership checks. | done |
-| Task 5.4 E2E task user journeys | Cover creating tasks, changing status, viewing personal tasks, and commenting with end-to-end tests. | todo |
+| Task 5.4 E2E task user journeys | Cover creating tasks, changing status, viewing personal tasks, and commenting with end-to-end tests. | done |
 | Task 5.5 Review stage 5 | Review the stage for workflow completeness, security, and artifact alignment. | todo |
 | Task 5.6 Smoke test stage 5 | Verify the end-to-end MVP journey in the running application. | todo |
 | Task 5.7 Changelog stage 5 | Record the completed MVP user workflow in `CHANGELOG.md`. | todo |

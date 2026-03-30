@@ -35,6 +35,7 @@
 - фильтрация project task list по статусу и дедлайну
 - отдельная task detail page с основными полями и activity/comments placeholder
 - commenting flow на task detail page с историей обсуждения
+- request-driven e2e journey для полного task workflow: project -> task -> dashboard -> status update -> comment
 
 ## Как начать
 
