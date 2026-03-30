@@ -89,7 +89,8 @@
                                 <p class="muted">{{ $task->description }}</p>
                             @endif
 
-                            <div>
+                            <div class="button-row">
+                                <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="button button-secondary">View task</a>
                                 <a href="{{ route('projects.tasks.edit', [$project, $task]) }}" class="button button-secondary">Edit task</a>
                             </div>
                         </article>

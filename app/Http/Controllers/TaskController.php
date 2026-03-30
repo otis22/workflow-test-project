@@ -51,6 +51,16 @@ class TaskController extends Controller
         return $this->redirectToProject($project, "Task \"{$task->title}\" created.");
     }
 
+    public function show(Request $request, Project $project, Task $task): View
+    {
+        $this->ensureProjectMember($request, $project);
+
+        return view('tasks.show', [
+            'project' => $project,
+            'task' => $task->load(['assignee', 'creator', 'project']),
+        ]);
+    }
+
     public function edit(Request $request, Project $project, Task $task): View
     {
         $this->ensureProjectMember($request, $project);

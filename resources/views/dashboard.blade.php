@@ -30,9 +30,12 @@
                                     @endif
                                 </p>
                             </div>
-                            <a href="{{ route('projects.show', $task->project) }}" class="button button-secondary">
-                                {{ $task->project->name }}
-                            </a>
+                            <div class="button-row">
+                                <a href="{{ route('projects.tasks.show', [$task->project, $task]) }}" class="button button-secondary">View task</a>
+                                <a href="{{ route('projects.show', $task->project) }}" class="button button-secondary">
+                                    {{ $task->project->name }}
+                                </a>
+                            </div>
                         </section>
                     @endforeach
                 </div>
@@ -54,7 +57,10 @@
                                     {{ $task->project->name }} · due {{ $task->due_date?->format('M j, Y') }}
                                 </p>
                             </div>
-                            <p class="muted">Assigned to you</p>
+                            <div class="button-row">
+                                <p class="muted">Assigned to you</p>
+                                <a href="{{ route('projects.tasks.show', [$task->project, $task]) }}" class="button button-secondary">View task</a>
+                            </div>
                         </section>
                     @endforeach
                 </div>

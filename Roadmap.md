@@ -36,7 +36,7 @@
 | Task 4.7 Changelog stage 4 | Record the completed task management work in `CHANGELOG.md`. | done |
 | Stage 5. Personal work view and comments | Deliver personal task visibility, task detail view, and discussion history. | todo |
 | Task 5.1 My tasks dashboard section | Show tasks assigned to the current user and near-term deadlines on the dashboard. | done |
-| Task 5.2 Task detail page | Implement the task page with the main fields and activity context. | todo |
+| Task 5.2 Task detail page | Implement the task page with the main fields and activity context. | done |
 | Task 5.3 Commenting flow | Implement adding and viewing comments with project membership checks. | todo |
 | Task 5.4 E2E task user journeys | Cover creating tasks, changing status, viewing personal tasks, and commenting with end-to-end tests. | todo |
 | Task 5.5 Review stage 5 | Review the stage for workflow completeness, security, and artifact alignment. | todo |

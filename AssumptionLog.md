@@ -74,3 +74,6 @@
 - Task 5.1 keeps the dashboard intentionally personal: both the assigned-work snapshot and the near-term deadline slice are limited to tasks assigned to the authenticated user, so the screen stays focused on individual execution instead of turning into a second project-wide task list.
 - Dashboard project links are capped to a small alphabetical set with active-task counts, which provides fast navigation without replacing the dedicated projects index as the main browsing screen.
 - Feature coverage for the dashboard now freezes time explicitly and resets it in teardown, which keeps due-date assertions deterministic without leaking clock state into the rest of the suite.
+- Task 5.2 introduces a dedicated read-only task page instead of overloading the edit form as the default task destination, which keeps project navigation aligned with the UI spec and leaves edit mode as a secondary action.
+- The task detail page already reserves a comments/discussion block with an empty-state message, so Task 5.3 can extend the existing screen instead of replacing the task navigation introduced here.
+- Dashboard cards and the project task list now route through the task detail page before edit, making the MVP navigation shallower and giving one stable URL for future comments/history context.
