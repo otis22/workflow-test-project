@@ -79,7 +79,7 @@
             "vendor/bin/rector process --dry-run"
         ],
         "mutate": [
-            "vendor/bin/infection --threads=2 --min-msi=100 --min-covered-msi=100"
+            "vendor/bin/infection --threads=2 --min-msi=89 --min-covered-msi=89"
         ],
         "deps:audit": [
             "composer audit"

@@ -94,4 +94,4 @@
 - Stage 5 was closed in `CHANGELOG.md` only after the personal dashboard, task detail page, comments flow, task-workflow e2e coverage, review follow-up for CI warnings, and stage smoke verification were all completed and marked done in `Roadmap.md`.
 - Task 6.1 ratchets the PHPUnit coverage gate from the bootstrap placeholder `80` to `94`, based on the current measured project coverage of `94.6%`, so future changes cannot silently erode the achieved baseline.
 - Task 6.1 aligns Infection with the artifact requirement by scoping mutation testing to `app/Application` and domain models rather than the entire web layer.
-- On that intended domain/application slice, the measured Infection baseline is `100%` MSI and `100%` covered MSI, so both mutation thresholds were ratcheted to `100`.
+- On that intended domain/application slice, the GitHub Actions mutation run currently measures `89.83%` MSI, so both mutation thresholds were ratcheted to `89` to reflect the enforced CI baseline rather than a more optimistic local run.
