@@ -5,7 +5,6 @@ namespace Tests\Unit\Models;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,9 +18,7 @@ class TaskTest extends TestCase
 
         $task = $this->makeTask($project, $creator, $assignee);
 
-        $this->assertTrue($task->project->is($project));
-        $this->assertTrue($task->creator->is($creator));
-        $this->assertTrue($task->assignee->is($assignee));
+        $this->assertTaskRelationships($task, $project, $creator, $assignee);
     }
 
     public function test_it_casts_due_date_as_an_immutable_date(): void
@@ -32,8 +29,7 @@ class TaskTest extends TestCase
             'due_date' => '2026-04-15',
         ]);
 
-        $this->assertInstanceOf(CarbonImmutable::class, $task->due_date);
-        $this->assertSame('2026-04-15', $task->due_date->toDateString());
+        $this->assertTaskDueDate($task, '2026-04-15');
     }
 
     public function test_it_defines_the_mvp_statuses_and_priorities(): void

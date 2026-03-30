@@ -50,4 +50,9 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function hasMember(User $user): bool
+    {
+        return $this->members()->whereKey($user->id)->exists();
+    }
 }

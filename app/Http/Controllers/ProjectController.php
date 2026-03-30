@@ -32,13 +32,10 @@ class ProjectController extends Controller
 
     public function show(Request $request, Project $project): View
     {
-        abort_unless(
-            $project->members()->whereKey($request->user()->id)->exists(),
-            403,
-        );
+        abort_unless($project->hasMember($request->user()), 403);
 
         return view('projects.show', [
-            'project' => $project->load(['owner', 'members']),
+            'project' => $project->load(['owner', 'members', 'tasks.assignee']),
         ]);
     }
 

@@ -55,3 +55,6 @@
 - Task 4.1 introduces a dedicated `Task` model and table with string-backed MVP `status` and `priority` values plus a nullable `due_date`, which keeps the domain aligned with the artifacts without introducing premature enum persistence complexity.
 - Creator and assignee membership validation for tasks is centralized in `EnsureTaskParticipantsBelongToProject`, so Stage 4 create/edit flows can reuse one domain rule instead of duplicating project-member checks in controllers.
 - Test helper setup for project memberships was consolidated in `tests/TestCase.php` to keep the zero-duplication quality gate passing while the task domain test surface grows.
+- Task 4.2 introduces nested project task routes and a dedicated `CreateTask` application action so task creation stays project-scoped and the persistence rule for creator/assignee membership remains outside the controller layer.
+- The project workspace now shows a minimal task list and a create-task entry point without filters; richer task filtering is intentionally deferred to Task 4.4 to keep the roadmap slices distinct.
+- Task creation validation currently requires `due_date` to be today or later, which is a deliberate MVP decision under the artifact’s allowed deadline-validation ambiguity.

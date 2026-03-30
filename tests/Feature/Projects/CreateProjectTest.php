@@ -138,18 +138,4 @@ class CreateProjectTest extends TestCase
             'user_id' => $user->id,
         ]);
     }
-
-    private function createProjectForMember(User $user, string $name): Project
-    {
-        $project = Project::factory()->create([
-            'owner_id' => $user->id,
-            'name' => $name,
-        ]);
-
-        $project->memberLinks()->create([
-            'user_id' => $user->id,
-        ]);
-
-        return $project;
-    }
 }

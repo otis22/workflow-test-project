@@ -2,11 +2,25 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $project_id
+ * @property int $creator_id
+ * @property int|null $assignee_id
+ * @property string $title
+ * @property string|null $description
+ * @property string $status
+ * @property string $priority
+ * @property CarbonImmutable|null $due_date
+ * @property-read Project $project
+ * @property-read User $creator
+ * @property-read User|null $assignee
+ */
 class Task extends Model
 {
     /** @use HasFactory<TaskFactory> */
