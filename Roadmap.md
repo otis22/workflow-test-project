@@ -26,14 +26,14 @@
 | Task 3.5 Review stage 3 | Review the project stage for consistency with the domain model and UI spec. | done |
 | Task 3.6 Smoke test stage 3 | Verify project creation and navigation in the running application. | done |
 | Task 3.7 Changelog stage 3 | Record the completed project work in `CHANGELOG.md`. | done |
-| Stage 4. Tasks core | Deliver task creation, editing, assignment, and state management inside projects. | todo |
+| Stage 4. Tasks core | Deliver task creation, editing, assignment, and state management inside projects. | done |
 | Task 4.1 Model task domain | Implement task rules for project membership, assignee validity, status, priority, and deadlines. | done |
 | Task 4.2 Create task flow | Implement creating a task inside a project. | done |
 | Task 4.3 Edit task flow | Implement editing a task, including reassignment, status, priority, and deadline changes. | done |
 | Task 4.4 Project task list and filters | Implement the project task list with filtering by status and deadline. | done |
 | Task 4.5 Review stage 4 | Review the task stage for domain correctness, readability, and test strength. | done |
 | Task 4.6 Smoke test stage 4 | Verify core task workflows in the running application. | done |
-| Task 4.7 Changelog stage 4 | Record the completed task management work in `CHANGELOG.md`. | todo |
+| Task 4.7 Changelog stage 4 | Record the completed task management work in `CHANGELOG.md`. | done |
 | Stage 5. Personal work view and comments | Deliver personal task visibility, task detail view, and discussion history. | todo |
 | Task 5.1 My tasks dashboard section | Show tasks assigned to the current user and near-term deadlines on the dashboard. | todo |
 | Task 5.2 Task detail page | Implement the task page with the main fields and activity context. | todo |

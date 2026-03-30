@@ -23,3 +23,11 @@
 - Added the projects index and project workspace entry points, filtered to projects available through membership.
 - Expanded coverage with dedicated feature scenarios and a project navigation e2e journey for create and open flows.
 - Reviewed the stage against the source artifacts, updated the README to reflect the current MVP progress, and revalidated the running stack with a stage smoke test.
+
+## Stage 4. Tasks core
+
+- Added the task domain model with project ownership, creator and assignee relationships, MVP statuses and priorities, and due-date handling.
+- Implemented project-scoped task creation and editing with shared form handling, reassignment, status updates, priority updates, and deadline changes.
+- Turned the project workspace into the main project task list with server-rendered filters for task status and deadline state.
+- Expanded automated coverage across task domain rules, create and edit flows, and project task-list filtering scenarios.
+- Reviewed the stage against the source artifacts, updated the README to reflect task-management progress, and revalidated the running stack with a dedicated stage smoke test.

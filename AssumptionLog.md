@@ -70,3 +70,4 @@
 - Stage 4 smoke verification was executed on the running Docker Compose stack with `docker compose up -d --build`, `curl` checks for `/` and `/projects`, route inspection for nested task routes, and focused project-task feature suites.
 - The running stack still exposes the expected guest/runtime behavior after the task stage: `/` returns `200`, `/projects` redirects unauthenticated traffic to `/login`, and the nested task routes are registered under the project scope.
 - Task stage smoke evidence was tied directly to the delivered workflows by re-running project task list, task creation, and task editing feature tests against the live containerized application.
+- Stage 4 was closed in `CHANGELOG.md` only after the task domain, create/edit flows, project task filters, review, and stage smoke verification were all completed and marked done in `Roadmap.md`.
