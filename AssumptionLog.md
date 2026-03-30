@@ -64,3 +64,6 @@
 - Task 4.4 keeps project-task filtering query-based inside the existing project workspace instead of splitting the task list into a separate screen, which stays aligned with the UI spec while keeping the MVP navigation shallow.
 - Deadline filtering currently uses four server-rendered presets: `overdue`, `today`, `upcoming`, and `none`; this gives the MVP concrete deadline filtering without introducing a custom date-range UI before it is needed.
 - Task fixture creation in tests is now centralized in `tests/TestCase.php`, which keeps the zero-duplication gate sustainable as the task-management slice expands.
+- Stage 4 review confirmed that the task-management slice now covers the artifact-defined MVP core: project-scoped task creation, editing, reassignment, status/priority updates, deadline handling, and project-list filtering.
+- Stage 4 security review did not reveal new authorization gaps beyond the existing project-membership guard pattern; scoped nested task routes and shared participant validation keep cross-project access constrained.
+- The review found one documentation mismatch: `README.md` still described the MVP only through the projects stage, so it was updated immediately to include task creation, editing, and filtering progress.
