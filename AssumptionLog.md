@@ -71,3 +71,6 @@
 - The running stack still exposes the expected guest/runtime behavior after the task stage: `/` returns `200`, `/projects` redirects unauthenticated traffic to `/login`, and the nested task routes are registered under the project scope.
 - Task stage smoke evidence was tied directly to the delivered workflows by re-running project task list, task creation, and task editing feature tests against the live containerized application.
 - Stage 4 was closed in `CHANGELOG.md` only after the task domain, create/edit flows, project task filters, review, and stage smoke verification were all completed and marked done in `Roadmap.md`.
+- Task 5.1 keeps the dashboard intentionally personal: both the assigned-work snapshot and the near-term deadline slice are limited to tasks assigned to the authenticated user, so the screen stays focused on individual execution instead of turning into a second project-wide task list.
+- Dashboard project links are capped to a small alphabetical set with active-task counts, which provides fast navigation without replacing the dedicated projects index as the main browsing screen.
+- Feature coverage for the dashboard now freezes time explicitly and resets it in teardown, which keeps due-date assertions deterministic without leaking clock state into the rest of the suite.

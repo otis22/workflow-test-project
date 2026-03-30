@@ -26,6 +26,7 @@
 
 - регистрация, вход и выход из системы
 - authenticated dashboard shell
+- персональный dashboard с assigned work, near-term deadlines и quick project links
 - создание проектов
 - список доступных пользователю проектов
 - переход в project workspace

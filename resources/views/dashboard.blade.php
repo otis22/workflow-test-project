@@ -6,7 +6,7 @@
         <div>
             <h1>Welcome back, {{ auth()->user()->name }}</h1>
             <p class="muted">
-                Use this shell as the entry point for your assigned work, project navigation, and deadline awareness while the rest of the MVP is added.
+                Use this personal overview to stay on top of assigned work, near-term deadlines, and your active projects.
             </p>
         </div>
     </section>
@@ -15,19 +15,71 @@
         <article class="panel stack">
             <p class="eyebrow">My work</p>
             <h2 class="section-title">Assigned work snapshot</h2>
-            <p class="muted">Your active tasks will appear here once project and task management are implemented.</p>
+            @if ($assignedTasks->isEmpty())
+                <p class="muted">No active tasks are assigned to you yet.</p>
+            @else
+                <div class="stack">
+                    @foreach ($assignedTasks as $task)
+                        <section class="panel inset-panel stack">
+                            <div>
+                                <strong>{{ $task->title }}</strong>
+                                <p class="muted">
+                                    {{ ucfirst(str_replace('_', ' ', $task->status)) }}
+                                    @if ($task->due_date)
+                                        · due {{ $task->due_date->format('M j, Y') }}
+                                    @endif
+                                </p>
+                            </div>
+                            <a href="{{ route('projects.show', $task->project) }}" class="button button-secondary">
+                                {{ $task->project->name }}
+                            </a>
+                        </section>
+                    @endforeach
+                </div>
+            @endif
         </article>
 
         <article class="panel stack">
             <p class="eyebrow">Upcoming deadlines</p>
             <h2 class="section-title">Near-term due dates</h2>
-            <p class="muted">Deadline visibility is reserved here so the dashboard can become the user's default focus screen.</p>
+            @if ($nearTermDeadlines->isEmpty())
+                <p class="muted">Nothing is due in the next week.</p>
+            @else
+                <div class="stack">
+                    @foreach ($nearTermDeadlines as $task)
+                        <section class="panel inset-panel stack">
+                            <div>
+                                <strong>{{ $task->title }}</strong>
+                                <p class="muted">
+                                    {{ $task->project->name }} · due {{ $task->due_date?->format('M j, Y') }}
+                                </p>
+                            </div>
+                            <p class="muted">Assigned to you</p>
+                        </section>
+                    @endforeach
+                </div>
+            @endif
         </article>
 
         <article class="panel stack">
             <p class="eyebrow">Projects</p>
             <h2 class="section-title">Project navigation</h2>
-            <p class="muted">Projects will be listed here after the next roadmap stage introduces project creation and membership.</p>
+            @if ($projects->isEmpty())
+                <p class="muted">Create your first project to start tracking work.</p>
+                <a href="{{ route('projects.create') }}" class="button">Create project</a>
+            @else
+                <div class="stack">
+                    @foreach ($projects as $project)
+                        <section class="panel inset-panel stack">
+                            <div>
+                                <strong>{{ $project->name }}</strong>
+                                <p class="muted">{{ $project->open_tasks_count }} active tasks</p>
+                            </div>
+                            <a href="{{ route('projects.show', $project) }}" class="button button-secondary">Open project</a>
+                        </section>
+                    @endforeach
+                </div>
+            @endif
         </article>
     </section>
 @endsection
