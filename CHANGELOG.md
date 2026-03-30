@@ -47,3 +47,9 @@
 - Completed the final review across artifacts, architecture, authorization, CI stability, and dependency health with no additional implementation follow-up tasks required.
 - Revalidated the MVP on a clean Docker Compose volume with fresh dependency installation, successful migrations, and successful smoke responses for the public and guest-entry routes.
 - Closed the MVP roadmap with all planned stages and review follow-ups completed in the `codex` branch baseline.
+
+## Stage 7. Review follow-ups
+
+- Expanded smoke automation so the shared smoke command and GitHub Actions workflow verify `/`, `/login`, `/register`, `/dashboard`, and `/projects` instead of only the root page.
+- Removed unnecessary application-service refresh and eager-loading steps, added direct persistence-mapping coverage for `TaskData`, and ratcheted the scoped mutation floor back to `100/100`.
+- Added direct unit coverage for login throttling normalization, lockout, failure-hit, and success-clear branches, bringing `LoginUserRequest` coverage to `100%`.
