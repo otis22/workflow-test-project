@@ -41,7 +41,7 @@
 | Task 5.4 E2E task user journeys | Cover creating tasks, changing status, viewing personal tasks, and commenting with end-to-end tests. | done |
 | Task 5.5 Review stage 5 | Review the stage for workflow completeness, security, and artifact alignment. | done |
 | Task 5.5a [review] Remove CI Node 20 deprecation warnings | Update GitHub Actions usage so the pipelines no longer emit Node 20 runtime deprecation warnings. | done |
-| Task 5.6 Smoke test stage 5 | Verify the end-to-end MVP journey in the running application. | todo |
+| Task 5.6 Smoke test stage 5 | Verify the end-to-end MVP journey in the running application. | done |
 | Task 5.7 Changelog stage 5 | Record the completed MVP user workflow in `CHANGELOG.md`. | todo |
 | Stage 6. Hardening and release readiness | Finalize quality gates, documentation, and readiness of the MVP baseline. | todo |
 | Task 6.1 Coverage and mutation baseline | Lock the initial coverage gate and mutation baseline for domain and application layers. | todo |
