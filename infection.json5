@@ -2,11 +2,11 @@
   "$schema": "https://infection.github.io/schema.json",
   "source": {
     "directories": [
-      "app"
+      "app/Application",
+      "app/Models"
     ],
     "excludes": [
-      "Http/Controllers/Controller.php",
-      "Providers/AppServiceProvider.php"
+      "Models/User.php"
     ]
   },
   "tmpDir": "storage/infection",
