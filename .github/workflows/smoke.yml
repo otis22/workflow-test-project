@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build and start containers
         run: env UID="$(id -u)" GID="$(id -g)" docker compose up -d --build

@@ -87,3 +87,4 @@
 - Stage 5 security review covered task-detail access, comment submission access, input validation, and dependency health; `composer audit` remained clean during the review.
 - The review found one documentation mismatch: `README.md` still described the task detail page as a comments placeholder even though comments were already implemented, so it was corrected immediately in the same review task.
 - The review also found a CI infrastructure issue: GitHub Actions runs remain green, but they emit Node 20 deprecation warnings for `actions/checkout@v4` and `actions/setup-node@v4`; a dedicated `[review]` roadmap task was added so this warning is resolved in queue order before stage-close work continues.
+- Task 5.5a updates the workflows to `actions/checkout@v6` and `actions/setup-node@v6`, based on the current official GitHub action repositories, to move the JavaScript action runtime off the deprecated Node 20 path without changing pipeline behavior.
