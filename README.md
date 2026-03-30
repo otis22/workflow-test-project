@@ -33,7 +33,7 @@
 - создание задач внутри проекта
 - редактирование задач, включая статус, приоритет, дедлайн и исполнителя
 - фильтрация project task list по статусу и дедлайну
-- отдельная task detail page с основными полями и activity/comments placeholder
+- отдельная task detail page с основными полями и discussion history
 - commenting flow на task detail page с историей обсуждения
 - request-driven e2e journey для полного task workflow: project -> task -> dashboard -> status update -> comment
 
