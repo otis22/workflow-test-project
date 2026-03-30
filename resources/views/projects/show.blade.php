@@ -32,11 +32,44 @@
                 <a href="{{ route('projects.tasks.create', $project) }}" class="button">Create task</a>
             </div>
 
-            @if ($project->tasks->isEmpty())
+            <form method="GET" action="{{ route('projects.show', $project) }}" class="stack">
+                <p class="eyebrow">Filter tasks</p>
+
+                <div class="field">
+                    <label for="status">Status</label>
+                    <select id="status" name="status">
+                        <option value="">All statuses</option>
+                        @foreach (\App\Models\Task::STATUSES as $status)
+                            <option value="{{ $status }}" @selected($activeStatusFilter === $status)>
+                                {{ str($status)->replace('_', ' ')->title() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="deadline">Deadline</label>
+                    <select id="deadline" name="deadline">
+                        <option value="">All deadlines</option>
+                        @foreach ($deadlineFilters as $deadline)
+                            <option value="{{ $deadline }}" @selected($activeDeadlineFilter === $deadline)>
+                                {{ str($deadline)->title() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="button button-secondary">Apply filters</button>
+                    <a href="{{ route('projects.show', $project) }}" class="button button-secondary">Reset</a>
+                </div>
+            </form>
+
+            @if ($tasks->isEmpty())
                 <p class="muted">No tasks yet. Create the first task to start tracking project work.</p>
             @else
                 <div class="stack">
-                    @foreach ($project->tasks->sortByDesc('created_at') as $task)
+                    @foreach ($tasks as $task)
                         <article class="panel inset-panel stack">
                             <div>
                                 <h3 class="section-title">{{ $task->title }}</h3>

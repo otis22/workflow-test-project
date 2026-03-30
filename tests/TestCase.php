@@ -145,22 +145,36 @@ abstract class TestCase extends BaseTestCase
     {
         ['project' => $project, 'creator' => $creator, 'assignee' => $assignee] = $this->createTaskParticipantContext($withAssignee);
 
-        $task = Task::factory()
-            ->for($project)
-            ->for($creator, 'creator')
-            ->when($withAssignee, fn ($factory) => $factory->for($assignee, 'assignee'))
-            ->create([
-                'title' => 'Prepare launch checklist',
-                'description' => 'Capture all release blockers for the first cut.',
-                'status' => Task::STATUS_TODO,
-                'priority' => Task::PRIORITY_HIGH,
-                'due_date' => '2026-04-10',
-            ]);
+        $task = $this->createProjectTask($project, $creator, [
+            'title' => 'Prepare launch checklist',
+            'description' => 'Capture all release blockers for the first cut.',
+            'status' => Task::STATUS_TODO,
+            'priority' => Task::PRIORITY_HIGH,
+            'due_date' => '2026-04-10',
+            'assignee_id' => $withAssignee ? $assignee : null,
+        ]);
 
         return [
             'task' => $task,
             'creator' => $creator,
             'assignee' => $assignee,
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $attributes
+     */
+    protected function createProjectTask(Project $project, User $creator, array $attributes = []): Task
+    {
+        $factory = Task::factory()
+            ->for($project)
+            ->for($creator, 'creator');
+
+        if (array_key_exists('assignee_id', $attributes) && $attributes['assignee_id'] instanceof User) {
+            $factory = $factory->for($attributes['assignee_id'], 'assignee');
+            unset($attributes['assignee_id']);
+        }
+
+        return $factory->create($attributes);
     }
 }

@@ -61,3 +61,6 @@
 - Task 4.3 reuses a shared task form and a `TaskData` value object across create and update flows, which removes controller duplication and keeps task persistence attributes consistent between both application actions.
 - Nested task edit/update routes now use scoped bindings under the project path, so the application rejects cross-project task URLs without adding custom controller-side relation checks.
 - Update-task validation intentionally allows editing tasks with an already past due date, because blocking such updates would make overdue tasks harder to manage once the deadline has passed.
+- Task 4.4 keeps project-task filtering query-based inside the existing project workspace instead of splitting the task list into a separate screen, which stays aligned with the UI spec while keeping the MVP navigation shallow.
+- Deadline filtering currently uses four server-rendered presets: `overdue`, `today`, `upcoming`, and `none`; this gives the MVP concrete deadline filtering without introducing a custom date-range UI before it is needed.
+- Task fixture creation in tests is now centralized in `tests/TestCase.php`, which keeps the zero-duplication gate sustainable as the task-management slice expands.
