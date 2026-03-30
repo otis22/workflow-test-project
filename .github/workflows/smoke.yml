@@ -30,8 +30,8 @@ jobs:
       - name: Prepare Laravel app
         run: docker compose exec -T app sh -lc 'cp .env.example .env && php artisan key:generate --ansi && php artisan migrate --force --ansi'
 
-      - name: Check root URL
-        run: curl -I --retry 10 --retry-delay 3 --retry-connrefused http://127.0.0.1/
+      - name: Check main guest routes
+        run: bash scripts/smoke-check.sh http://127.0.0.1
 
       - name: Print logs on failure
         if: failure()
