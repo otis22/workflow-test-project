@@ -39,3 +39,11 @@
 - Implemented task comments with project-membership checks, chronological discussion history, and request-level validation on the task page.
 - Expanded end-to-end coverage with a dedicated task workflow journey that exercises project creation, task creation, dashboard visibility, status changes, and commenting.
 - Reviewed the stage against the source artifacts, fixed documentation drift, removed CI Node 20 deprecation warnings by upgrading official GitHub Actions majors, and revalidated the running stack with a stage smoke test.
+
+## Stage 6. Hardening and release readiness
+
+- Ratcheted the coverage gate to `94%` and aligned mutation testing to the domain and application slice with an enforced CI baseline of `89` MSI / covered MSI.
+- Audited the repository documentation so `README.md` now reflects the real local bootstrap flow, maintained verification commands, current quality baselines, and the four gating GitHub Actions workflows.
+- Completed the final review across artifacts, architecture, authorization, CI stability, and dependency health with no additional implementation follow-up tasks required.
+- Revalidated the MVP on a clean Docker Compose volume with fresh dependency installation, successful migrations, and successful smoke responses for the public and guest-entry routes.
+- Closed the MVP roadmap with all planned stages and review follow-ups completed in the `codex` branch baseline.
