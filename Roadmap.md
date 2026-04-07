@@ -9,7 +9,7 @@
 | 0.3 | Инструменты качества | Установить и настроить: Pest, Laravel Pint, PHPStan, Rector, PHPCPD, Infection. Проверить запуск каждого инструмента | `done` |
 | 0.4 | CI — основной пайплайн | GitHub Actions workflow: install → pint (check) → pest (coverage) → phpstan → phpcpd → rector (dry-run) → composer audit | `done` |
 | 0.5 | CI — дополнительные workflows | Отдельные workflows: e2e tests (Dusk), smoke tests, mutation tests (Infection). Каждый блокирует merge при неудаче | `done` |
-| 0.6 | Структура каталогов | Создать каталоги для чистой архитектуры: Domain, Application, Infrastructure, Web/UI. Настроить autoload | `todo` |
+| 0.6 | Структура каталогов | Создать каталоги для чистой архитектуры: Domain, Application, Infrastructure, Web/UI. Настроить autoload | `done` |
 
 ## Этап 1: Доменный слой
 
