@@ -61,7 +61,7 @@
         "stan": "./vendor/bin/phpstan analyse --memory-limit=512M",
         "rector": "./vendor/bin/rector process",
         "rector:check": "./vendor/bin/rector process --dry-run",
-        "md": "./vendor/bin/phpmd app text cleancode,codesize,design,naming,unusedcode",
+        "md": "./vendor/bin/phpmd app text phpmd.xml",
         "infection": "./vendor/bin/infection --threads=2 --no-interaction",
         "check:all": [
             "@format:check",
