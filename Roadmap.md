@@ -6,7 +6,7 @@
 |---|--------|----------|--------|
 | 0.1 | Docker Compose | Создать docker-compose.yml с сервисами: app (PHP 8.3 + Laravel), nginx, PostgreSQL. Убедиться, что `docker compose up` поднимается без ошибок | `done` |
 | 0.2 | Инициализация Laravel-проекта | Создать Laravel-проект внутри контейнера, настроить .env, подключить БД, проверить стартовую страницу | `done` |
-| 0.3 | Инструменты качества | Установить и настроить: Pest, Laravel Pint, PHPStan, Rector, PHPCPD, Infection. Проверить запуск каждого инструмента | `todo` |
+| 0.3 | Инструменты качества | Установить и настроить: Pest, Laravel Pint, PHPStan, Rector, PHPCPD, Infection. Проверить запуск каждого инструмента | `done` |
 | 0.4 | CI — основной пайплайн | GitHub Actions workflow: install → pint (check) → pest (coverage) → phpstan → phpcpd → rector (dry-run) → composer audit | `todo` |
 | 0.5 | CI — дополнительные workflows | Отдельные workflows: e2e tests (Dusk), smoke tests, mutation tests (Infection). Каждый блокирует merge при неудаче | `todo` |
 | 0.6 | Структура каталогов | Создать каталоги для чистой архитектуры: Domain, Application, Infrastructure, Web/UI. Настроить autoload | `todo` |
