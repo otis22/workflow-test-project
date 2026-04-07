@@ -12,11 +12,16 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "infection/infection": "^0.29",
+        "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
-        "phpunit/phpunit": "^12.5.12"
+        "pestphp/pest": "^4.4",
+        "pestphp/pest-plugin-laravel": "^4.1",
+        "phpmd/phpmd": "^2.15",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -45,7 +50,26 @@
         ],
         "test": [
             "@php artisan config:clear --ansi",
-            "@php artisan test"
+            "./vendor/bin/pest"
+        ],
+        "test:coverage": [
+            "@php artisan config:clear --ansi",
+            "./vendor/bin/pest --coverage --min=0"
+        ],
+        "format": "./vendor/bin/pint",
+        "format:check": "./vendor/bin/pint --test",
+        "stan": "./vendor/bin/phpstan analyse --memory-limit=512M",
+        "rector": "./vendor/bin/rector process",
+        "rector:check": "./vendor/bin/rector process --dry-run",
+        "md": "./vendor/bin/phpmd app text cleancode,codesize,design,naming,unusedcode",
+        "infection": "./vendor/bin/infection --threads=2 --no-interaction",
+        "check:all": [
+            "@format:check",
+            "@stan",
+            "@rector:check",
+            "@md",
+            "@test",
+            "composer audit"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -77,7 +101,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "infection/extension-installer": true
         }
     },
     "minimum-stability": "stable",

@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxml2-dev \
     libonig-dev \
     unzip \
+    $PHPIZE_DEPS \
     && docker-php-ext-install \
     pdo_pgsql \
     pgsql \
@@ -17,6 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ctype \
     zip \
     pcntl \
+    && pecl install pcov \
+    && docker-php-ext-enable pcov \
+    && apt-get purge -y --auto-remove $PHPIZE_DEPS \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

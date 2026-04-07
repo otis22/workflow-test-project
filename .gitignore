@@ -18,7 +18,11 @@
 /public/storage
 /storage/*.key
 /storage/pail
+/storage/framework/phpstan
+/storage/infection
 /vendor
+.phpunit.cache
+.phpunit.result.cache
 _ide_helper.php
 Homestead.json
 Homestead.yaml
