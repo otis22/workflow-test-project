@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Application\Hashing\PasswordHasher;
 use App\Application\User\Exception\EmailAlreadyTakenException;
 use App\Application\User\Exception\WeakPasswordException;
 use App\Application\User\RegisterUser;
@@ -58,6 +59,41 @@ it('rejects invalid email via domain entity validation', function (): void {
 it('rejects empty name via domain entity validation', function (): void {
     makeRegisterUser()->execute('', 'alice@example.com', 'super-secret');
 })->throws(InvalidArgumentException::class, 'User name must not be empty');
+
+it('accepts a password of exactly the minimum length', function (): void {
+    $user = makeRegisterUser()->execute('Alice', 'alice@example.com', '12345678');
+
+    expect($user->passwordHash)->toBe('hashed:12345678');
+});
+
+it('does not hash the password when name or email are invalid', function (): void {
+    $hasher = new class implements PasswordHasher
+    {
+        public int $hashCalls = 0;
+
+        public function hash(string $plain): string
+        {
+            $this->hashCalls++;
+
+            return 'hashed:'.$plain;
+        }
+
+        public function verify(string $plain, string $hash): bool
+        {
+            return $hash === 'hashed:'.$plain;
+        }
+    };
+
+    $useCase = new RegisterUser(new InMemoryUserRepository, $hasher, new FakeClock);
+
+    try {
+        $useCase->execute('Alice', 'not-an-email', '12345678');
+    } catch (InvalidArgumentException) {
+        // expected
+    }
+
+    expect($hasher->hashCalls)->toBe(0);
+});
 
 it('assigns sequential ids on multiple registrations', function (): void {
     $repo = new InMemoryUserRepository;

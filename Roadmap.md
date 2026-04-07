@@ -103,6 +103,7 @@
 |---|--------|----------|--------|
 | 1.r1 | `[review]` Инвариант updatedAt >= createdAt | Добавить проверку в конструкторы доменных сущностей (User, Project, далее Task/Comment), что updatedAt не раньше createdAt. Применить симметрично ко всем сущностям. Источник: Codex review задачи 1.2 | `todo` |
 | 1.r2 | `[review]` Валидация id > 0 во всех entities | Добавить проверку `id > 0` в конструкторы User, Project, ProjectMember, Task, Comment. Применить симметрично. Источник: Codex review задачи 1.4 | `todo` |
+| 2.r1 | `[review]` Email normalization | Нормализовать email (lowercase + trim) на уровне use cases или value object EmailAddress. Сделать поиск дубликатов и login case-insensitive. Источник: Codex review задачи 2.1 | `todo` |
 
 ## Этап 10: Финальное ревью и исправление ошибок
 

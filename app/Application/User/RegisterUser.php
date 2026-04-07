@@ -10,6 +10,7 @@ use App\Application\User\Exception\EmailAlreadyTakenException;
 use App\Application\User\Exception\WeakPasswordException;
 use App\Domain\User\User;
 use App\Domain\User\UserRepository;
+use InvalidArgumentException;
 
 final readonly class RegisterUser
 {
@@ -25,6 +26,16 @@ final readonly class RegisterUser
     {
         if (strlen($plainPassword) < self::MIN_PASSWORD_LENGTH) {
             throw WeakPasswordException::tooShort(self::MIN_PASSWORD_LENGTH);
+        }
+
+        // Pre-validate domain invariants before touching the repository or hashing.
+        // The domain User constructor re-validates as the ultimate guarantee.
+        if (trim($name) === '') {
+            throw new InvalidArgumentException('User name must not be empty');
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            throw new InvalidArgumentException('User email is not valid');
         }
 
         if ($this->users->findByEmail($email) instanceof User) {
