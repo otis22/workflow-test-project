@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Domain\Task\DueDate;
+use App\Domain\Task\Priority;
+use App\Domain\Task\Status;
 use App\Domain\Task\Task;
 
 function makeTask(array $overrides = []): Task
@@ -14,8 +17,8 @@ function makeTask(array $overrides = []): Task
         'assigneeId' => null,
         'title' => 'Do the thing',
         'description' => '',
-        'status' => 'todo',
-        'priority' => 'medium',
+        'status' => Status::Todo,
+        'priority' => Priority::Medium,
         'dueDate' => null,
         'createdAt' => $now,
         'updatedAt' => $now,
@@ -39,12 +42,12 @@ function makeTask(array $overrides = []): Task
 
 it('creates a task with valid data', function (): void {
     $now = new DateTimeImmutable('2026-01-01T00:00:00Z');
-    $due = new DateTimeImmutable('2026-02-01T00:00:00Z');
+    $due = new DueDate(new DateTimeImmutable('2026-02-01T00:00:00Z'));
     $task = makeTask([
         'assigneeId' => 7,
         'description' => 'details',
-        'status' => 'in_progress',
-        'priority' => 'high',
+        'status' => Status::InProgress,
+        'priority' => Priority::High,
         'dueDate' => $due,
         'createdAt' => $now,
         'updatedAt' => $now,
@@ -56,9 +59,9 @@ it('creates a task with valid data', function (): void {
         ->and($task->assigneeId)->toBe(7)
         ->and($task->title)->toBe('Do the thing')
         ->and($task->description)->toBe('details')
-        ->and($task->status)->toBe('in_progress')
-        ->and($task->priority)->toBe('high')
-        ->and($task->dueDate)->toEqual($due)
+        ->and($task->status)->toBe(Status::InProgress)
+        ->and($task->priority)->toBe(Priority::High)
+        ->and($task->dueDate)->toBe($due)
         ->and($task->createdAt)->toEqual($now)
         ->and($task->updatedAt)->toEqual($now);
 });
@@ -86,24 +89,6 @@ it('rejects empty title', fn (): Task => makeTask(['title' => '']))
 
 it('rejects whitespace-only title', fn (): Task => makeTask(['title' => '   ']))
     ->throws(InvalidArgumentException::class, 'Task title must not be empty');
-
-it('rejects unknown status', fn (): Task => makeTask(['status' => 'pending']))
-    ->throws(InvalidArgumentException::class, 'Task status must be one of: todo, in_progress, done');
-
-it('rejects unknown priority', fn (): Task => makeTask(['priority' => 'urgent']))
-    ->throws(InvalidArgumentException::class, 'Task priority must be one of: low, medium, high');
-
-it('accepts all valid statuses', function (): void {
-    foreach (['todo', 'in_progress', 'done'] as $status) {
-        expect(makeTask(['status' => $status])->status)->toBe($status);
-    }
-});
-
-it('accepts all valid priorities', function (): void {
-    foreach (['low', 'medium', 'high'] as $priority) {
-        expect(makeTask(['priority' => $priority])->priority)->toBe($priority);
-    }
-});
 
 it('returns a new instance with updated title and bumps updatedAt', function (): void {
     $created = new DateTimeImmutable('2026-01-01T00:00:00Z');
@@ -135,25 +120,17 @@ it('returns a new instance with updated description', function (): void {
 it('returns a new instance with updated status', function (): void {
     $now = new DateTimeImmutable;
     $task = makeTask();
-    $changed = $task->withStatus('done', $now);
-    expect($changed->status)->toBe('done')
-        ->and($task->status)->toBe('todo');
+    $changed = $task->withStatus(Status::Done, $now);
+    expect($changed->status)->toBe(Status::Done)
+        ->and($task->status)->toBe(Status::Todo);
 });
-
-it('rejects unknown status in withStatus', function (): void {
-    makeTask()->withStatus('archived', new DateTimeImmutable);
-})->throws(InvalidArgumentException::class, 'Task status must be one of: todo, in_progress, done');
 
 it('returns a new instance with updated priority', function (): void {
     $now = new DateTimeImmutable;
     $task = makeTask();
-    $changed = $task->withPriority('high', $now);
-    expect($changed->priority)->toBe('high');
+    $changed = $task->withPriority(Priority::High, $now);
+    expect($changed->priority)->toBe(Priority::High);
 });
-
-it('rejects unknown priority in withPriority', function (): void {
-    makeTask()->withPriority('blocker', new DateTimeImmutable);
-})->throws(InvalidArgumentException::class, 'Task priority must be one of: low, medium, high');
 
 it('returns a new instance with assignee set and unset', function (): void {
     $now = new DateTimeImmutable;
@@ -171,11 +148,11 @@ it('rejects zero assignee in withAssignee', function (): void {
 
 it('returns a new instance with due date set and unset', function (): void {
     $now = new DateTimeImmutable;
-    $due = new DateTimeImmutable('2026-03-01T00:00:00Z');
+    $due = new DueDate(new DateTimeImmutable('2026-03-01T00:00:00Z'));
     $task = makeTask();
 
     $withDue = $task->withDueDate($due, $now);
-    expect($withDue->dueDate)->toEqual($due);
+    expect($withDue->dueDate)->toBe($due);
 
     $withoutDue = $withDue->withDueDate(null, $now);
     expect($withoutDue->dueDate)->toBeNull();

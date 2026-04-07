@@ -9,10 +9,6 @@ use InvalidArgumentException;
 
 final readonly class Task
 {
-    public const array STATUSES = ['todo', 'in_progress', 'done'];
-
-    public const array PRIORITIES = ['low', 'medium', 'high'];
-
     public function __construct(
         public int $id,
         public int $projectId,
@@ -20,9 +16,9 @@ final readonly class Task
         public ?int $assigneeId,
         public string $title,
         public string $description,
-        public string $status,
-        public string $priority,
-        public ?DateTimeImmutable $dueDate,
+        public Status $status,
+        public Priority $priority,
+        public ?DueDate $dueDate,
         public DateTimeImmutable $createdAt,
         public DateTimeImmutable $updatedAt,
     ) {
@@ -41,18 +37,6 @@ final readonly class Task
         if (trim($title) === '') {
             throw new InvalidArgumentException('Task title must not be empty');
         }
-
-        if (! in_array($status, self::STATUSES, true)) {
-            throw new InvalidArgumentException(
-                'Task status must be one of: '.implode(', ', self::STATUSES)
-            );
-        }
-
-        if (! in_array($priority, self::PRIORITIES, true)) {
-            throw new InvalidArgumentException(
-                'Task priority must be one of: '.implode(', ', self::PRIORITIES)
-            );
-        }
     }
 
     public function withTitle(string $title, DateTimeImmutable $updatedAt): self
@@ -65,12 +49,12 @@ final readonly class Task
         return $this->copyWith(['description' => $description, 'updatedAt' => $updatedAt]);
     }
 
-    public function withStatus(string $status, DateTimeImmutable $updatedAt): self
+    public function withStatus(Status $status, DateTimeImmutable $updatedAt): self
     {
         return $this->copyWith(['status' => $status, 'updatedAt' => $updatedAt]);
     }
 
-    public function withPriority(string $priority, DateTimeImmutable $updatedAt): self
+    public function withPriority(Priority $priority, DateTimeImmutable $updatedAt): self
     {
         return $this->copyWith(['priority' => $priority, 'updatedAt' => $updatedAt]);
     }
@@ -80,7 +64,7 @@ final readonly class Task
         return $this->copyWith(['assigneeId' => $assigneeId, 'updatedAt' => $updatedAt]);
     }
 
-    public function withDueDate(?DateTimeImmutable $dueDate, DateTimeImmutable $updatedAt): self
+    public function withDueDate(?DueDate $dueDate, DateTimeImmutable $updatedAt): self
     {
         return $this->copyWith(['dueDate' => $dueDate, 'updatedAt' => $updatedAt]);
     }
