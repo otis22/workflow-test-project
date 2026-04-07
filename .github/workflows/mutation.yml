@@ -1,0 +1,16 @@
+# Mutation tests (Infection). Skeleton — будет активирован в задаче 9.1.
+name: Mutation tests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  infection:
+    name: Infection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Infection will be enabled in task 9.1"

@@ -1,0 +1,16 @@
+# E2E tests (Laravel Dusk). Skeleton — будет активирован в задаче 8.1.
+name: E2E tests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: Dusk e2e
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "E2E suite will be enabled in task 8.1"

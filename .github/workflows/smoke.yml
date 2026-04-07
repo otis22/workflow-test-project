@@ -1,0 +1,61 @@
+name: Smoke tests
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: docker compose smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare .env
+        run: cp .env.example .env
+
+      - name: Build and start containers
+        run: docker compose up -d --build
+
+      - name: Wait for app to be healthy
+        run: |
+          for i in $(seq 1 30); do
+            if [ "$(docker inspect -f '{{.State.Health.Status}}' workflow-test-project-app-1 2>/dev/null)" = "healthy" ]; then
+              echo "app is healthy"
+              exit 0
+            fi
+            echo "waiting for app... ($i/30)"
+            sleep 2
+          done
+          echo "app did not become healthy"
+          docker compose logs
+          exit 1
+
+      - name: Install composer dependencies
+        run: docker compose exec -T app composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Generate application key
+        run: docker compose exec -T app php artisan key:generate
+
+      - name: Run migrations
+        run: docker compose exec -T app php artisan migrate --force
+
+      - name: Curl home page
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+          echo "HTTP $status"
+          test "$status" = "200"
+
+      - name: Dump logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v
