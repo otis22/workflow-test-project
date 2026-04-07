@@ -91,3 +91,17 @@
 - **Размещение в `app/Domain/Task/`** — Comment концептуально часть aggregate Task.
 - **Правило "автор — участник проекта"** в use case `AddComment` (этап 2.9), не в entity.
 - **Codex review:** APPROVE, no findings.
+
+## 1.6 Value Objects (Status, Priority, DueDate)
+
+- **Status и Priority — backed string enum** (PHP 8.1+ idiomatic). Кейсы: Todo/InProgress/Done и Low/Medium/High. После интеграции в Task валидация через `in_array` удалена — невалидные значения непредставимы на уровне типов.
+- **DueDate — final readonly value class** с методом `isOverdue(now): bool` и `equals(other)`. Семантика: `isOverdue` строгая (now > value, равенство — не overdue).
+- **Equality DueDate** через `format('U.u')` — сравнивает instant + микросекунды в UTC, не timezone metadata. Это важно: одно и то же мгновение в разных таймзонах считается равным (см. тест "different timezones are equal").
+- **Декомпозиция 1.6.1 → VO + tests, 1.6.2 → интеграция в Task** — два отдельных коммита и codex-review цикла, чтобы каждый был ≤150 строк и обозримым.
+- **Размещение всех трёх VO в `app/Domain/Task/`** — они принадлежат aggregate Task.
+- **phpmd `ExcessiveParameterList: 12`** оставлено: после VO интеграции количество параметров Task осталось 11 (11 семантических полей), хотя их типы ужесточились.
+- **Codex triage 1.6.1:**
+  - accept: `==` на DateTimeImmutable семантически неопределён → перешёл на `format('U.u')`
+  - accept: тест на timezone-equality → добавлен
+  - defer: `values()` helper на enum → не нужен в 1.6.2 (in_array удалён, не дублирован)
+- **Codex review 1.6.2:** APPROVE, no findings.
