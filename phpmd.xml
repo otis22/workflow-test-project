@@ -7,7 +7,10 @@
 
     <description>TaskFlow PHPMD ruleset — base rules with project-specific tweaks.</description>
 
-    <rule ref="rulesets/cleancode.xml"/>
+    <rule ref="rulesets/cleancode.xml">
+        <!-- Named constructors / factory methods on exceptions and value objects are idiomatic. -->
+        <exclude name="StaticAccess"/>
+    </rule>
     <rule ref="rulesets/codesize.xml">
         <exclude name="ExcessiveParameterList"/>
     </rule>
