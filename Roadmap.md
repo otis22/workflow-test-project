@@ -34,7 +34,7 @@
 | 2.6 | Редактирование задачи | Use case UpdateTask. Изменение полей: title, description, status, priority, due_date, assignee. Валидация: assignee — участник проекта. Unit-тесты | `done` |
 | 2.7 | Список задач проекта | Use case ListProjectTasks. Фильтрация по статусу и дедлайну. Unit-тесты | `done` |
 | 2.8 | Список задач пользователя | Use case ListUserTasks. Задачи, назначенные текущему пользователю. Unit-тесты | `done` |
-| 2.9 | Добавление комментария | Use case AddComment. Валидация: автор — участник проекта. Unit-тесты | `todo` |
+| 2.9 | Добавление комментария | Use case AddComment. Валидация: автор — участник проекта. Unit-тесты | `done` |
 | 2.10 | Список комментариев задачи | Use case ListTaskComments. Unit-тесты | `todo` |
 
 ## Этап 3: Инфраструктурный слой
