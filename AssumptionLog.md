@@ -71,3 +71,16 @@
 - **Правило "владелец автоматически — участник"** не реализуется в entity, а вынесено в use case `CreateProject` (этап 2.3): на уровне entity это требовало бы инжекта Project и нарушило бы изоляцию.
 - **Размещение в `app/Domain/Project/`** (а не в отдельном `app/Domain/ProjectMember/`) — ProjectMember концептуально часть aggregate Project.
 - **Codex review:** ship, no findings.
+
+## 1.4 Доменная сущность Task
+
+- **Status и Priority как строки + const массивы STATUSES/PRIORITIES** на этапе 1.4. В 1.6 заменятся на типизированные value objects.
+- **`assigneeId`, `dueDate` — nullable** по доменной модели (задача может быть без исполнителя и без дедлайна).
+- **`description: string` (не nullable)** — пустая строка = "нет описания". Симметрично с Project.
+- **`copyWith` private helper** для всех 6 мутаторов вместо повторения 11 named-arg вызовов. Использует `array_key_exists` для nullable-полей (`assigneeId`, `dueDate`), чтобы явный `null` не схлопывался через `??`.
+- **phpmd `ExcessiveParameterList` поднят до 12** — domain entity с promotion-конструктором легитимно имеет 11 параметров. После 1.6 (введение VO) количество снизится.
+- **Правило "creator — участник проекта"** не в entity, а в use case `CreateTask` (этап 2.5).
+- **Codex triage:**
+  - defer: `id <= 0` валидация — отсутствует во всех 4 entities, должна применяться симметрично → Roadmap 1.r2 [review]
+  - reject: description должен быть `?string` — PRD явно `string (может быть пустой)`, не nullable; симметрично с Project
+  - reject: тесты на null description — нет правила

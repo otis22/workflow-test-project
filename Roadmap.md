@@ -18,7 +18,7 @@
 | 1.1 | Сущность User | Domain-модель User с полями из доменной модели. Unit-тесты на создание и валидацию | `done` |
 | 1.2 | Сущность Project | Domain-модель Project с owner_id. Правило: проект должен иметь владельца | `done` |
 | 1.3 | Сущность ProjectMember | Domain-модель ProjectMember. Правило: владелец автоматически является участником | `done` |
-| 1.4 | Сущность Task | Domain-модель Task со статусами (todo/in_progress/done) и приоритетами (low/medium/high). Правила: задача принадлежит проекту, создатель — участник проекта | `todo` |
+| 1.4 | Сущность Task | Domain-модель Task со статусами (todo/in_progress/done) и приоритетами (low/medium/high). Правила: задача принадлежит проекту, создатель — участник проекта | `done` |
 | 1.5 | Сущность Comment | Domain-модель Comment. Правило: комментарий может добавить только участник проекта | `todo` |
 | 1.6 | Value Objects | Status, Priority, DueDate — выделить value objects для типизации. Unit-тесты | `todo` |
 
@@ -102,6 +102,7 @@
 | # | Задача | Описание | Статус |
 |---|--------|----------|--------|
 | 1.r1 | `[review]` Инвариант updatedAt >= createdAt | Добавить проверку в конструкторы доменных сущностей (User, Project, далее Task/Comment), что updatedAt не раньше createdAt. Применить симметрично ко всем сущностям. Источник: Codex review задачи 1.2 | `todo` |
+| 1.r2 | `[review]` Валидация id > 0 во всех entities | Добавить проверку `id > 0` в конструкторы User, Project, ProjectMember, Task, Comment. Применить симметрично. Источник: Codex review задачи 1.4 | `todo` |
 
 ## Этап 10: Финальное ревью и исправление ошибок
 
