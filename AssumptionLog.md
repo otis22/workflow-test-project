@@ -84,3 +84,10 @@
   - defer: `id <= 0` валидация — отсутствует во всех 4 entities, должна применяться симметрично → Roadmap 1.r2 [review]
   - reject: description должен быть `?string` — PRD явно `string (может быть пустой)`, не nullable; симметрично с Project
   - reject: тесты на null description — нет правила
+
+## 1.5 Доменная сущность Comment
+
+- **Без мутаторов** — комментарии не редактируются в MVP (UI spec не предусматривает edit). Создание/удаление на уровне репозитория.
+- **Размещение в `app/Domain/Task/`** — Comment концептуально часть aggregate Task.
+- **Правило "автор — участник проекта"** в use case `AddComment` (этап 2.9), не в entity.
+- **Codex review:** APPROVE, no findings.

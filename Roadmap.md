@@ -19,7 +19,7 @@
 | 1.2 | Сущность Project | Domain-модель Project с owner_id. Правило: проект должен иметь владельца | `done` |
 | 1.3 | Сущность ProjectMember | Domain-модель ProjectMember. Правило: владелец автоматически является участником | `done` |
 | 1.4 | Сущность Task | Domain-модель Task со статусами (todo/in_progress/done) и приоритетами (low/medium/high). Правила: задача принадлежит проекту, создатель — участник проекта | `done` |
-| 1.5 | Сущность Comment | Domain-модель Comment. Правило: комментарий может добавить только участник проекта | `todo` |
+| 1.5 | Сущность Comment | Domain-модель Comment. Правило: комментарий может добавить только участник проекта | `done` |
 | 1.6 | Value Objects | Status, Priority, DueDate — выделить value objects для типизации. Unit-тесты | `todo` |
 
 ## Этап 2: Application-слой (Use Cases)
