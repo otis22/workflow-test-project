@@ -8,10 +8,15 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: smoke-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   smoke:
     name: docker compose smoke test
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -25,8 +30,10 @@ jobs:
 
       - name: Wait for app to be healthy
         run: |
+          cid="$(docker compose ps -q app)"
+          test -n "$cid"
           for i in $(seq 1 30); do
-            if [ "$(docker inspect -f '{{.State.Health.Status}}' workflow-test-project-app-1 2>/dev/null)" = "healthy" ]; then
+            if [ "$(docker inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{end}}' "$cid")" = "healthy" ]; then
               echo "app is healthy"
               exit 0
             fi
