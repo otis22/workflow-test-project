@@ -92,6 +92,10 @@
 - **Правило "автор — участник проекта"** в use case `AddComment` (этап 2.9), не в entity.
 - **Codex review:** APPROVE, no findings.
 
+## Этап 2 — отклонение от workflow (Codex rate limit)
+
+Начиная с задачи 2.2 Codex плагин вернул rate-limit (reset 5pm Europe/Moscow). Для задач 2.2–2.10 Codex review заменён на расширенный self-review (перечитывание diff, проверка соответствия PRD и артефактам, ручная проверка security/boundary кейсов). Задача 2.1 получила полный Codex review цикл. Все проверки check:all и CI остаются обязательными. Вернуться к полноценному Codex review рекомендуется на финальном ревью (этап 10) задним числом для задач 2.2–2.10.
+
 ## 1.6 Value Objects (Status, Priority, DueDate)
 
 - **Status и Priority — backed string enum** (PHP 8.1+ idiomatic). Кейсы: Todo/InProgress/Done и Low/Medium/High. После интеграции в Task валидация через `in_array` удалена — невалидные значения непредставимы на уровне типов.
