@@ -38,3 +38,19 @@
   - defer: phpmd vs PHPCPD полнота → переоценить в этапе 10
   - reject: PHPStan level 6 консервативен — достаточен для MVP
   - reject: pcov без pin версии — преждевременная оптимизация для dev
+
+## 1.1 Доменная сущность User
+
+- **Чистый домен без Eloquent**: `final readonly class User` с public readonly properties — нативная PHP 8.3 иммутабельность, валидация в конструкторе.
+- **Поле `passwordHash` (camelCase)** на уровне домена вместо `password_hash` из доменной модели — на уровне домена используем PHP-конвенцию, snake_case останется на уровне БД/маппинга (этап 3.2).
+- **Иммутабельность через `withName`/`withEmail`/`withPasswordHash`**: каждый метод принимает новое значение и `DateTimeImmutable $updatedAt`, возвращает новый экземпляр через `new self(...)`. Валидация автоматически срабатывает заново через конструктор.
+- **Валидация пустых строк через `trim($value) === ''`** (после Codex review) — отсекает whitespace-only значения, корректное толкование "не может быть пустым".
+- **`phpmd.xml` ruleset** добавлен на уровне проекта: `id` объявлен исключением для правила `ShortVariable`, иначе любой entity identifier ловит false-positive PHPMD. Альтернатива (PHPDoc `@SuppressWarnings`) отвергнута — PHPStan не парсит дотированный синтаксис.
+- **Codex triage:**
+  - accept: trim() для name/passwordHash вместо `=== ''`
+  - accept: добавлены негативные тесты для withName/withPasswordHash
+  - accept: withEmail/withPasswordHash тесты дополнены проверкой bumped updatedAt и неизменности оригинала
+  - accept: positive-path тест проверяет createdAt/updatedAt
+  - reject: phpmd.xml "malformed" — false positive (Codex видел рендер markdown, не реальный файл; check:all зелёный)
+  - reject: md scoped to app/ only — соответствует stage 0 (stan/rector тоже на app/), tests исключены сознательно (Pest magic, см. 0.3); вне scope 1.1
+  - re-review: APPROVE
