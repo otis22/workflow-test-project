@@ -1,5 +1,64 @@
 # Changelog
 
+## Этап 2: Application-слой (Use Cases)
+
+**Статус:** завершён.
+
+### Добавлено
+
+#### Общая инфраструктура application-слоя
+
+- **`App\Application\Clock\Clock`** — порт для времени (`now(): DateTimeImmutable`).
+- **`App\Application\Hashing\PasswordHasher`** — порт для хэширования (`hash`, `verify`).
+- **`App\Application\Auth\SessionGuard`** — порт управления сессией (`login`, `logout`, `currentUserId`).
+- **Repository интерфейсы в домене:**
+  - `App\Domain\User\UserRepository` (findByEmail, findById, save)
+  - `App\Domain\Project\ProjectRepository` (findById, save)
+  - `App\Domain\Project\ProjectMemberRepository` (findByProjectAndUser, projectIdsForUser, save)
+  - `App\Domain\Task\TaskRepository` (findById, save, listByProject с фильтрами status/dueBefore, listByAssignee)
+  - `App\Domain\Task\CommentRepository` (save, listByTask)
+
+#### Use cases
+
+- **2.1 RegisterUser** (`App\Application\User\RegisterUser`) — регистрация с проверкой минимальной длины пароля (8), pre-валидацией name/email (trim + filter_var) до repository и хэширования, защитой от дубликатов email. Исключения: `WeakPasswordException`, `EmailAlreadyTakenException`.
+- **2.2 Login/Logout** (`App\Application\Auth\Login`, `Logout`) — login с одинаковым сообщением ошибки для unknown email и wrong password (no user enumeration); logout идемпотентен. `InvalidCredentialsException`.
+- **2.3 CreateProject** (`App\Application\Project\CreateProject`) — создание проекта + автоматическое добавление владельца как ProjectMember с тем же timestamp. `OwnerNotFoundException`.
+- **2.4 ListUserProjects** (`App\Application\Project\ListUserProjects`) — список проектов где пользователь участник, стабильный порядок по id.
+- **2.5 CreateTask** (`App\Application\Task\CreateTask`) — создание задачи с валидацией "project exists", "creator is member", "assignee (if set) is member". `ProjectNotFoundException`, `NotAProjectMemberException`.
+- **2.6 UpdateTask** (`App\Application\Task\UpdateTask`) — partial update с boolean-флагами `changeDueDate`/`changeAssignee` для корректного различения "don't touch" vs "set to null" на nullable полях. `TaskNotFoundException`.
+- **2.7 ListProjectTasks** — фильтрация по `?Status` и `?DateTimeImmutable $dueBefore`, тонкий делегат.
+- **2.8 ListUserTasks** — задачи где пользователь assignee, тонкий делегат.
+- **2.9 AddComment** — с проверкой "author is project member" (membership получаем через task.projectId).
+- **2.10 ListTaskComments** — тонкий делегат.
+
+#### Test fakes (tests/Support/Fakes/)
+
+`FakeClock`, `FakePasswordHasher`, `InMemoryUserRepository`, `InMemorySessionGuard`, `InMemoryProjectRepository`, `InMemoryProjectMemberRepository`, `InMemoryTaskRepository`, `InMemoryCommentRepository`. Все с auto-incrementing id, reconstruct при save для сохранения immutability, фильтры совместимы с domain типами.
+
+### Принятые решения
+
+- **Все use cases — `final readonly class`** с constructor-injected портами (clean architecture, никаких Laravel facades).
+- **Один Clock, один PasswordHasher на весь application-слой** — избегаем переизобретения и простой DI в Infrastructure-слое (3.x).
+- **Доменные правила, требующие membership** ("creator/author is member", "assignee is member") реализованы в use cases, где есть контекст aggregate. Entity не имеют ссылок на UserRepository/MemberRepository.
+- **Pre-validation name/email в RegisterUser** до findByEmail и hash — по результатам Codex review. Domain User constructor остаётся ultimate guarantee (DRY нарушена сознательно в пользу защиты границ).
+- **No user enumeration в Login** — одинаковое сообщение и тип исключения для "unknown email" и "wrong password".
+- **`changeDueDate`/`changeAssignee` флаги в UpdateTask** вместо sentinel-объектов. PHPMD `BooleanArgumentFlag` явно исключён в `phpmd.xml` с комментарием. Решение о полном CQRS-split на отдельные use cases (SetDueDate/Unassign) отложено — MVP UI имеет единую форму редактирования.
+- **Placeholder `id: 0` до save** — текущий User/Project/Task/Comment entity позволяет id=0, repository присваивает реальный. После реализации 1.r2 (`id > 0`) придётся переделать на явный "DraftX" тип или save-возвращающий-id контракт.
+
+### Отложенные замечания (Codex review)
+
+- **2.r1** `[review]` — Email normalization (lowercase+trim) для case-insensitive поиска дубликатов и login. Источник: Codex review 2.1.
+
+### Отклонение от workflow (Codex rate limit)
+
+Начиная с задачи 2.2 Codex плагин упёрся в rate limit. Для задач 2.2–2.10 Codex review заменён на расширенный self-review (перечитывание diff, проверка PRD, ручная проверка boundary и security). Рекомендуется повторить Codex review задним числом в рамках финального ревью (этап 10). Задача 2.1 прошла полный цикл Codex review + fix.
+
+### Проверки
+
+- **115 unit-тестов** (64 domain из этапа 1 + 51 новый application): 264 ассерта.
+- CI зелёный на всех 11 коммитах 2.1–2.10.
+- Smoke test локально: контейнеры healthy, HTTP 200.
+
 ## Этап 1: Доменный слой
 
 **Статус:** завершён.
