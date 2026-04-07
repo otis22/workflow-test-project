@@ -29,7 +29,7 @@
 | 2.1 | Регистрация пользователя | Use case RegisterUser. Валидация, хэширование пароля, сохранение. Unit-тесты | `done` |
 | 2.2 | Аутентификация | Use case Login / Logout. Проверка credentials, управление сессией. Unit-тесты | `done` |
 | 2.3 | Создание проекта | Use case CreateProject. Автоматическое добавление владельца как участника. Unit-тесты | `done` |
-| 2.4 | Список проектов пользователя | Use case ListUserProjects. Возвращает проекты, где пользователь — участник. Unit-тесты | `todo` |
+| 2.4 | Список проектов пользователя | Use case ListUserProjects. Возвращает проекты, где пользователь — участник. Unit-тесты | `done` |
 | 2.5 | Создание задачи | Use case CreateTask. Валидация: создатель — участник проекта. Unit-тесты | `todo` |
 | 2.6 | Редактирование задачи | Use case UpdateTask. Изменение полей: title, description, status, priority, due_date, assignee. Валидация: assignee — участник проекта. Unit-тесты | `todo` |
 | 2.7 | Список задач проекта | Use case ListProjectTasks. Фильтрация по статусу и дедлайну. Unit-тесты | `todo` |
