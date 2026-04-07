@@ -17,6 +17,7 @@ final readonly class DueDate
 
     public function equals(self $other): bool
     {
-        return $this->value == $other->value;
+        // Compare instants (UTC microseconds), not timezone metadata.
+        return $this->value->format('U.u') === $other->value->format('U.u');
     }
 }

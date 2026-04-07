@@ -45,3 +45,10 @@ it('two DueDates with different instants are not equal', function (): void {
 
     expect($a->equals($b))->toBeFalse();
 });
+
+it('two DueDates representing the same instant in different timezones are equal', function (): void {
+    $utc = new DueDate(new DateTimeImmutable('2026-06-01T12:00:00+00:00'));
+    $msk = new DueDate(new DateTimeImmutable('2026-06-01T15:00:00+03:00'));
+
+    expect($utc->equals($msk))->toBeTrue();
+});
