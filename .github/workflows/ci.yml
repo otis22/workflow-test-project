@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   quality:
     name: Quality checks
@@ -60,14 +63,8 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-interaction
 
-      - name: Copy .env
-        run: cp .env.example .env
-
-      - name: Generate application key
-        run: php artisan key:generate
-
-      - name: Run migrations
-        run: php artisan migrate --force
+      - name: Composer audit
+        run: composer audit
 
       - name: Pint (format check)
         run: composer format:check
@@ -81,8 +78,14 @@ jobs:
       - name: PHPMD
         run: composer md
 
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
       - name: Pest with coverage
         run: composer test:coverage
-
-      - name: Composer audit
-        run: composer audit
