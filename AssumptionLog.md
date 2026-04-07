@@ -54,3 +54,13 @@
   - reject: phpmd.xml "malformed" — false positive (Codex видел рендер markdown, не реальный файл; check:all зелёный)
   - reject: md scoped to app/ only — соответствует stage 0 (stan/rector тоже на app/), tests исключены сознательно (Pest magic, см. 0.3); вне scope 1.1
   - re-review: APPROVE
+
+## 1.2 Доменная сущность Project
+
+- **`ownerId: int`** на уровне домена вместо `owner_id`. Инвариант "проект должен иметь владельца" реализован как `ownerId > 0`.
+- **`description` может быть пустой строкой** — описание необязательно по доменной модели.
+- **Метод `withName`** перепроверяет валидность через конструктор автоматически. Метод `withDescription` без валидации (description безусловно валиден).
+- **Codex triage:**
+  - defer: инвариант `updatedAt >= createdAt` — реальное доменное правило, но не в PRD 1.2 и отсутствует в User 1.1; должен применяться симметрично → вынесено в Roadmap как 1.r1 [review]
+  - reject: trim-and-store вместо trim-only — PRD не требует нормализации, поведение симметрично User 1.1 (transparency over speculative normalization)
+  - reject: тест на trim-vs-store policy — нет правила для проверки
