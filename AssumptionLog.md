@@ -64,3 +64,10 @@
   - defer: инвариант `updatedAt >= createdAt` — реальное доменное правило, но не в PRD 1.2 и отсутствует в User 1.1; должен применяться симметрично → вынесено в Roadmap как 1.r1 [review]
   - reject: trim-and-store вместо trim-only — PRD не требует нормализации, поведение симметрично User 1.1 (transparency over speculative normalization)
   - reject: тест на trim-vs-store policy — нет правила для проверки
+
+## 1.3 Доменная сущность ProjectMember
+
+- **Минимальная entity** без мутаторов: членство либо создаётся, либо удаляется на уровне репозитория. Изменение полей участника не имеет смысла.
+- **Правило "владелец автоматически — участник"** не реализуется в entity, а вынесено в use case `CreateProject` (этап 2.3): на уровне entity это требовало бы инжекта Project и нарушило бы изоляцию.
+- **Размещение в `app/Domain/Project/`** (а не в отдельном `app/Domain/ProjectMember/`) — ProjectMember концептуально часть aggregate Project.
+- **Codex review:** ship, no findings.
