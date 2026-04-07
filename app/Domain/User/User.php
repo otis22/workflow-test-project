@@ -17,7 +17,7 @@ final readonly class User
         public DateTimeImmutable $createdAt,
         public DateTimeImmutable $updatedAt,
     ) {
-        if ($name === '') {
+        if (trim($name) === '') {
             throw new InvalidArgumentException('User name must not be empty');
         }
 
@@ -25,7 +25,7 @@ final readonly class User
             throw new InvalidArgumentException('User email is not valid');
         }
 
-        if ($passwordHash === '') {
+        if (trim($passwordHash) === '') {
             throw new InvalidArgumentException('User password hash must not be empty');
         }
     }
