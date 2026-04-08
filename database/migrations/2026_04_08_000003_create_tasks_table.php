@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('assignee_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('title');
             $table->text('description');
-            $table->string('status', 20);
-            $table->string('priority', 10);
+            $table->enum('status', ['todo', 'in_progress', 'done']);
+            $table->enum('priority', ['low', 'medium', 'high']);
             $table->timestamp('due_date')->nullable();
             $table->timestamps();
 

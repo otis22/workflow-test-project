@@ -211,6 +211,66 @@ it('sets tasks.assignee_id to null when the assigned user is deleted', function 
     expect($task->assignee_id)->toBeNull();
 });
 
+it('rejects task insert with invalid status', function (): void {
+    $userId = DB::table('users')->insertGetId([
+        'name' => 'Alice',
+        'email' => 'a@example.com',
+        'password_hash' => 'hash',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+    $projectId = DB::table('projects')->insertGetId([
+        'owner_id' => $userId,
+        'name' => 'P',
+        'description' => '',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    DB::table('tasks')->insert([
+        'project_id' => $projectId,
+        'creator_id' => $userId,
+        'assignee_id' => null,
+        'title' => 'T',
+        'description' => '',
+        'status' => 'bogus',
+        'priority' => 'low',
+        'due_date' => null,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+})->throws(QueryException::class);
+
+it('rejects task insert with invalid priority', function (): void {
+    $userId = DB::table('users')->insertGetId([
+        'name' => 'Alice',
+        'email' => 'a@example.com',
+        'password_hash' => 'hash',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+    $projectId = DB::table('projects')->insertGetId([
+        'owner_id' => $userId,
+        'name' => 'P',
+        'description' => '',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    DB::table('tasks')->insert([
+        'project_id' => $projectId,
+        'creator_id' => $userId,
+        'assignee_id' => null,
+        'title' => 'T',
+        'description' => '',
+        'status' => 'todo',
+        'priority' => 'urgent',
+        'due_date' => null,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+})->throws(QueryException::class);
+
 it('prevents deleting a user who owns a project (RESTRICT)', function (): void {
     $userId = DB::table('users')->insertGetId([
         'name' => 'Alice',
