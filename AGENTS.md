@@ -78,15 +78,83 @@
 
 После коммита, **перед push**, агент обязан запросить code review через Codex плагин.
 
+**КРИТИЧЕСКИ ВАЖНО — sandbox limitation.** В текущем окружении Codex работает в sandbox, который **не может читать файлы** ни из рабочего каталога проекта, ни из `/tmp` (ошибка `bwrap: loopback: Failed RTM_NEWADDR: Operation not permitted`). Поэтому любая ссылка "посмотри файл X" или "diff в /tmp/Y" приведёт к пустому review с verdict `CHANGES REQUESTED (review blocked)` и потратит бюджет впустую. Единственный рабочий способ — **встраивать весь контент прямо в текст промпта**. См. обязательный шаблон ниже.
+
 **Процедура:**
 
-1. Агент вызывает скилл `codex:rescue` с задачей провести code review diff'а текущей подзадачи
-2. В промпте для Codex агент **обязательно** указывает:
-   - Контекст задачи (что делали и зачем)
-   - Ссылки на артефакты проекта: `artifacts/prd-taskflow-ru.md`, `artifacts/technical-requirements-taskflow-ru.md`, `artifacts/domain-model-taskflow-ru.md`, `artifacts/ui-spec-taskflow-ru.md`
-   - Инструкцию: «Используй артефакты из `/artifacts` как источник требований при review — проверяй соответствие кода продуктовым требованиям, доменной модели, техническим ограничениям и UI-спецификации»
-   - Просьбу проверить: качество кода, потенциальные баги, соответствие архитектуре проекта, читаемость, безопасность
-3. Агент получает результат review от Codex и анализирует замечания
+1. Собрать диф подзадачи: `git diff <base>..HEAD -- app/ tests/`. Сохранить в память/переменную, не передавать Codex путём к файлу.
+2. Прочитать нужные артефакты и PRD текущей подзадачи через Read tool (не через ссылку в промпте).
+3. Вызвать скилл `codex:rescue` с промптом по **обязательному шаблону** (ниже).
+4. Получить результат и анализировать замечания. Если Codex отвечает «Review blocked», «cannot read», «sandbox error» — это не валидный review, бюджет не считается потраченным, переформулировать промпт и перезапустить.
+
+**Обязательный шаблон промпта для `codex:rescue`:**
+
+```
+<контекст задачи: что делали, зачем, какой это этап Roadmap>
+
+IMPORTANT: Do NOT attempt any filesystem read or shell command. The sandbox
+blocks file access. All content you need is embedded verbatim below.
+
+Review focus:
+1. Correctness vs PRD of the task
+2. Compliance with project artifacts (domain model, tech requirements, UI spec, product PRD)
+3. Security: authorization, input validation, boundary cases, IDOR
+4. Clean architecture: layer purity, DI через порты, отсутствие framework leaks
+5. Tests: rule coverage, negative cases, edge cases
+6. Code quality: readability, naming, dead code, duplication
+
+Output format: findings с file:line, severity (critical/major/minor/nit),
+описанием и suggested fix. В конце — summary verdict (APPROVE / CHANGES REQUESTED)
+и systemic issues, если есть. No speculation — only cite embedded text.
+
+========================================
+BEGIN ARTIFACTS
+========================================
+<полный или релевантный текст artifacts/prd-taskflow-ru.md>
+<полный или релевантный текст artifacts/domain-model-taskflow-ru.md>
+<полный или релевантный текст artifacts/technical-requirements-taskflow-ru.md>
+<полный или релевантный текст artifacts/ui-spec-taskflow-ru.md>
+========================================
+END ARTIFACTS
+========================================
+
+========================================
+BEGIN TASK PRD
+========================================
+<полный текст PRD текущей подзадачи из /PRD/X.Y-*.md>
+========================================
+END TASK PRD
+========================================
+
+========================================
+BEGIN GIT DIFF <base>..HEAD
+========================================
+<полный unified diff подзадачи — app/ + tests/>
+========================================
+END GIT DIFF
+========================================
+
+END OF INPUT. Review strictly from the text above.
+```
+
+**Обязательные правила шаблона:**
+
+- Весь контент — прямо в тексте промпта. **Никаких `$(cat ...)`, ссылок `/tmp/...`, `file://...` или путей к файлам проекта**.
+- Секции обрамляются явными маркерами `BEGIN ...` / `END ...` — так Codex не путает границы.
+- Явная инструкция `Do NOT attempt any filesystem read or shell command` в начале — гасит попытки sandbox'а лезть в ФС и возвращать ошибку.
+- Требование цитировать `file:line` из встроенного текста — не абстрактные рекомендации.
+- Требование «No speculation — only findings you can cite from the embedded text» — отсекает галлюцинации при пустом контексте.
+
+**Оптимизация для крупных diff'ов (>1500 строк):**
+
+- Если diff не помещается в один промпт — либо сжать артефакты до ключевых разделов (цели, domain rules, списки полей), либо разбить review на 2 промпта: один по app/ код, второй по tests/. Но всё ещё — только 1 Codex-вызов на промпт, бюджет не удваивается.
+- Фейковые/вспомогательные файлы (`tests/Support/Fakes/*`) допустимо давать в сокращённом виде (только сигнатуры методов), если они не в scope review.
+
+**Запрещено:**
+
+- Передавать Codex пути к файлам (ни абсолютные, ни относительные) в надежде, что он их прочитает.
+- Использовать shell-substitution (`$(cat ...)`) в промпте — это литеральный текст для Codex, а не исполняемый код.
+- Считать «Review blocked / sandbox error» валидным review — такой прогон не засчитывается в бюджет, нужно переформулировать.
 
 **Запрещено:**
 
@@ -145,7 +213,7 @@ codex triage:
 
 Если все замечания были `defer` или `reject` — агент сразу переходит к шагу 11 (Push), не делая дополнительных коммитов с правками.
 
-**Бюджет итераций:** максимум 3 цикла review. Если после 3-й итерации остаются критичные замечания — агент останавливается, документирует ситуацию в `AssumptionLog.md` и уточняет у пользователя.
+**Бюджет итераций:** максимум 2 Codex review на одну PRD (одну подзадачу). Если после 2-го review остаются критичные замечания — агент останавливается, документирует ситуацию в `AssumptionLog.md` и уточняет у пользователя.
 
 #### Шаг 6 — Self-review кода
 
