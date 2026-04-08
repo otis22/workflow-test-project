@@ -42,7 +42,7 @@
 
 | # | Задача | Описание | Статус |
 |---|--------|----------|--------|
-| 3.1 | Миграции БД | Миграции для таблиц: users, projects, project_members, tasks, comments | `todo` |
+| 3.1 | Миграции БД | Миграции для таблиц: users, projects, project_members, tasks, comments | `done` |
 | 3.2 | Eloquent-модели и репозитории | Eloquent-модели + реализация репозиториев (UserRepository, ProjectRepository, TaskRepository, CommentRepository). Привязка интерфейсов через Service Provider | `todo` |
 | 3.3 | Фабрики и сидеры | Создать фабрики для всех моделей. Базовый сидер для тестирования | `todo` |
 

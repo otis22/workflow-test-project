@@ -122,3 +122,24 @@
   - defer (systemic, critical): `ListTaskComments` не проверяет membership вызывающего в проекте задачи → **2.r2**
 - Все 4 замечания сведены в одну системную задачу `2.r2 [review]`: требуется архитектурное решение по месту actor-based authorization (application-layer use cases vs controller/policy слой Laravel). Сейчас контроллеры отсутствуют, поэтому риск теоретический; вопрос должен быть закрыт до задач этапа 4–7 (Web/UI), где use cases начнут вызываться из HTTP-слоя.
 - **Верт Codex:** CHANGES REQUESTED (строго по артефактному правилу "пользователь работает только со своими данными и проектами, в которых участвует"). Триаж переводит их в defer — scope 2.11 = только review, фактическое исправление — отдельная задача.
+
+## 3.1 Миграции БД
+
+- **Заменена дефолтная Laravel `users`-миграция**: оставлены только domain-aligned поля (`name`, `email` unique, `password_hash`, timestamps). Удалены `email_verified_at`, `remember_token` — Laravel-auth scaffolding не используется (кастомный `SessionGuard` из 2.2). Таблица `password_reset_tokens` удалена полностью — восстановление пароля не входит в MVP (см. `artifacts/prd-taskflow-ru.md` §7). Таблица `sessions` сохранена без изменений как ортогональная Laravel session-инфраструктура.
+- **FK actions** (явно задокументированы в PRD 3.1 и покрыты тестом):
+  - `projects.owner_id → users` **RESTRICT** — нельзя удалить пользователя, пока он владеет проектами. Безопаснее CASCADE в MVP без soft delete.
+  - `project_members.project_id/user_id` **CASCADE** — удаление проекта или пользователя чистит членство.
+  - `tasks.project_id` **CASCADE**, `tasks.creator_id` **RESTRICT** (сохранение авторства), `tasks.assignee_id` **SET NULL**.
+  - `comments.task_id` **CASCADE**, `comments.author_id` **RESTRICT**.
+- **Индексы**: `project_members` unique `(project_id, user_id)`; `tasks` — индекс на `status` и `due_date` (под фильтры `ListProjectTasks`). Остальные FK получают индексы автоматически через `foreignId()`.
+- **Status/Priority — DB-level enum**, а не `string(20)`. Причина: Codex review 3.1 указал, что `string` позволяет БД принять невалидное значение, что расходится с доменной моделью. `Blueprint::enum()` переносим между pgsql/sqlite/mysql (на pgsql транслируется в CHECK constraint). Это defense in depth поверх типовой валидации в `Status`/`Priority` enum'ах доменного слоя.
+- **Comments — только `created_at`, без `updated_at`**: комментарии иммутабельны в MVP (см. AssumptionLog 1.5, UI spec не предусматривает edit).
+- **Превышение бюджета подзадачи**: 3.1.1 содержит ~380 строк (5 миграций + Feature test), против целевого лимита 150. Разбиение на 5 подзадач создало бы больше накладных расходов, чем даёт изоляция: миграции шаблонные, связаны FK, тест проверяет комплексно. Зафиксировано как осознанное исключение из §4 Workflow.
+- **Feature tests работают на pgsql**, а не sqlite (как задумывалось `phpunit.xml`). `phpunit.xml` содержит `<env name="DB_CONNECTION" value="sqlite"/>`, но override не применяется в текущей конфигурации Laravel — `.env` с `DB_CONNECTION=pgsql` побеждает. Для 3.1 это даже полезнее: тесты сразу проверяют pgsql-совместимость миграций, а не вводят sqlite как "упрощённое" окружение с риском расхождения. Отдельная задача по диагностике phpunit.xml env override не создаётся — сейчас работает правильно случайно, но работает.
+- **Codex triage 3.1:**
+  - accept: `tasks.status` без CHECK → `enum(['todo','in_progress','done'])`
+  - accept: `tasks.priority` без CHECK → `enum(['low','medium','high'])`
+  - accept: отсутствуют негативные тесты на invalid status/priority → добавлены
+  - reject: `sessions.user_id` без FK → out of scope (Laravel scaffolding, сохранено как есть per PRD)
+  - reject: тест на sessions.user_id FK → производное от reject выше
+- **Codex re-review 3.1:** APPROVE, no findings. Бюджет 2/2.
