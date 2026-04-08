@@ -109,3 +109,16 @@
   - accept: тест на timezone-equality → добавлен
   - defer: `values()` helper на enum → не нужен в 1.6.2 (in_array удалён, не дублирован)
 - **Codex review 1.6.2:** APPROVE, no findings.
+
+## 2.11 Отложенный Codex review задач 2.2–2.10
+
+- Выполнен Codex review на diff `375bf89..ad08bdd` (application layer задач 2.2–2.10).
+- Первые две попытки провалились из-за sandbox Codex: `bwrap: loopback: Failed RTM_NEWADDR` блокировал чтение файлов и из рабочего каталога, и из `/tmp`. Решение — встраивание полного diff, PRD и artifacts непосредственно в текст промпта Codex (см. обновлённую инструкцию в `AGENTS.md` §5 шаг 8).
+- Бюджет 2 review на PRD формально исчерпан первой парой, но содержательного прогона не было — третья попытка разовое исключение, задокументировано здесь.
+- **Codex triage 2.11:**
+  - defer (systemic, critical): `UpdateTask` не принимает actorId и не проверяет, что вызывающий имеет право менять задачу → **2.r2**
+  - defer (systemic, critical): `ListProjectTasks` не проверяет membership вызывающего в проекте → **2.r2**
+  - defer (systemic, critical): `ListUserTasks` позволяет запросить чужие задачи (нет `actorId == userId`) → **2.r2**
+  - defer (systemic, critical): `ListTaskComments` не проверяет membership вызывающего в проекте задачи → **2.r2**
+- Все 4 замечания сведены в одну системную задачу `2.r2 [review]`: требуется архитектурное решение по месту actor-based authorization (application-layer use cases vs controller/policy слой Laravel). Сейчас контроллеры отсутствуют, поэтому риск теоретический; вопрос должен быть закрыт до задач этапа 4–7 (Web/UI), где use cases начнут вызываться из HTTP-слоя.
+- **Верт Codex:** CHANGES REQUESTED (строго по артефактному правилу "пользователь работает только со своими данными и проектами, в которых участвует"). Триаж переводит их в defer — scope 2.11 = только review, фактическое исправление — отдельная задача.

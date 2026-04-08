@@ -36,7 +36,7 @@
 | 2.8 | Список задач пользователя | Use case ListUserTasks. Задачи, назначенные текущему пользователю. Unit-тесты | `done` |
 | 2.9 | Добавление комментария | Use case AddComment. Валидация: автор — участник проекта. Unit-тесты | `done` |
 | 2.10 | Список комментариев задачи | Use case ListTaskComments. Unit-тесты | `done` |
-| 2.11 | `[review]` Codex review задач 2.2–2.10 | Прогнать Codex review для задач 2.2–2.10 задним числом — на этапе 2 Codex плагин был недоступен из-за rate limit (см. AssumptionLog). Зафиксировать триаж и при необходимости создать fix-задачи | `todo` |
+| 2.11 | `[review]` Codex review задач 2.2–2.10 | Прогнать Codex review для задач 2.2–2.10 задним числом — на этапе 2 Codex плагин был недоступен из-за rate limit (см. AssumptionLog). Зафиксировать триаж и при необходимости создать fix-задачи | `done` |
 
 ## Этап 3: Инфраструктурный слой
 
@@ -105,6 +105,7 @@
 | 1.r1 | `[review]` Инвариант updatedAt >= createdAt | Добавить проверку в конструкторы доменных сущностей (User, Project, далее Task/Comment), что updatedAt не раньше createdAt. Применить симметрично ко всем сущностям. Источник: Codex review задачи 1.2 | `todo` |
 | 1.r2 | `[review]` Валидация id > 0 во всех entities | Добавить проверку `id > 0` в конструкторы User, Project, ProjectMember, Task, Comment. Применить симметрично. Источник: Codex review задачи 1.4 | `todo` |
 | 2.r1 | `[review]` Email normalization | Нормализовать email (lowercase + trim) на уровне use cases или value object EmailAddress. Сделать поиск дубликатов и login case-insensitive. Источник: Codex review задачи 2.1 | `todo` |
+| 2.r2 | `[review]` Actor-based authorization в application layer | Системная проблема: `UpdateTask`, `ListProjectTasks`, `ListUserTasks`, `ListTaskComments` не принимают actor и не проверяют право вызывающего (IDOR). Требуется архитектурное решение: вводить `actorId` в контракты use cases и проверять membership/ownership, либо явно зафиксировать, что auth обеспечивается controller layer (stage 4+) через Laravel policies. Решение должно быть принято до первой Web/UI задачи, которая вызовет эти use cases. Источник: Codex review 2.11 (задним числом для 2.2–2.10). | `todo` |
 
 ## Этап 10: Финальное ревью и исправление ошибок
 
