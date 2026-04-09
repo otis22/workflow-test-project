@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Eloquent\Model;
 
+use Database\Factories\ProjectMemberModelFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -15,6 +17,9 @@ use Illuminate\Support\Carbon;
  */
 final class ProjectMemberModel extends Model
 {
+    /** @use HasFactory<ProjectMemberModelFactory> */
+    use HasFactory;
+
     protected $table = 'project_members';
 
     protected $guarded = [];
@@ -32,4 +37,7 @@ final class ProjectMemberModel extends Model
         'user_id' => 'int',
         'created_at' => 'datetime',
     ];
+
+    // Explicit factory binding: see UserModel for rationale.
+    protected static string $factory = ProjectMemberModelFactory::class;
 }

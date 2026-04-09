@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Infrastructure\Persistence\Eloquent\Model\ProjectMemberModel;
+use App\Infrastructure\Persistence\Eloquent\Model\ProjectModel;
 use App\Infrastructure\Persistence\Eloquent\Model\UserModel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -24,18 +26,35 @@ it('creates multiple users via factory with unique emails', function (): void {
         ->and(array_unique($emails))->toHaveCount(5);
 });
 
-it('runs the DatabaseSeeder and populates expected users', function (): void {
+it('creates a valid project via factory with auto-created owner', function (): void {
+    $project = ProjectModel::factory()->create();
+
+    expect($project->id)->toBeGreaterThan(0)
+        ->and($project->owner_id)->toBeGreaterThan(0)
+        ->and(UserModel::query()->find($project->owner_id))->not->toBeNull();
+});
+
+it('creates a valid project member via factory', function (): void {
+    $member = ProjectMemberModel::factory()->create();
+
+    expect($member->id)->toBeGreaterThan(0)
+        ->and(ProjectModel::query()->find($member->project_id))->not->toBeNull()
+        ->and(UserModel::query()->find($member->user_id))->not->toBeNull();
+});
+
+it('runs the DatabaseSeeder and populates expected users, project and members', function (): void {
     $this->seed();
 
     expect(UserModel::query()->count())->toBe(3)
-        ->and(UserModel::query()->where('email', 'alice@example.com')->exists())->toBeTrue()
-        ->and(UserModel::query()->where('email', 'bob@example.com')->exists())->toBeTrue()
-        ->and(UserModel::query()->where('email', 'charlie@example.com')->exists())->toBeTrue();
+        ->and(ProjectModel::query()->where('name', 'TaskFlow MVP')->exists())->toBeTrue()
+        ->and(ProjectMemberModel::query()->count())->toBe(2);
 });
 
 it('DatabaseSeeder is idempotent', function (): void {
     $this->seed();
     $this->seed();
 
-    expect(UserModel::query()->count())->toBe(3);
+    expect(UserModel::query()->count())->toBe(3)
+        ->and(ProjectModel::query()->count())->toBe(1)
+        ->and(ProjectMemberModel::query()->count())->toBe(2);
 });
