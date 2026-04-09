@@ -123,6 +123,16 @@
 - Все 4 замечания сведены в одну системную задачу `2.r2 [review]`: требуется архитектурное решение по месту actor-based authorization (application-layer use cases vs controller/policy слой Laravel). Сейчас контроллеры отсутствуют, поэтому риск теоретический; вопрос должен быть закрыт до задач этапа 4–7 (Web/UI), где use cases начнут вызываться из HTTP-слоя.
 - **Верт Codex:** CHANGES REQUESTED (строго по артефактному правилу "пользователь работает только со своими данными и проектами, в которых участвует"). Триаж переводит их в defer — scope 2.11 = только review, фактическое исправление — отдельная задача.
 
+## 1.r1 Инвариант updatedAt >= createdAt
+
+- **Применено к User, Project, Task** — единственным сущностям с обоими полями. ProjectMember и Comment явно вне scope (см. AssumptionLog 1.3, 1.5).
+- **Сравнение через `format('U.u')`** — instant + microseconds в UTC, симметрично с `DueDate::equals` (см. AssumptionLog 1.6). Это игнорирует timezone metadata и сравнивает физические моменты времени.
+- **Равенство `updatedAt == createdAt` допустимо** — соответствует только что созданной сущности. Покрытие этого случая обеспечивается всеми существующими позитивными конструкторными тестами (где обе метки = `$now`); отдельный явный boundary-тест не добавлялся как избыточный.
+- **Codex triage:**
+  - accept (major, partial): добавлены тесты µs-earlier rejection и same-instant-different-tz acceptance для всех 3 entity. Equality boundary не добавлялся (см. выше).
+  - reject (minor): "сообщение исключения не проверяется" — ложноположительное, Pest `->throws($class, $message)` уже пинит точное сообщение.
+- **Codex re-review:** APPROVE, no critical findings. Бюджет 2/2.
+
 ## 3.1 Миграции БД
 
 - **Заменена дефолтная Laravel `users`-миграция**: оставлены только domain-aligned поля (`name`, `email` unique, `password_hash`, timestamps). Удалены `email_verified_at`, `remember_token` — Laravel-auth scaffolding не используется (кастомный `SessionGuard` из 2.2). Таблица `password_reset_tokens` удалена полностью — восстановление пароля не входит в MVP (см. `artifacts/prd-taskflow-ru.md` §7). Таблица `sessions` сохранена без изменений как ортогональная Laravel session-инфраструктура.
