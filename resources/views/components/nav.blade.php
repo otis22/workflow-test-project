@@ -5,17 +5,19 @@
         </a>
 
         <div class="flex items-center gap-4 text-sm font-medium">
-            @guest
+            @signedOut
                 <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Sign in</a>
                 <a href="{{ route('register') }}" class="rounded-md bg-gray-900 px-3 py-1.5 text-white hover:bg-gray-800">Register</a>
-            @endguest
+            @endsignedOut
 
-            @auth
+            @signedIn
                 <a href="#" class="text-gray-600 hover:text-gray-900">Dashboard</a>
                 <a href="#" class="text-gray-600 hover:text-gray-900">Projects</a>
-                {{-- Logout placeholder: real POST form + route wired in 4.4. --}}
-                <button type="button" class="text-gray-600 hover:text-gray-900" disabled>Logout</button>
-            @endauth
+                <form method="POST" action="{{ route('logout') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="text-gray-600 hover:text-gray-900">Logout</button>
+                </form>
+            @endsignedIn
         </div>
     </div>
 </nav>
