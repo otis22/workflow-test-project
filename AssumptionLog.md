@@ -141,6 +141,17 @@
 - **Решение пользователя:** заблокировать 1.r2 и решить совместно с 3.2 (остальные Eloquent-репозитории) или 2.r2 (actor-based auth — там тоже меняются контракты use cases). Самый чистый путь — разделить контракт репозитория: `create(...primitives)` для новой сущности, `save(Entity)` для update (требует id > 0).
 - **Текущий статус:** изменения откачены, рабочая ветка чиста, задача `1.r2 [blocked]` в Roadmap.
 
+## 2.r1 Email normalization
+
+- **Точка нормализации:** `RegisterUser::execute` и `Login::execute`. Lowercase + trim перед валидацией формата, поиском дубликатов и сохранением. Domain User entity не трогаем — сохраняется политика «transparency over speculative normalization» (см. AssumptionLog 1.2).
+- **`EmailAddress` VO отвергнут** как scope creep: потребовал бы менять User entity, маппер, фейки, миграцию (collation), 5+ тестов. Для MVP достаточно нормализации на границе.
+- **Дублирование `normalizeEmail` (1 строка) в 2 use cases** — сознательное решение: ниже порога вынесения в shared utility. Дрифт между двумя реализациями исключён тестами обоих use cases.
+- **БД:** существующий unique constraint на `users.email` (pgsql, case-sensitive) достаточен после нормализации в use case — все вставки идут в lowercase. Миграция данных не требуется (нет продакшна, миграции 3.1 свежие).
+- **Codex triage:**
+  - reject (minor): «нет негативного теста на whitespace-only email» — путь после `normalizeEmail` совпадает с существующим тестом `'rejects invalid email via domain entity validation'` (`'   '` → `''` → `filter_var` fails → `InvalidArgumentException`); добавление было бы дублированием поведения.
+  - reject (nit): «вынести `normalizeEmail` в shared helper» — задокументированное решение PRD, см. выше.
+- **Codex verdict:** APPROVE. Re-review не требуется (все findings reject).
+
 ## 3.1 Миграции БД
 
 - **Заменена дефолтная Laravel `users`-миграция**: оставлены только domain-aligned поля (`name`, `email` unique, `password_hash`, timestamps). Удалены `email_verified_at`, `remember_token` — Laravel-auth scaffolding не используется (кастомный `SessionGuard` из 2.2). Таблица `password_reset_tokens` удалена полностью — восстановление пароля не входит в MVP (см. `artifacts/prd-taskflow-ru.md` §7). Таблица `sessions` сохранена без изменений как ортогональная Laravel session-инфраструктура.
