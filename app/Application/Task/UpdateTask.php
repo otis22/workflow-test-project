@@ -25,6 +25,7 @@ final readonly class UpdateTask
     ) {}
 
     public function execute(
+        int $actorId,
         int $taskId,
         ?string $title = null,
         ?string $description = null,
@@ -38,6 +39,10 @@ final readonly class UpdateTask
         $task = $this->tasks->findById($taskId);
         if (! $task instanceof Task) {
             throw TaskNotFoundException::forId($taskId);
+        }
+
+        if (! $this->members->findByProjectAndUser($task->projectId, $actorId) instanceof ProjectMember) {
+            throw NotAProjectMemberException::forUserAndProject($actorId, $task->projectId);
         }
 
         if ($changeAssignee) {

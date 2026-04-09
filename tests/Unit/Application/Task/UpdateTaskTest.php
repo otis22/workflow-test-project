@@ -59,7 +59,7 @@ it('updates title and bumps updatedAt', function (): void {
     $ctx = makeUpdateTaskFixture();
     $ctx['clock']->set(new DateTimeImmutable('2026-04-08T00:00:00Z'));
 
-    $updated = $ctx['useCase']->execute($ctx['task']->id, title: 'New');
+    $updated = $ctx['useCase']->execute($ctx['alice']->id, $ctx['task']->id, title: 'New');
 
     expect($updated->title)->toBe('New')
         ->and($updated->updatedAt)->toEqual($ctx['clock']->now());
@@ -69,6 +69,7 @@ it('updates status and priority', function (): void {
     $ctx = makeUpdateTaskFixture();
 
     $updated = $ctx['useCase']->execute(
+        $ctx['alice']->id,
         $ctx['task']->id,
         status: Status::Done,
         priority: Priority::High,
@@ -83,6 +84,7 @@ it('sets due date via changeDueDate flag', function (): void {
     $due = new DueDate(new DateTimeImmutable('2026-06-01T00:00:00Z'));
 
     $updated = $ctx['useCase']->execute(
+        $ctx['alice']->id,
         $ctx['task']->id,
         changeDueDate: true,
         dueDate: $due,
@@ -93,9 +95,9 @@ it('sets due date via changeDueDate flag', function (): void {
 
 it('clears due date when changeDueDate is true and value is null', function (): void {
     $ctx = makeUpdateTaskFixture();
-    $ctx['useCase']->execute($ctx['task']->id, changeDueDate: true, dueDate: new DueDate(new DateTimeImmutable));
+    $ctx['useCase']->execute($ctx['alice']->id, $ctx['task']->id, changeDueDate: true, dueDate: new DueDate(new DateTimeImmutable));
 
-    $cleared = $ctx['useCase']->execute($ctx['task']->id, changeDueDate: true, dueDate: null);
+    $cleared = $ctx['useCase']->execute($ctx['alice']->id, $ctx['task']->id, changeDueDate: true, dueDate: null);
     expect($cleared->dueDate)->toBeNull();
 });
 
@@ -103,6 +105,7 @@ it('assigns a member', function (): void {
     $ctx = makeUpdateTaskFixture();
 
     $updated = $ctx['useCase']->execute(
+        $ctx['alice']->id,
         $ctx['task']->id,
         changeAssignee: true,
         assigneeId: $ctx['bob']->id,
@@ -113,9 +116,9 @@ it('assigns a member', function (): void {
 
 it('clears assignee with changeAssignee=true and null', function (): void {
     $ctx = makeUpdateTaskFixture();
-    $ctx['useCase']->execute($ctx['task']->id, changeAssignee: true, assigneeId: $ctx['bob']->id);
+    $ctx['useCase']->execute($ctx['alice']->id, $ctx['task']->id, changeAssignee: true, assigneeId: $ctx['bob']->id);
 
-    $updated = $ctx['useCase']->execute($ctx['task']->id, changeAssignee: true, assigneeId: null);
+    $updated = $ctx['useCase']->execute($ctx['alice']->id, $ctx['task']->id, changeAssignee: true, assigneeId: null);
 
     expect($updated->assigneeId)->toBeNull();
 });
@@ -124,22 +127,29 @@ it('rejects assignee who is not a member', function (): void {
     $ctx = makeUpdateTaskFixture();
 
     $ctx['useCase']->execute(
+        $ctx['alice']->id,
         $ctx['task']->id,
         changeAssignee: true,
         assigneeId: $ctx['eve']->id,
     );
 })->throws(NotAProjectMemberException::class);
 
+it('rejects update when actor is not a project member', function (): void {
+    $ctx = makeUpdateTaskFixture();
+
+    $ctx['useCase']->execute($ctx['eve']->id, $ctx['task']->id, title: 'Hijacked');
+})->throws(NotAProjectMemberException::class);
+
 it('rejects unknown task', function (): void {
     $ctx = makeUpdateTaskFixture();
 
-    $ctx['useCase']->execute(999, title: 'x');
+    $ctx['useCase']->execute($ctx['alice']->id, 999, title: 'x');
 })->throws(TaskNotFoundException::class);
 
 it('persists updates through the repository', function (): void {
     $ctx = makeUpdateTaskFixture();
 
-    $ctx['useCase']->execute($ctx['task']->id, title: 'Updated');
+    $ctx['useCase']->execute($ctx['alice']->id, $ctx['task']->id, title: 'Updated');
 
     $reloaded = $ctx['tasks']->findById($ctx['task']->id);
     expect($reloaded)->toBeInstanceOf(Task::class)

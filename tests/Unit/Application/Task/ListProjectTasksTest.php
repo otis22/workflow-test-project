@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Application\Project\CreateProject;
 use App\Application\Task\CreateTask;
+use App\Application\Task\Exception\NotAProjectMemberException;
 use App\Application\Task\ListProjectTasks;
 use App\Application\User\RegisterUser;
 use App\Domain\Task\DueDate;
@@ -30,6 +31,7 @@ function makeListProjectTasksFixture(): array
     $createTask = new CreateTask($tasks, $projects, $members, $clock);
 
     $alice = $register->execute('Alice', 'a@example.com', 'super-secret');
+    $eve = $register->execute('Eve', 'e@example.com', 'super-secret');
     $p1 = $createProject->execute($alice->id, 'P1', '');
     $p2 = $createProject->execute($alice->id, 'P2', '');
 
@@ -38,22 +40,22 @@ function makeListProjectTasksFixture(): array
     $t3 = $createTask->execute($p1->id, $alice->id, 'T3', '', Status::Done, Priority::High, null, null);
     $t4 = $createTask->execute($p2->id, $alice->id, 'T4-other-project', '', Status::Todo, Priority::Low, null, null);
 
-    $useCase = new ListProjectTasks($tasks);
+    $useCase = new ListProjectTasks($tasks, $members);
 
-    return ['useCase' => $useCase, 'p1' => $p1, 'p2' => $p2, 't1' => $t1, 't2' => $t2, 't3' => $t3, 't4' => $t4];
+    return ['useCase' => $useCase, 'alice' => $alice, 'eve' => $eve, 'p1' => $p1, 'p2' => $p2, 't1' => $t1, 't2' => $t2, 't3' => $t3, 't4' => $t4];
 }
 
 it('returns all tasks of a project without filters', function (): void {
     $ctx = makeListProjectTasksFixture();
 
-    $ids = array_map(fn (Task $t): int => $t->id, $ctx['useCase']->execute($ctx['p1']->id));
+    $ids = array_map(fn (Task $t): int => $t->id, $ctx['useCase']->execute($ctx['alice']->id, $ctx['p1']->id));
     expect($ids)->toBe([$ctx['t1']->id, $ctx['t2']->id, $ctx['t3']->id]);
 });
 
 it('filters by status', function (): void {
     $ctx = makeListProjectTasksFixture();
 
-    $result = $ctx['useCase']->execute($ctx['p1']->id, status: Status::InProgress);
+    $result = $ctx['useCase']->execute($ctx['alice']->id, $ctx['p1']->id, status: Status::InProgress);
     expect($result)->toHaveCount(1)
         ->and($result[0]->id)->toBe($ctx['t2']->id);
 });
@@ -61,7 +63,7 @@ it('filters by status', function (): void {
 it('filters by dueBefore and excludes tasks without dueDate', function (): void {
     $ctx = makeListProjectTasksFixture();
 
-    $result = $ctx['useCase']->execute($ctx['p1']->id, dueBefore: new DateTimeImmutable('2026-05-15T00:00:00Z'));
+    $result = $ctx['useCase']->execute($ctx['alice']->id, $ctx['p1']->id, dueBefore: new DateTimeImmutable('2026-05-15T00:00:00Z'));
     // Only t1 (due 2026-05-01) qualifies; t2 is due 2026-06-01 (after), t3 has no due.
     expect($result)->toHaveCount(1)
         ->and($result[0]->id)->toBe($ctx['t1']->id);
@@ -71,6 +73,7 @@ it('combines status and dueBefore filters', function (): void {
     $ctx = makeListProjectTasksFixture();
 
     $result = $ctx['useCase']->execute(
+        $ctx['alice']->id,
         $ctx['p1']->id,
         status: Status::Todo,
         dueBefore: new DateTimeImmutable('2026-05-15T00:00:00Z'),
@@ -82,7 +85,13 @@ it('combines status and dueBefore filters', function (): void {
 it('does not return tasks from other projects', function (): void {
     $ctx = makeListProjectTasksFixture();
 
-    $result = $ctx['useCase']->execute($ctx['p2']->id);
+    $result = $ctx['useCase']->execute($ctx['alice']->id, $ctx['p2']->id);
     expect($result)->toHaveCount(1)
         ->and($result[0]->id)->toBe($ctx['t4']->id);
 });
+
+it('rejects listing when actor is not a project member', function (): void {
+    $ctx = makeListProjectTasksFixture();
+
+    $ctx['useCase']->execute($ctx['eve']->id, $ctx['p1']->id);
+})->throws(NotAProjectMemberException::class);
