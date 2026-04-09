@@ -204,6 +204,16 @@
   - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
 - **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
+## 4.3 Страница входа
+
+- **Контроллер тонкий**, mirrors 4.2.2 RegisterController pattern.
+- **`InvalidCredentialsException` → `ValidationException` на поле `email`** с единым сообщением `'Invalid credentials.'` для обоих случаев (unknown email, wrong password). No user enumeration, симметрично контракту 2.2.
+- **`Login::execute` сам вызывает `SessionGuard::login()`** — контроллер НЕ повторяет вызов, иначе двойная миграция session id. Комментарий в store() это фиксирует.
+- **`LoginRequest::rules`** — без `min:8` на password: domain владеет password length policy (только в RegisterUser), дублирование здесь «раскрыло» бы правило и создало бы расхождение.
+- **Nav + welcome**: `href="#"` → `route('login')`. Это последний placeholder был, закрыт.
+- **9 feature тестов** покрывают форму, wiring, auth-redirect, happy path, case-insensitive, unknown email generic error, wrong password — тот же generic error (enumeration check), empty fields.
+- **Codex verdict:** APPROVE без findings (1-й прогон).
+
 ## 4.2 Страница регистрации
 
 Декомпозирована на 4.2.1 (инфраструктурные адаптеры) и 4.2.2 (страница + контроллер).
