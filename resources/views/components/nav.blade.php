@@ -12,7 +12,7 @@
 
             @signedIn
                 <a href="#" class="text-gray-600 hover:text-gray-900">Dashboard</a>
-                <a href="#" class="text-gray-600 hover:text-gray-900">Projects</a>
+                <a href="{{ route('projects.index') }}" class="text-gray-600 hover:text-gray-900">Projects</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
                     <button type="submit" class="text-gray-600 hover:text-gray-900">Logout</button>
