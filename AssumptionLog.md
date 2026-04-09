@@ -133,6 +133,14 @@
   - reject (minor): "сообщение исключения не проверяется" — ложноположительное, Pest `->throws($class, $message)` уже пинит точное сообщение.
 - **Codex re-review:** APPROVE, no critical findings. Бюджет 2/2.
 
+## 1.r2 Валидация id > 0 — BLOCKED
+
+- **Попытка реализации:** добавление `if ($id <= 0) throw ...` в конструкторы 5 entity ломает 49 существующих тестов.
+- **Корень проблемы:** все 5 application use cases (`RegisterUser`, `CreateProject`, `CreateTask`, `AddComment`, плюс ProjectMember через `CreateProject`) используют draft-паттерн: `new Entity(id: 0, ...)` → `repository->save($draft)` → возвращает entity с присвоенным id. Контракт всех `*Repository::save()` принимает entity целиком, включая `id = 0` как маркер «ещё не сохранён». Это противоречит инварианту `id > 0`.
+- **PRD ошибка:** первоначальный PRD 1.r2 утверждал «такого паттерна нет» — это неверно (декомпозиция была сделана без анализа application слоя).
+- **Решение пользователя:** заблокировать 1.r2 и решить совместно с 3.2 (остальные Eloquent-репозитории) или 2.r2 (actor-based auth — там тоже меняются контракты use cases). Самый чистый путь — разделить контракт репозитория: `create(...primitives)` для новой сущности, `save(Entity)` для update (требует id > 0).
+- **Текущий статус:** изменения откачены, рабочая ветка чиста, задача `1.r2 [blocked]` в Roadmap.
+
 ## 3.1 Миграции БД
 
 - **Заменена дефолтная Laravel `users`-миграция**: оставлены только domain-aligned поля (`name`, `email` unique, `password_hash`, timestamps). Удалены `email_verified_at`, `remember_token` — Laravel-auth scaffolding не используется (кастомный `SessionGuard` из 2.2). Таблица `password_reset_tokens` удалена полностью — восстановление пароля не входит в MVP (см. `artifacts/prd-taskflow-ru.md` §7). Таблица `sessions` сохранена без изменений как ортогональная Laravel session-инфраструктура.
