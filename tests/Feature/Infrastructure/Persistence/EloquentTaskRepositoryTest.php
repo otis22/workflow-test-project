@@ -187,6 +187,56 @@ it('listByProject filters by dueBefore and excludes tasks without dueDate', func
         ->and($result[0]->id)->toBe($early->id);
 });
 
+it('listByProject dueBefore uses strict less-than semantics at the boundary', function (): void {
+    /** @var TaskRepository $repo */
+    $repo = app(TaskRepository::class);
+    ['userId' => $userId, 'projectId' => $projectId] = seedTaskFixture();
+
+    $boundary = new DateTimeImmutable('2026-05-15T00:00:00Z');
+    $repo->save(makeDomainTask($projectId, $userId, dueDate: new DueDate($boundary)));
+
+    // Strict < excludes the task whose due date equals the boundary.
+    $result = $repo->listByProject($projectId, dueBefore: $boundary);
+
+    expect($result)->toBe([]);
+});
+
+it('listByProject combines status and dueBefore filters', function (): void {
+    /** @var TaskRepository $repo */
+    $repo = app(TaskRepository::class);
+    ['userId' => $userId, 'projectId' => $projectId] = seedTaskFixture();
+
+    $matching = $repo->save(makeDomainTask(
+        $projectId,
+        $userId,
+        status: Status::Todo,
+        dueDate: new DueDate(new DateTimeImmutable('2026-05-01T00:00:00Z')),
+    ));
+    // same status, but due after the boundary
+    $repo->save(makeDomainTask(
+        $projectId,
+        $userId,
+        status: Status::Todo,
+        dueDate: new DueDate(new DateTimeImmutable('2026-06-01T00:00:00Z')),
+    ));
+    // due before boundary but different status
+    $repo->save(makeDomainTask(
+        $projectId,
+        $userId,
+        status: Status::Done,
+        dueDate: new DueDate(new DateTimeImmutable('2026-05-01T00:00:00Z')),
+    ));
+
+    $result = $repo->listByProject(
+        $projectId,
+        status: Status::Todo,
+        dueBefore: new DateTimeImmutable('2026-05-15T00:00:00Z'),
+    );
+
+    expect($result)->toHaveCount(1)
+        ->and($result[0]->id)->toBe($matching->id);
+});
+
 it('listByAssignee returns only tasks assigned to the user, ordered by id', function (): void {
     /** @var TaskRepository $repo */
     $repo = app(TaskRepository::class);
