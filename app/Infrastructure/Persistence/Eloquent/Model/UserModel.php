@@ -31,5 +31,9 @@ final class UserModel extends Model
         'updated_at' => 'datetime',
     ];
 
+    // Explicit factory binding: the default HasFactory convention expects the
+    // model to live under App\Models; our persistence models live under
+    // App\Infrastructure\Persistence\Eloquent\Model, so Laravel cannot resolve
+    // the factory by name alone.
     protected static string $factory = UserModelFactory::class;
 }
