@@ -43,7 +43,7 @@
 | # | Задача | Описание | Статус |
 |---|--------|----------|--------|
 | 3.1 | Миграции БД | Миграции для таблиц: users, projects, project_members, tasks, comments | `done` |
-| 3.2 | Eloquent-модели и репозитории | Eloquent-модели + реализация репозиториев (UserRepository, ProjectRepository, TaskRepository, CommentRepository). Привязка интерфейсов через Service Provider | `todo` |
+| 3.2 | Eloquent-модели и репозитории | Eloquent-модели + реализация репозиториев (UserRepository, ProjectRepository, TaskRepository, CommentRepository). Привязка интерфейсов через Service Provider | `done` |
 | 3.3 | Фабрики и сидеры | Создать фабрики для всех моделей. Базовый сидер для тестирования | `todo` |
 
 ## Этап 4: Web/UI — Аутентификация
@@ -103,7 +103,7 @@
 | # | Задача | Описание | Статус |
 |---|--------|----------|--------|
 | 1.r1 | `[review]` Инвариант updatedAt >= createdAt | Добавить проверку в конструкторы доменных сущностей (User, Project, далее Task/Comment), что updatedAt не раньше createdAt. Применить симметрично ко всем сущностям. Источник: Codex review задачи 1.2 | `done` |
-| 1.r2 | `[review][blocked]` Валидация id > 0 во всех entities | Добавить проверку `id > 0` в конструкторы User, Project, ProjectMember, Task, Comment. Применить симметрично. Источник: Codex review задачи 1.4. **BLOCKED**: конфликт с draft-паттерном `new Entity(id: 0, ...)` → `repository->save()` во всех 5 use cases. Решение требует рефакторинга контрактов репозиториев (split create/update). Решить совместно с задачей 3.2 (когда будут писаться остальные репозитории) или с 2.r2 (где тоже трогаем контракты use cases). См. AssumptionLog 1.r2 | `todo` |
+| 1.r2 | `[review][rejected]` Валидация id > 0 во всех entities | Замечание корректно в вакууме, но несовместимо с draft-паттерном проекта: все 5 use cases используют `new Entity(id: 0, ...) → repository->save()`. Паттерн зафиксирован во всех 5 Eloquent-репозиториях (3.2.2-3.2.6). `id = 0` — легитимное состояние unpersisted draft. Закрыто в 3.2.6. См. AssumptionLog 1.r2 | `done` |
 | 2.r1 | `[review]` Email normalization | Нормализовать email (lowercase + trim) на уровне use cases или value object EmailAddress. Сделать поиск дубликатов и login case-insensitive. Источник: Codex review задачи 2.1 | `done` |
 | 2.r2 | `[review]` Actor-based authorization в application layer | Системная проблема: `UpdateTask`, `ListProjectTasks`, `ListUserTasks`, `ListTaskComments` не принимают actor и не проверяют право вызывающего (IDOR). Решение пользователя: actor-based в application layer. Реализовано в 2 подзадачах: 2.r2.A (UpdateTask + ListProjectTasks), 2.r2.B (ListUserTasks rename + ListTaskComments). Информационный leak 404 vs 403 вынесен отдельно как 2.r3. | `done` |
 

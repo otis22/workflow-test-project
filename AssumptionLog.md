@@ -133,7 +133,15 @@
   - reject (minor): "сообщение исключения не проверяется" — ложноположительное, Pest `->throws($class, $message)` уже пинит точное сообщение.
 - **Codex re-review:** APPROVE, no critical findings. Бюджет 2/2.
 
-## 1.r2 Валидация id > 0 — BLOCKED
+## 1.r2 Валидация id > 0 — REJECTED (закрыто в 3.2.6)
+
+- **Итоговое решение:** замечание отклонено. Все 5 Eloquent-репо (3.2.2–3.2.6) зафиксировали draft-паттерн как архитектурный выбор проекта: `save(Entity с id=0)` → insert, `save(Entity с id>0)` → update-or-throw. `id = 0` — легитимное состояние unpersisted draft, не валидационная ошибка. Инвариант `id > 0` в доменных entity несовместим с этим паттерном.
+- **История**: первая попытка (на этапе 1.r2 подзадачи) привела к откату — 49 тестов сломалось. Пользователь заблокировал задачу «до 3.2/4.x». При реализации 3.2.3 (EloquentProjectRepository) было зафиксировано решение следовать прецеденту 3.2.2 (draft pattern), что подтвердило выбор. В 3.2.6 вся цепочка 5 репо полностью использует этот паттерн.
+- **Закрывается** как `rejected` вместо `blocked`.
+
+---
+
+## 1.r2 Валидация id > 0 — BLOCKED (historical)
 
 - **Попытка реализации:** добавление `if ($id <= 0) throw ...` в конструкторы 5 entity ломает 49 существующих тестов.
 - **Корень проблемы:** все 5 application use cases (`RegisterUser`, `CreateProject`, `CreateTask`, `AddComment`, плюс ProjectMember через `CreateProject`) используют draft-паттерн: `new Entity(id: 0, ...)` → `repository->save($draft)` → возвращает entity с присвоенным id. Контракт всех `*Repository::save()` принимает entity целиком, включая `id = 0` как маркер «ещё не сохранён». Это противоречит инварианту `id > 0`.
@@ -165,6 +173,36 @@
   - 1-я попытка: «Review blocked» (Codex не увидел встроенный diff) → невалидный, бюджет не считается потраченным.
   - 2-я попытка с полным телом файлов вместо diff: APPROVE.
   - reject (minor): «нет позитивного теста для ListUserTasks после rename» — существующие тесты `ListUserTasksTest.php` уже покрывают позитивный путь; rename чисто семантический, поведение не менялось. Codex видел только diff, не существующие тесты.
+
+## 3.2.4 EloquentProjectMemberRepository
+
+- **Симметрично 3.2.3** с двумя отличиями: entity только с `created_at` (нет updated_at, см. AssumptionLog 1.3), и дополнительный метод `projectIdsForUser` через `pluck → map → values → all`.
+- **Update-ветка реализована для симметрии**, хотя практически не вызывается (ProjectMember иммутабелен по дизайну).
+- **Codex triage:**
+  - accept (minor): round-trip тест расширен — equality через `format('U')` всех полей (id, projectId, userId, createdAt).
+  - reject (minor): «неиспользуемый второй owner user в lists project ids test» — наблюдение, не дефект, читаемость важнее.
+- **Codex re-review:** APPROVE. Бюджет 2/2.
+
+## 3.2.5 EloquentTaskRepository
+
+- **Биггест из 3.2.x серии**: маппит enum'ы (Status, Priority backed string), nullable VO (DueDate), nullable assigneeId. Две query-операции: `listByProject` с двумя фильтрами (status + dueBefore, оба nullable, AND-композиция) и `listByAssignee`.
+- **`listByProject` dueBefore**: строгое `<` (не `<=`), совпадает с `InMemoryTaskRepository` фейком. Задачи без `due_date` исключаются когда `dueBefore` задан.
+- **Codex triage:**
+  - accept (minor, F1): добавлен boundary-тест пинующий строгое `<` на границе.
+  - accept (minor, F2): добавлен тест combined status + dueBefore filter.
+  - reject (minor, F3): отдельный «mapper-only DateTimeImmutable write» тест — round-trip через `format('U')` уже пинит контракт.
+- **Codex re-review:** F1/F2 закрыты, F3 rejection disputed (Codex не смог переподтвердить round-trip в изолированном re-review вызове), не critical. Push по §10.
+
+## 3.2.6 EloquentCommentRepository
+
+- **Симметрично 3.2.4** (immutable, только `created_at`, без findById в interface).
+- **Round-trip через listByTask** — нет findById в интерфейсе, поэтому round-trip проверяется через `listByTask(taskId)[0]`.
+- **Codex triage:**
+  - reject × 3 (blocker-hallucinations): Codex неправильно прочитал escape-последовательности PHP в промпте и пожаловался на «bare identifiers», «missing quotes в sprintf», хотя в реальном коде всё корректно.
+  - reject (minor, F4): «mapper DateTimeImmutable explicit assertion» — round-trip `format('U')` покрывает (F3 из 3.2.5 повторно).
+  - reject (minor, F5): «exact exception message is brittle» — точное сообщение это контракт, симметрично всем 4 предыдущим репо.
+  - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
+- **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
 ## 3.2.3 EloquentProjectRepository
 
