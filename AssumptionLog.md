@@ -204,6 +204,20 @@
   - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
 - **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
+## 3.3 Фабрики и сидеры
+
+- **Декомпозиция на 3 подзадачи** (3.3.1/3.3.2/3.3.3) по принципу «одна модель на подзадачу + последовательное обогащение seeder».
+- **Удалён мёртвый Laravel default код** (`app/Models/User.php`, `database/factories/UserFactory.php`) — ссылался на несуществующие колонки (`password`, `email_verified_at`, `remember_token`); grep подтвердил, что ни один import не разорван.
+- **`protected static $factory` property override** на всех 5 моделях, потому что Laravel HasFactory соглашение ищет фабрики по имени класса в `App\Models\{Name}` namespace, а наши модели живут в `App\Infrastructure\Persistence\Eloquent\Model`. Альтернатива (move моделей в `App\Models`) отвергнута — нарушает чистую архитектуру. Комментарий над property объясняет override.
+- **Фабрики с nested `::factory()` relationships** (e.g. `'owner_id' => UserModel::factory()`) — Laravel auto-creates FK parent при вызове `->create()`. Упрощает тесты.
+- **`ProjectMemberModelFactory` и `CommentModelFactory` явно задают `created_at`** через `now()`, потому что модели имеют `$timestamps = false`. Миграции 3.1 имеют `useCurrent()` default, поэтому на уровне БД пропуск колонки тоже работает, но явная установка делает factory output предсказуемым.
+- **Seeder использует `updateOrCreate` на естественных ключах** (email, project name, [task_id, title], [task_id, author_id, body]) для идемпотентности. Подтверждено реальным smoke test (`db:seed` выполнен дважды на pgsql → финальные counts 3/1/2/3/2).
+- **Codex triage 3.3.1/3.3.2/3.3.3:**
+  - Большинство findings оказались галлюцинациями из-за escape-sequence confusion в промптах Codex (например Review 3.3.2 первого прогона был Review blocked, Review 3.3.1 первого прогона нашёл «syntax errors» которых нет).
+  - accept (nit 3.3.1): комментарий над `$factory` property — explain convention override.
+  - reject (major 3.3.2, seeder NULL created_at): миграция `project_members` имеет `useCurrent()` DB default, INSERT без колонки получает server time. Проверено.
+  - Остальные nits отклонены как defensive/over-engineering.
+
 ## 3.2.3 EloquentProjectRepository
 
 - **Симметрично 3.2.2**: draft-паттерн (`save(id=0)` insert, `save(id>0)` update-or-throw), отдельный `ProjectMapper` класс, feature тесты через container binding.

@@ -1,5 +1,48 @@
 # Changelog
 
+## Этап 3: Инфраструктурный слой
+
+**Статус:** завершён.
+
+### Добавлено
+
+#### 3.1 Миграции БД
+- 5 миграций для domain-aligned таблиц: `users`, `projects`, `project_members`, `tasks`, `comments`. FK actions документированы (RESTRICT на owner/creator/author, CASCADE на project_id, SET NULL на assignee). Индексы: unique email, unique (project_id, user_id), tasks (status, due_date). Status/Priority — enum на уровне БД (CHECK constraint в pgsql).
+- Удалены Laravel auth scaffolding колонки (`email_verified_at`, `remember_token`, `password_reset_tokens` таблица).
+
+#### 3.2 Eloquent модели и репозитории
+- **3.2.1 Eloquent модели** (5 штук) + `PersistenceServiceProvider` заготовка.
+- **3.2.2 EloquentUserRepository** с `UserMapper`. Draft-паттерн: `save(id=0)` → insert, `save(id>0)` → update-or-RuntimeException.
+- **3.2.3 EloquentProjectRepository** + `ProjectMapper`.
+- **3.2.4 EloquentProjectMemberRepository** + `ProjectMemberMapper`. Особенность: `$timestamps = false`, только `created_at`. Дополнительный метод `projectIdsForUser`.
+- **3.2.5 EloquentTaskRepository** + `TaskMapper`. Маппит backed string enums (Status, Priority), nullable VO (DueDate), nullable assignee. Query-операции `listByProject` с фильтрами (status + dueBefore AND-композиция, строгое `<` для dueBefore) и `listByAssignee`.
+- **3.2.6 EloquentCommentRepository** + `CommentMapper`. Минимальный интерфейс: `save` + `listByTask`, без `findById`.
+- **Все 5 реализаций** связаны с interfaces через `PersistenceServiceProvider`. Draft-паттерн зафиксирован как архитектурное решение проекта.
+
+#### 3.3 Фабрики и сидеры
+- Удалён мёртвый Laravel default код: `app/Models/User.php`, `database/factories/UserFactory.php`.
+- **5 фабрик** в `database/factories/`: `UserModelFactory`, `ProjectModelFactory`, `ProjectMemberModelFactory`, `TaskModelFactory`, `CommentModelFactory`. Все с nested `::factory()` relationships для FK.
+- **HasFactory trait + `protected static $factory`** на все 5 моделей (override convention т.к. модели живут вне `App\Models`).
+- **`DatabaseSeeder`** — детерминированный idempotent сид: 3 пользователя (Alice, Bob, Charlie как outsider), 1 проект (TaskFlow MVP) с Alice+Bob как members, 3 задачи разных статусов/приоритетов, 2 комментария. Все через `updateOrCreate` на естественных ключах.
+
+### Принятые решения
+
+- **Draft-паттерн** зафиксирован как архитектурное решение: все 5 Eloquent-репо используют `save(Entity с id=0)` → insert, `save(Entity с id>0)` → update-or-throw. Это закрывает 1.r2 как rejected: `id = 0` — легитимное состояние unpersisted draft.
+- **Маппер как отдельный класс** (не метод репо) — единая ответственность, позволяет re-use, тестируемо через round-trip.
+- **Feature тесты через container binding** (`app(Repository::class)`) — одновременно проверяют и репо, и binding в service provider.
+- **Фикстуры owner'а в тестах через raw `UserModel::query()->create([...])`** в 3.2.3–3.2.6 до 3.3, затем через factory после 3.3.1. Не возвращались назад для избежания scope creep.
+- **Seeder password_hash** сохранён как `'hash:secret'` placeholder — совместим с существующим `FakePasswordHasher` (AssumptionLog 2.1) и test-фикстурами; seeder для dev/test, не production.
+
+### Отложенные замечания (Codex review)
+
+- **2.r3** `[review]` — Information disclosure: 404 vs 403 в `UpdateTask` и `ListTaskComments`. Non-member actor различает «task не существует» (TaskNotFoundException) от «task существует, но нет membership» (NotAProjectMemberException). Источник: Codex review 2.r2.A.
+
+### Проверки
+
+- **199 тестов** (64 domain + 51 application + 84 infrastructure/feature): 476 ассертов.
+- CI зелёный на всех задачах 3.1–3.3.3.
+- Smoke test локально: контейнеры healthy, HTTP 200, seeder идемпотентен (`db:seed` дважды → 3/1/2/3/2).
+
 ## Этап 2: Application-слой (Use Cases)
 
 **Статус:** завершён.
