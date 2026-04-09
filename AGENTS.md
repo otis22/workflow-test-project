@@ -90,10 +90,27 @@
 **Обязательный шаблон промпта для `codex:rescue`:**
 
 ```
+BLIND REVIEW MODE. You have NO filesystem access. Any attempt to read,
+grep, find, ls, cat, or resolve file paths will fail with a sandbox
+error and wastes the session. Review STRICTLY the embedded content
+below, nothing else. Do not infer the existence of files, tests,
+migrations, or constraints that are not explicitly embedded.
+
 <контекст задачи: что делали, зачем, какой это этап Roadmap>
 
-IMPORTANT: Do NOT attempt any filesystem read or shell command. The sandbox
-blocks file access. All content you need is embedded verbatim below.
+Project-specific conventions (DO NOT flag these as defects):
+- Draft-entity pattern: save(Entity с id=0) inserts, save(Entity с id>0)
+  updates or throws. id=0 is a legitimate unpersisted state.
+- Mapper round-trip contract: feature tests assert save→load→format('U')
+  equality. This IS the mapper correctness contract — do not request
+  additional "mapper-only" tests.
+- Exception messages: tests assert exact messages via Pest
+  ->throws($class, $message) — this is the project contract, not
+  brittleness.
+- Factory convention override: domain Eloquent models live in
+  App\Infrastructure\Persistence\Eloquent\Model and use explicit
+  `protected static string $factory = ...` because they are outside
+  App\Models.
 
 Review focus:
 1. Correctness vs PRD of the task
@@ -103,17 +120,18 @@ Review focus:
 5. Tests: rule coverage, negative cases, edge cases
 6. Code quality: readability, naming, dead code, duplication
 
-Output format: findings с file:line, severity (critical/major/minor/nit),
-описанием и suggested fix. В конце — summary verdict (APPROVE / CHANGES REQUESTED)
-и systemic issues, если есть. No speculation — only cite embedded text.
+Output format:
+- Findings with file:line, severity (critical/major/minor/nit),
+  description, suggested fix.
+- FINAL VERDICT must be exactly one of: `APPROVE` or `CHANGES REQUESTED`.
+  Do NOT use other labels like `NITS`, `APPROVE-WITH-NITS`, `REQUEST CHANGES`.
+- No speculation — only cite embedded text. If you cannot verify a
+  concern from the embedded content, do not raise it.
 
 ========================================
 BEGIN ARTIFACTS
 ========================================
-<полный или релевантный текст artifacts/prd-taskflow-ru.md>
-<полный или релевантный текст artifacts/domain-model-taskflow-ru.md>
-<полный или релевантный текст artifacts/technical-requirements-taskflow-ru.md>
-<полный или релевантный текст artifacts/ui-spec-taskflow-ru.md>
+<релевантный текст artifacts/*.md — только секции, относящиеся к задаче>
 ========================================
 END ARTIFACTS
 ========================================
@@ -127,14 +145,25 @@ END TASK PRD
 ========================================
 
 ========================================
-BEGIN GIT DIFF <base>..HEAD
+BEGIN CHANGED FILES (full bodies after changes)
 ========================================
-<полный unified diff подзадачи — app/ + tests/>
+<полные тела ВСЕХ изменённых файлов после изменений — НЕ diff'ы>
+<один файл = одна секция с header вида "--- path/to/file.php ---">
 ========================================
-END GIT DIFF
+END CHANGED FILES
 ========================================
 
-END OF INPUT. Review strictly from the text above.
+========================================
+BEGIN RELEVANT UNCHANGED CONTEXT
+========================================
+<фрагменты существующих файлов, которые важны для понимания
+изменений, но сами не менялись: migration columns, precedent
+repository, related test fixtures>
+========================================
+END RELEVANT UNCHANGED CONTEXT
+========================================
+
+END OF INPUT. Review the embedded text only.
 ```
 
 **Обязательные правила шаблона:**
@@ -155,6 +184,55 @@ END OF INPUT. Review strictly from the text above.
 - Передавать Codex пути к файлам (ни абсолютные, ни относительные) в надежде, что он их прочитает.
 - Использовать shell-substitution (`$(cat ...)`) в промпте — это литеральный текст для Codex, а не исполняемый код.
 - Считать «Review blocked / sandbox error» валидным review — такой прогон не засчитывается в бюджет, нужно переформулировать.
+
+#### Шаг 8.1 — Известные failure modes Codex и mitigations
+
+За время работы с Codex накопился список воспроизводимых аномалий. Агент должен знать их и применять mitigations автоматически.
+
+**FM-1: Галлюцинации «syntax errors» из-за escape-последовательностей**
+- *Симптом:* Codex рапортует «bare identifiers», «missing quotes», «unquoted array keys», «invalid namespace» в коде, где всё корректно. Часто выдаётся как `blocker`.
+- *Причина:* нестабильная интерпретация `\$`, `$`, `"'"` в embed. Codex иногда «съедает» кавычки/бэкслеши и читает мусор.
+- *Mitigation:* в embed'ах использовать чистый `$var` **без** экранирования `\$`. Полные тела файлов, а не diff'ы. Если Codex всё равно ругается на «syntax» — проверить локально (`php -l`, `composer check:all` уже покрывает) и reject как hallucination с записью в commit-сообщении.
+- *Не делать:* слепо переписывать код под описание Codex без локальной проверки.
+
+**FM-2: «Review blocked» — попытка чтения ФС**
+- *Симптом:* Codex возвращает verdict вида «Review blocked: cannot read /path/...», findings пустые.
+- *Причина:* sandbox блокирует `bwrap loopback`, но Codex всё равно пробует. Часто случается когда промпт упоминает пути.
+- *Mitigation:* (1) промпт начинается с жирного `BLIND REVIEW MODE. No filesystem access.`; (2) не упоминать абсолютные пути к файлам — только relative `path/to/file.php` как label; (3) при rail blocked — **не считать бюджет потраченным**, переформулировать промпт с более агрессивным запретом чтения.
+
+**FM-3: Повторяющийся false-positive test-gap**
+- *Симптом:* Codex требует «добавить X test» когда X уже покрыт существующим тестом или конвенцией проекта.
+- *Примеры из этой сессии:* «explicit mapper DateTimeImmutable write assertion» (×3), «test for nullable default in factory», «equality boundary test when already exists».
+- *Mitigation:* в шаблоне блока «Project-specific conventions» заранее перечислять контракты, которые УЖЕ покрыты (round-trip через `format('U')`, exact exception messages и т.д.). Reject такие findings со ссылкой на конвенцию.
+
+**FM-4: Ссылки на невложенные файлы**
+- *Симптом:* Codex говорит «X not visible / not verifiable» или выдумывает constraints, которых нет.
+- *Причина:* Codex пытается рассуждать о файлах за пределами embed.
+- *Mitigation:* (1) секция `BEGIN RELEVANT UNCHANGED CONTEXT` в шаблоне — вкладывать migration columns, precedent-файлы, relevant test fixtures даже если они не менялись; (2) явная фраза в промпте: «Do not infer the existence of files, tests, migrations, or constraints that are not explicitly embedded.»
+
+**FM-5: Нестандартный verdict**
+- *Симптом:* verdict вида `NITS`, `APPROVE WITH NITS`, `REQUEST CHANGES` — не укладывается в двухвариантную схему.
+- *Mitigation:* в шаблоне явно: «FINAL VERDICT must be exactly one of: `APPROVE` or `CHANGES REQUESTED`. Do not use other labels.» Если Codex всё равно выдал nit-only verdict — трактовать как APPROVE, документировать в commit-сообщении.
+
+**FM-6: Re-review теряет контекст оригинала**
+- *Симптом:* во втором ревью Codex говорит «cannot verify your previous rejection rationale» про находку, которую отклонили в первом прогоне.
+- *Причина:* re-review — это изолированный вызов без памяти о предыдущем.
+- *Mitigation:* в re-review промпте повторять (1) краткий контекст предыдущего триажа, (2) ссылки на существующий код, от которого зависит rejection, (3) embed релевантных оригинальных тестов/файлов, не только fix-дифа. Если Codex всё равно «disputes» без нового критического замечания — push, rejection стоит на своих основаниях.
+
+**FM-7: Over-defensive test suggestions**
+- *Симптом:* findings вида «add test for X», где X — defensive проверка без реального риска (null on null field, type on typed field, и т.п.).
+- *Mitigation:* reject как «defensive coverage without real defect risk». Симметрично принципам «Don't add validation for scenarios that can't happen» из CLAUDE.md.
+
+**Общий принцип триажа Codex findings:**
+
+| Признак находки | Действие |
+|-----------------|----------|
+| Подтверждается локальной проверкой (`php -l`, `composer check:all`, grep) | accept |
+| Противоречит зафиксированной конвенции в AssumptionLog или precedent'у | reject со ссылкой |
+| Выходит за scope подзадачи, но корректен по сути | defer в новую `[review]` задачу |
+| Не может быть подтверждён из embedded text | reject (Codex speculation) |
+| Галлюцинация (синтаксис уже зелёный) | reject с явной пометкой hallucination |
+| Defensive тест без реального bug risk | reject |
 
 **Запрещено:**
 
