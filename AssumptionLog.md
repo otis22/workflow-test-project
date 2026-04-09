@@ -204,6 +204,18 @@
   - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
 - **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
+## 4.1 Layout и базовые Blade-компоненты
+
+- **Layout как Blade component** (`<x-layouts.app>`), не `@extends` — идиоматично для Blade 10+ и компактнее composition.
+- **Tailwind v4 через `@vite`** — существующая инфраструктура `resources/css/app.css` и Vite 8 уже были в package.json на этапе 0.2, просто не использовались.
+- **CI-изменение**: в `ci.yml` добавлены Node 20 setup + `npm ci` + `npm run build` перед `composer audit`/Pest. Причина: `@vite` directive бросает `ViteManifestNotFoundException` без собранных assets, что ломает feature тесты. Это инфраструктурный fix одновременно с 4.1, записано в commit-сообщении.
+- **`package-lock.json`** сгенерирован первым `npm install` (раньше не существовал). Залочены версии Vite 8 / Tailwind v4.
+- **Placeholder `href="#"` в nav и welcome** — осознанное: реальные `route()` вызовы в 4.2 (register), 4.3 (login), 4.4 (logout), 5.1 (projects). Dashboard route появится в 7.1.
+- **`@auth` branch nav не покрыт позитивным тестом** — Laravel default auth guard не привязан к нашему `App\Application\Auth\SessionGuard` порту (custom guard из 2.2). `@auth` всегда `false` в тестах. Полный тест branch откладывается до 4.3, где middleware подключит сессию. Текущий негативный тест покрывает `@guest` branch и проверяет отсутствие `@auth` контента.
+- **Logout placeholder: `<button type="button" disabled>`** вместо `<form action="#">`, потому что POST на `/` → 405. Real form wire-up в 4.4.
+- **Codex triage:** 5 accept (nav logout, button type duplicate, vite test strictness, @auth negative test, form-field contract doc) + 8 reject (defensive, out-of-scope, empirically verified).
+- **Codex re-review:** APPROVE. Бюджет 2/2.
+
 ## 3.3 Фабрики и сидеры
 
 - **Декомпозиция на 3 подзадачи** (3.3.1/3.3.2/3.3.3) по принципу «одна модель на подзадачу + последовательное обогащение seeder».
