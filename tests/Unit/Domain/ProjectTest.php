@@ -156,3 +156,32 @@ it('rejects updatedAt earlier than createdAt', function (): void {
         updatedAt: $updated,
     );
 })->throws(InvalidArgumentException::class, 'Project updatedAt must not be earlier than createdAt');
+
+it('rejects updatedAt one microsecond earlier than createdAt', function (): void {
+    $created = new DateTimeImmutable('2026-01-01T00:00:00.000001Z');
+    $updated = new DateTimeImmutable('2026-01-01T00:00:00.000000Z');
+    new Project(
+        id: 1,
+        ownerId: 1,
+        name: 'Foo',
+        description: '',
+        createdAt: $created,
+        updatedAt: $updated,
+    );
+})->throws(InvalidArgumentException::class, 'Project updatedAt must not be earlier than createdAt');
+
+it('accepts same instant in different timezones for createdAt and updatedAt', function (): void {
+    $createdUtc = new DateTimeImmutable('2026-01-01T00:00:00Z');
+    $updatedTokyo = new DateTimeImmutable('2026-01-01T09:00:00+09:00');
+
+    $project = new Project(
+        id: 1,
+        ownerId: 1,
+        name: 'Foo',
+        description: '',
+        createdAt: $createdUtc,
+        updatedAt: $updatedTokyo,
+    );
+
+    expect($project->createdAt->format('U.u'))->toBe($project->updatedAt->format('U.u'));
+});

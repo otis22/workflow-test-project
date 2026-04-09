@@ -190,6 +190,35 @@ it('rejects updatedAt earlier than createdAt', function (): void {
     );
 })->throws(InvalidArgumentException::class, 'User updatedAt must not be earlier than createdAt');
 
+it('rejects updatedAt one microsecond earlier than createdAt', function (): void {
+    $created = new DateTimeImmutable('2026-01-01T00:00:00.000001Z');
+    $updated = new DateTimeImmutable('2026-01-01T00:00:00.000000Z');
+    new User(
+        id: 1,
+        name: 'Alice',
+        email: 'alice@example.com',
+        passwordHash: 'hashed',
+        createdAt: $created,
+        updatedAt: $updated,
+    );
+})->throws(InvalidArgumentException::class, 'User updatedAt must not be earlier than createdAt');
+
+it('accepts same instant in different timezones for createdAt and updatedAt', function (): void {
+    $createdUtc = new DateTimeImmutable('2026-01-01T00:00:00Z');
+    $updatedTokyo = new DateTimeImmutable('2026-01-01T09:00:00+09:00');
+
+    $user = new User(
+        id: 1,
+        name: 'Alice',
+        email: 'alice@example.com',
+        passwordHash: 'hashed',
+        createdAt: $createdUtc,
+        updatedAt: $updatedTokyo,
+    );
+
+    expect($user->createdAt->format('U.u'))->toBe($user->updatedAt->format('U.u'));
+});
+
 it('rejects empty password hash in withPasswordHash', function (): void {
     $now = new DateTimeImmutable;
     $user = new User(

@@ -83,6 +83,20 @@ it('rejects updatedAt earlier than createdAt', fn (): Task => makeTask([
     'updatedAt' => new DateTimeImmutable('2026-01-01T23:59:59Z'),
 ]))->throws(InvalidArgumentException::class, 'Task updatedAt must not be earlier than createdAt');
 
+it('rejects updatedAt one microsecond earlier than createdAt', fn (): Task => makeTask([
+    'createdAt' => new DateTimeImmutable('2026-01-01T00:00:00.000001Z'),
+    'updatedAt' => new DateTimeImmutable('2026-01-01T00:00:00.000000Z'),
+]))->throws(InvalidArgumentException::class, 'Task updatedAt must not be earlier than createdAt');
+
+it('accepts same instant in different timezones for createdAt and updatedAt', function (): void {
+    $task = makeTask([
+        'createdAt' => new DateTimeImmutable('2026-01-01T00:00:00Z'),
+        'updatedAt' => new DateTimeImmutable('2026-01-01T09:00:00+09:00'),
+    ]);
+
+    expect($task->createdAt->format('U.u'))->toBe($task->updatedAt->format('U.u'));
+});
+
 it('rejects zero assignee id', fn (): Task => makeTask(['assigneeId' => 0]))
     ->throws(InvalidArgumentException::class, 'Task assigneeId must be positive when set');
 
