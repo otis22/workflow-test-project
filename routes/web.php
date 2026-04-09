@@ -22,4 +22,6 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::middleware('auth.session')->group(function (): void {
     Route::get('/projects', [ProjectsController::class, 'index'])->name('projects.index');
+    Route::get('/projects/create', [ProjectsController::class, 'create'])->name('projects.create');
+    Route::post('/projects', [ProjectsController::class, 'store'])->name('projects.store');
 });

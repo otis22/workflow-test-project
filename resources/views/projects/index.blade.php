@@ -4,8 +4,7 @@
     <section class="py-8">
         <div class="mb-6 flex items-center justify-between">
             <h1 class="text-2xl font-semibold text-gray-900">Your projects</h1>
-            {{-- Placeholder href — wired in 5.2 --}}
-            <a href="#" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+            <a href="{{ route('projects.create') }}" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
                 Create project
             </a>
         </div>
@@ -13,7 +12,7 @@
         @if (empty($projects))
             <div class="rounded-md border border-dashed border-gray-300 p-8 text-center">
                 <p class="text-gray-600">You have no projects yet.</p>
-                <a href="#" class="mt-4 inline-block text-sm font-medium text-gray-900 hover:underline">
+                <a href="{{ route('projects.create') }}" class="mt-4 inline-block text-sm font-medium text-gray-900 hover:underline">
                     Create your first project
                 </a>
             </div>
