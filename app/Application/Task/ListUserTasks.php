@@ -11,9 +11,17 @@ final readonly class ListUserTasks
 {
     public function __construct(private TaskRepository $tasks) {}
 
-    /** @return list<Task> */
-    public function execute(int $userId): array
+    /**
+     * Returns tasks assigned to the actor calling the use case.
+     *
+     * The single parameter is the actor's own identity. The use case
+     * does not allow querying tasks of another user — actor authentication
+     * is the responsibility of the session/controller layer.
+     *
+     * @return list<Task>
+     */
+    public function execute(int $actorId): array
     {
-        return $this->tasks->listByAssignee($userId);
+        return $this->tasks->listByAssignee($actorId);
     }
 }
