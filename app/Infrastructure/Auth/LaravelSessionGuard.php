@@ -9,7 +9,9 @@ use Illuminate\Contracts\Session\Session;
 
 final readonly class LaravelSessionGuard implements SessionGuard
 {
-    private const string SESSION_KEY = 'auth.user_id';
+    // Single flat key (no dot-notation) to avoid collision with Laravel
+    // Auth facade internals and Session::get's dot-notation lookup.
+    private const string SESSION_KEY = 'taskflow_auth_user_id';
 
     public function __construct(private Session $session) {}
 
@@ -24,7 +26,7 @@ final readonly class LaravelSessionGuard implements SessionGuard
     #[\Override]
     public function logout(): void
     {
-        $this->session->forget(self::SESSION_KEY);
+        // invalidate() already flushes all data and regenerates the id.
         $this->session->invalidate();
     }
 
