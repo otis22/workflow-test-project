@@ -13,10 +13,8 @@
             @auth
                 <a href="#" class="text-gray-600 hover:text-gray-900">Dashboard</a>
                 <a href="#" class="text-gray-600 hover:text-gray-900">Projects</a>
-                <form method="POST" action="#" class="inline">
-                    @csrf
-                    <button type="submit" class="text-gray-600 hover:text-gray-900">Logout</button>
-                </form>
+                {{-- Logout placeholder: real POST form + route wired in 4.4. --}}
+                <button type="button" class="text-gray-600 hover:text-gray-900" disabled>Logout</button>
             @endauth
         </div>
     </div>
