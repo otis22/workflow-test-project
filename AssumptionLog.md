@@ -204,6 +204,29 @@
   - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
 - **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
+## 4.2 Страница регистрации
+
+Декомпозирована на 4.2.1 (инфраструктурные адаптеры) и 4.2.2 (страница + контроллер).
+
+### 4.2.1 Laravel adapters (Clock, PasswordHasher, SessionGuard)
+- **SystemClock** — тривиальный `new DateTimeImmutable`.
+- **LaravelPasswordHasher** делегирует `Illuminate\Contracts\Hashing\Hasher` (bcrypt по умолчанию).
+- **LaravelSessionGuard** делегирует `Illuminate\Contracts\Session\Session`. Ключ `'taskflow_auth_user_id'` (плоский, не dot-notation — избегает collision с Laravel Auth internals и `Session::get` nested lookup). `login()` делает `migrate(true)` против session fixation; `logout()` только `invalidate()` (flush + regenerate одним вызовом).
+- **Все три биндинга** в `AppServiceProvider::register`.
+- **Session fixation** зафиксирован тестом: `session()->getId()` меняется после `login()`.
+- **Codex triage:** 3 accept (session fixation test, flat key, drop dead forget()) + несколько info/no-action.
+
+### 4.2.2 RegisterController + view + routes
+- **RegisterController** тонкий: FormRequest валидирует, `RegisterUser` use case делает работу, контроллер мэппит domain exceptions в `ValidationException` с привязкой к полю (`EmailAlreadyTakenException` → email, `WeakPasswordException` → password). `InvalidArgumentException` не ловится — `RegisterRequest` уже покрывает эти пути.
+- **Успешный flow**: `SessionGuard::login($user->id)` + `redirect('/')`. Dashboard route появится в 7.1, пока `/`.
+- **`RegisterRequest::rules`** дублирует domain-валидацию: `required/email/min:8/confirmed`. Это сознательно для читаемых error messages до вызова use case. Min длина через `RegisterUser::MIN_PASSWORD_LENGTH` константу — single source of truth.
+- **Password confirmation** через Laravel `confirmed` rule; ошибка attach'ится на `password` поле.
+- **Guest-only страница**: если `currentUserId() !== null` → 302 на `/`.
+- **Nav + welcome** обновлены: `href="#"` → `route('register')`. Sign in остаётся `#` до 4.3.
+- **9 feature тестов** покрывают: form rendering (через `route()`, `POST`, `password_confirmation` name), home exposes register link, auth-redirect, happy path + session login, invalid name/email/password/mismatch, case-insensitive duplicate.
+- **Codex triage 1-й прогон:** 3 accept (id hardcoding, weak assertions, missing nav wiring test — FM-4 из §8.1 где не вложил nav/welcome в embed) + 4 reject (premature abstraction, defensive catch, view comment, CSRF test).
+- **Codex re-review:** APPROVE. Бюджет 2/2.
+
 ## 4.1 Layout и базовые Blade-компоненты
 
 - **Layout как Blade component** (`<x-layouts.app>`), не `@extends` — идиоматично для Blade 10+ и компактнее composition.
