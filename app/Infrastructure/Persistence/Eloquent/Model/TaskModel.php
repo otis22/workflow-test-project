@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Eloquent\Model;
 
+use Database\Factories\TaskModelFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -22,6 +24,9 @@ use Illuminate\Support\Carbon;
  */
 final class TaskModel extends Model
 {
+    /** @use HasFactory<TaskModelFactory> */
+    use HasFactory;
+
     protected $table = 'tasks';
 
     protected $guarded = [];
@@ -34,4 +39,7 @@ final class TaskModel extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    // Explicit factory binding: see UserModel for rationale.
+    protected static string $factory = TaskModelFactory::class;
 }
