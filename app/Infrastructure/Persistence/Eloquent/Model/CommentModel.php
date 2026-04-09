@@ -20,6 +20,13 @@ final class CommentModel extends Model
 
     protected $guarded = [];
 
+    /**
+     * comments has only created_at (domain entity is immutable per
+     * AssumptionLog 1.5). created_at is populated either by the DB default
+     * (useCurrent() in migration 3.1) for raw Eloquent inserts, or
+     * explicitly by the mapper from a domain entity's createdAt value
+     * (subtask 3.2.5).
+     */
     public $timestamps = false;
 
     protected $casts = [

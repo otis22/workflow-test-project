@@ -19,6 +19,12 @@ final class ProjectMemberModel extends Model
 
     protected $guarded = [];
 
+    /**
+     * project_members has only created_at (domain entity is immutable).
+     * created_at is populated either by the DB default (useCurrent() in
+     * migration 3.1) for raw Eloquent inserts, or explicitly by the mapper
+     * from a domain entity's createdAt value (subtask 3.2.3).
+     */
     public $timestamps = false;
 
     protected $casts = [
