@@ -19,7 +19,7 @@ final readonly class Login
 
     public function execute(string $email, string $plainPassword): User
     {
-        $user = $this->users->findByEmail($email);
+        $user = $this->users->findByEmail($this->normalizeEmail($email));
 
         if (! $user instanceof User) {
             throw InvalidCredentialsException::create();
@@ -32,5 +32,10 @@ final readonly class Login
         $this->session->login($user->id);
 
         return $user;
+    }
+
+    private function normalizeEmail(string $email): string
+    {
+        return strtolower(trim($email));
     }
 }

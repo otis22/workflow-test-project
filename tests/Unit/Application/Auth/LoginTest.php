@@ -39,6 +39,15 @@ it('rejects unknown email with InvalidCredentialsException', function (): void {
     $login->execute('ghost@example.com', 'super-secret');
 })->throws(InvalidCredentialsException::class, 'Invalid credentials');
 
+it('logs in with case-insensitive email and surrounding whitespace', function (): void {
+    [$login, $session] = makeLoginFixture();
+
+    $user = $login->execute('  ALICE@Example.COM  ', 'super-secret');
+
+    expect($user->email)->toBe('alice@example.com')
+        ->and($session->currentUserId())->toBe($user->id);
+});
+
 it('rejects wrong password with InvalidCredentialsException', function (): void {
     [$login] = makeLoginFixture();
 

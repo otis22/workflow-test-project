@@ -95,6 +95,33 @@ it('does not hash the password when name or email are invalid', function (): voi
     expect($hasher->hashCalls)->toBe(0);
 });
 
+it('stores email in lowercase regardless of input case', function (): void {
+    $repo = new InMemoryUserRepository;
+    $useCase = makeRegisterUser($repo);
+
+    $user = $useCase->execute('Alice', 'Alice@Example.COM', 'super-secret');
+
+    expect($user->email)->toBe('alice@example.com')
+        ->and($repo->findByEmail('alice@example.com'))->not->toBeNull();
+});
+
+it('detects duplicate email case-insensitively', function (): void {
+    $repo = new InMemoryUserRepository;
+    $useCase = makeRegisterUser($repo);
+    $useCase->execute('Alice', 'alice@example.com', 'super-secret');
+
+    $useCase->execute('Alice2', 'ALICE@example.COM', 'another-pass');
+})->throws(EmailAlreadyTakenException::class);
+
+it('trims surrounding whitespace from email', function (): void {
+    $repo = new InMemoryUserRepository;
+    $useCase = makeRegisterUser($repo);
+
+    $user = $useCase->execute('Alice', '  alice@example.com  ', 'super-secret');
+
+    expect($user->email)->toBe('alice@example.com');
+});
+
 it('assigns sequential ids on multiple registrations', function (): void {
     $repo = new InMemoryUserRepository;
     $useCase = makeRegisterUser($repo);

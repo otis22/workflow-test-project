@@ -28,6 +28,8 @@ final readonly class RegisterUser
             throw WeakPasswordException::tooShort(self::MIN_PASSWORD_LENGTH);
         }
 
+        $email = $this->normalizeEmail($email);
+
         // Pre-validate domain invariants before touching the repository or hashing.
         // The domain User constructor re-validates as the ultimate guarantee.
         if (trim($name) === '') {
@@ -54,5 +56,10 @@ final readonly class RegisterUser
         );
 
         return $this->users->save($user);
+    }
+
+    private function normalizeEmail(string $email): string
+    {
+        return strtolower(trim($email));
     }
 }
