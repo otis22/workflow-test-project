@@ -105,6 +105,17 @@ it('rejects submission with a whitespace-only name', function (): void {
     $response->assertRedirect('/projects/create')->assertSessionHasErrors('name');
 });
 
+it('rejects submission with a non-string name (array injection)', function (): void {
+    loginAliceForCreate();
+
+    $response = $this->from('/projects/create')->post('/projects', [
+        'name' => ['array', 'injected'],
+        'description' => '',
+    ]);
+
+    $response->assertRedirect('/projects/create')->assertSessionHasErrors('name');
+});
+
 it('rejects submission when name is longer than 255 characters', function (): void {
     loginAliceForCreate();
 
