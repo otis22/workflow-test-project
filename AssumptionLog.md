@@ -204,6 +204,40 @@
   - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
 - **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
+## 5.1 Список проектов
+
+Декомпозирован на 5.1.1 (auth middleware) и 5.1.2 (projects list page).
+
+### 5.1.1 EnsureAuthenticated middleware
+- **Custom middleware** `App\Http\Middleware\EnsureAuthenticated` через constructor DI на `SessionGuard` port. Нужен отдельно от Laravel default `auth` middleware, потому что тот использует `Auth` facade — не привязан к нашему custom guard (см. 4.4).
+- **`redirect()->guest(route('login'))`** автоматически сохраняет intended URL в `session('url.intended')`. Потребитель — LoginController в будущих задачах, если потребуется redirect-to-intended.
+- **Alias `auth.session`** в `bootstrap/app.php` — явно отличен от Laravel `auth`, чтобы не путать с default guard.
+- **Codex verdict:** APPROVE, только info nits.
+
+### 5.1.2 Projects list page
+- **`ProjectsController::index`** — тонкий, через DI получает `SessionGuard` и `ListUserProjects`, достаёт `currentUserId()`, вызывает use case, рендерит `projects.index` view.
+- **Defensive RuntimeException** при `currentUserId() === null` — сигнализирует, что middleware не подключён. Не тестируется, т.к. не достижимо через web.
+- **View** с empty-state и списком проектов. Placeholder href на create project и project detail — будут заменены в 5.2 и 5.3.
+- **Route в `auth.session` группе**, именованный `projects.index`.
+- **Nav** `@signedIn` «Projects» теперь использует `route('projects.index')`.
+- **5 feature тестов**: guest redirect, empty state, cross-user isolation (IDOR guard), stable id order, nav wiring.
+- **Codex verdict:** APPROVE без findings.
+
+## 5.2 Создание проекта
+
+- **`ProjectsController` расширен**: `create()` + `store()`. Приватный helper `requireActor()` вынесен для DRY между `index` и `store`.
+- **`CreateProjectRequest`** FormRequest: `required|string|max:255` на `name`, `nullable|string|max:5000` на `description`.
+- **`prepareForValidation()`** триммит `name` **только если это строка**. Это двухитерационный фикс:
+  - **1-я итерация (Codex finding #6)**: без `prepareForValidation` whitespace-only имя проходило `required` и падало в 500 через domain invariant. Добавил `trim((string) $input)`.
+  - **2-я итерация (Codex finding в re-review)**: `(string)` coercion на массиве даёт `"Array"`, байпас валидации. Добавил `is_string()` guard.
+  - **3-я итерация (вне Codex бюджета 2/2)**: применил textbook `is_string` + regression test «non-string name (array injection)». Превышение бюджета задокументировано в commit и здесь.
+- **`store()`** всегда берёт `ownerId` из `SessionGuard`, никогда из request input — защита от mass assignment.
+- **`OwnerNotFoundException`** не ловится — middleware гарантирует authенticated actor, 500 = programmer error.
+- **`description`** принудительно кастится к строке даже когда null — domain Project требует string (пустой допустим), null не принимает.
+- **Routes**: `/projects/create` объявлен ДО `/projects/{id}` (last пока нет, но планируется в 5.3) — порядок важен, чтобы `create` не матчился как id.
+- **10 feature тестов**: guest GET+POST redirect, form rendering, happy path + project member auto-registration (через `ListUserProjects` probe для устойчивости к test isolation), empty name, whitespace-only name, array injection name, long name, empty description.
+- **Codex triage:** accept 2 (trim + array guard), reject 2 (FormRequest authorize() default, test coupling to markup).
+
 ## 4.4 Выход из системы
 
 - **POST-only маршрут** `/logout`. GET явно не регистрируется → 405 от Laravel router. Это CSRF-безопасная практика.
