@@ -174,6 +174,31 @@ END OF INPUT. Review the embedded text only.
 - Требование цитировать `file:line` из встроенного текста — не абстрактные рекомендации.
 - Требование «No speculation — only findings you can cite from the embedded text» — отсекает галлюцинации при пустом контексте.
 
+**Пре-flight чек-лист (ОБЯЗАТЕЛЕН перед каждым вызовом `codex:rescue`):**
+
+Агент обязан выполнить каждый пункт **через Read tool** и подтвердить в голове перед отправкой промпта. Пропуск любого пункта = невалидный review.
+
+- [ ] Прочитан PRD текущей подзадачи (`/PRD/X.Y-*.md`) через Read tool.
+- [ ] Прочитаны релевантные секции artifacts через Read tool:
+  - `artifacts/prd-taskflow-ru.md` — продуктовые цели/user stories, если задача касается фич
+  - `artifacts/domain-model-taskflow-ru.md` — если задача меняет domain entities, их поля, инварианты, связи
+  - `artifacts/technical-requirements-taskflow-ru.md` — если задача затрагивает архитектуру, слои, качество, CI/CD
+  - `artifacts/ui-spec-taskflow-ru.md` — если задача касается экранов/UI
+- [ ] Прочитан precedent (если есть) — файлы предыдущих аналогичных подзадач.
+- [ ] Прочитаны migration/schema файлы, если задача касается persistence.
+- [ ] Прочитан relevant existing test, если меняется его контракт.
+
+**Что идёт в embed:**
+- PRD подзадачи — **полный текст**, всегда.
+- Artifacts — **релевантные секции** (не обязательно весь файл; цитировать конкретные правила/цели, которые задача должна удовлетворить). Даже для «мелких» или «симметричных» задач минимум одна секция artifacts должна присутствовать — иначе Codex слеп к расхождениям с source-of-truth.
+- Precedent — полные тела файлов ключевых precedent-классов (не «merged, trust me»).
+- Full bodies изменённых файлов.
+- Relevant unchanged context (migrations, fakes, test fixtures).
+
+**Запрещено заменять artifacts/PRD пересказом в контексте промпта.** Codex не может верифицировать пересказ — только embedded verbatim text из source-of-truth. Пересказ создаёт ложное ощущение проверки.
+
+**Запрещено пропускать артефакты для «симметричных» задач** с обоснованием «как в precedent'е». Precedent сам по себе не source-of-truth — только artifacts. Если precedent расходится с artifacts, это отдельный баг и его должен поймать именно Codex review.
+
 **Оптимизация для крупных diff'ов (>1500 строк):**
 
 - Если diff не помещается в один промпт — либо сжать артефакты до ключевых разделов (цели, domain rules, списки полей), либо разбить review на 2 промпта: один по app/ код, второй по tests/. Но всё ещё — только 1 Codex-вызов на промпт, бюджет не удваивается.
