@@ -7,6 +7,7 @@ namespace App\Infrastructure\Persistence\Eloquent;
 use App\Domain\User\User;
 use App\Domain\User\UserRepository;
 use App\Infrastructure\Persistence\Eloquent\Model\UserModel;
+use RuntimeException;
 
 final readonly class EloquentUserRepository implements UserRepository
 {
@@ -28,13 +29,25 @@ final readonly class EloquentUserRepository implements UserRepository
 
     public function save(User $user): User
     {
-        $model = $user->id > 0
-            ? (UserModel::query()->find($user->id) ?? new UserModel)
-            : new UserModel;
+        $model = $this->resolveModelForSave($user->id);
 
         $model->fill($this->mapper->toRow($user));
         $model->save();
 
         return $this->mapper->toDomain($model->refresh());
+    }
+
+    private function resolveModelForSave(int $id): UserModel
+    {
+        if ($id <= 0) {
+            return new UserModel;
+        }
+
+        $existing = UserModel::query()->find($id);
+        if (! $existing instanceof UserModel) {
+            throw new RuntimeException(sprintf('User with id %d not found for update', $id));
+        }
+
+        return $existing;
     }
 }

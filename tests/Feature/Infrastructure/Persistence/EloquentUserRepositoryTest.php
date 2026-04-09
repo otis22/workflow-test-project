@@ -72,20 +72,44 @@ it('returns null from findById when user does not exist', function (): void {
     expect($repo->findById(999))->toBeNull();
 });
 
-it('updates an existing user when saving with a positive id', function (): void {
+it('updates an existing user and preserves createdAt while bumping updatedAt', function (): void {
     /** @var UserRepository $repo */
     $repo = app(UserRepository::class);
     $saved = $repo->save(makeDomainUser());
+    $originalCreatedAt = $saved->createdAt;
 
-    $updated = $saved->withName('Alice Updated', new DateTimeImmutable('2026-04-09T11:00:00Z'));
+    $newUpdatedAt = new DateTimeImmutable('2026-04-09T11:00:00Z');
+    $updated = $saved->withName('Alice Updated', $newUpdatedAt);
     $result = $repo->save($updated);
 
     expect($result->id)->toBe($saved->id)
-        ->and($result->name)->toBe('Alice Updated');
+        ->and($result->name)->toBe('Alice Updated')
+        ->and($result->createdAt->format('U'))->toBe($originalCreatedAt->format('U'))
+        ->and($result->updatedAt->format('U'))->toBe($newUpdatedAt->format('U'));
 
-    // Confirm persisted:
-    expect($repo->findById($saved->id)->name)->toBe('Alice Updated');
+    // Reload and confirm typing preservation and persisted timestamp.
+    $reloaded = $repo->findById($saved->id);
+    expect($reloaded->name)->toBe('Alice Updated')
+        ->and($reloaded->createdAt)->toBeInstanceOf(DateTimeImmutable::class)
+        ->and($reloaded->updatedAt)->toBeInstanceOf(DateTimeImmutable::class)
+        ->and($reloaded->updatedAt->format('U'))->toBe($newUpdatedAt->format('U'));
 });
+
+it('throws when saving a user with a positive id that does not exist', function (): void {
+    /** @var UserRepository $repo */
+    $repo = app(UserRepository::class);
+
+    $stale = new User(
+        id: 999,
+        name: 'Ghost',
+        email: 'ghost@example.com',
+        passwordHash: 'hash',
+        createdAt: new DateTimeImmutable,
+        updatedAt: new DateTimeImmutable,
+    );
+
+    $repo->save($stale);
+})->throws(RuntimeException::class, 'User with id 999 not found for update');
 
 it('preserves createdAt and updatedAt as DateTimeImmutable on round-trip', function (): void {
     /** @var UserRepository $repo */
