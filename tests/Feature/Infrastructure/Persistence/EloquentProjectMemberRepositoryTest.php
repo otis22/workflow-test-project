@@ -100,7 +100,7 @@ it('throws when saving a member with a positive id that does not exist', functio
     $repo->save($stale);
 })->throws(RuntimeException::class, 'ProjectMember with id 999 not found for update');
 
-it('preserves createdAt as DateTimeImmutable on round-trip', function (): void {
+it('preserves createdAt value and type on round-trip', function (): void {
     /** @var ProjectMemberRepository $repo */
     $repo = app(ProjectMemberRepository::class);
     ['userId' => $userId, 'projectId' => $projectId] = seedMembershipFixture();
@@ -109,5 +109,8 @@ it('preserves createdAt as DateTimeImmutable on round-trip', function (): void {
     $loaded = $repo->findByProjectAndUser($projectId, $userId);
 
     expect($loaded->id)->toBe($saved->id)
-        ->and($loaded->createdAt)->toBeInstanceOf(DateTimeImmutable::class);
+        ->and($loaded->projectId)->toBe($projectId)
+        ->and($loaded->userId)->toBe($userId)
+        ->and($loaded->createdAt)->toBeInstanceOf(DateTimeImmutable::class)
+        ->and($loaded->createdAt->format('U'))->toBe($saved->createdAt->format('U'));
 });
