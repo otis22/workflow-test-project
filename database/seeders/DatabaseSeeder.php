@@ -1,25 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Infrastructure\Persistence\Eloquent\Model\UserModel;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+final class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
-     * Seed the application's database.
+     * Seed the application's database with a deterministic dataset
+     * for local development. Additional models are added by subtasks
+     * 3.3.2 (projects/members) and 3.3.3 (tasks/comments).
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        UserModel::query()->updateOrCreate(
+            ['email' => 'alice@example.com'],
+            ['name' => 'Alice', 'password_hash' => 'hash:secret'],
+        );
+        UserModel::query()->updateOrCreate(
+            ['email' => 'bob@example.com'],
+            ['name' => 'Bob', 'password_hash' => 'hash:secret'],
+        );
+        UserModel::query()->updateOrCreate(
+            ['email' => 'charlie@example.com'],
+            ['name' => 'Charlie', 'password_hash' => 'hash:secret'],
+        );
     }
 }

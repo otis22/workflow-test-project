@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Eloquent\Model;
 
+use Database\Factories\UserModelFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
@@ -17,6 +19,9 @@ use Illuminate\Support\Carbon;
  */
 final class UserModel extends Model
 {
+    /** @use HasFactory<UserModelFactory> */
+    use HasFactory;
+
     protected $table = 'users';
 
     protected $guarded = [];
@@ -25,4 +30,6 @@ final class UserModel extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    protected static string $factory = UserModelFactory::class;
 }
