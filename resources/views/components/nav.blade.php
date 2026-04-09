@@ -6,7 +6,7 @@
 
         <div class="flex items-center gap-4 text-sm font-medium">
             @guest
-                <a href="#" class="text-gray-600 hover:text-gray-900">Sign in</a>
+                <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Sign in</a>
                 <a href="{{ route('register') }}" class="rounded-md bg-gray-900 px-3 py-1.5 text-white hover:bg-gray-800">Register</a>
             @endguest
 

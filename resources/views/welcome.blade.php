@@ -13,7 +13,7 @@
         </p>
 
         <div class="flex items-center gap-3">
-            <a href="#" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+            <a href="{{ route('login') }}" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
                 Sign in
             </a>
             <a href="{{ route('register') }}" class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
