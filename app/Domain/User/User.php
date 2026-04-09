@@ -28,6 +28,10 @@ final readonly class User
         if (trim($passwordHash) === '') {
             throw new InvalidArgumentException('User password hash must not be empty');
         }
+
+        if ($updatedAt->format('U.u') < $createdAt->format('U.u')) {
+            throw new InvalidArgumentException('User updatedAt must not be earlier than createdAt');
+        }
     }
 
     public function withName(string $name, DateTimeImmutable $updatedAt): self

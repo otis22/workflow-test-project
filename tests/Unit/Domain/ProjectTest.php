@@ -143,3 +143,16 @@ it('rejects empty name in withName', function (): void {
 
     $project->withName('   ', $now);
 })->throws(InvalidArgumentException::class, 'Project name must not be empty');
+
+it('rejects updatedAt earlier than createdAt', function (): void {
+    $created = new DateTimeImmutable('2026-01-02T00:00:00Z');
+    $updated = new DateTimeImmutable('2026-01-01T23:59:59Z');
+    new Project(
+        id: 1,
+        ownerId: 1,
+        name: 'Foo',
+        description: '',
+        createdAt: $created,
+        updatedAt: $updated,
+    );
+})->throws(InvalidArgumentException::class, 'Project updatedAt must not be earlier than createdAt');

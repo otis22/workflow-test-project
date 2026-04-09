@@ -177,6 +177,19 @@ it('rejects empty name in withName', function (): void {
     $user->withName('  ', $now);
 })->throws(InvalidArgumentException::class, 'User name must not be empty');
 
+it('rejects updatedAt earlier than createdAt', function (): void {
+    $created = new DateTimeImmutable('2026-01-02T00:00:00Z');
+    $updated = new DateTimeImmutable('2026-01-01T23:59:59Z');
+    new User(
+        id: 1,
+        name: 'Alice',
+        email: 'alice@example.com',
+        passwordHash: 'hashed',
+        createdAt: $created,
+        updatedAt: $updated,
+    );
+})->throws(InvalidArgumentException::class, 'User updatedAt must not be earlier than createdAt');
+
 it('rejects empty password hash in withPasswordHash', function (): void {
     $now = new DateTimeImmutable;
     $user = new User(

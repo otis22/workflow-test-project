@@ -78,6 +78,11 @@ it('rejects zero project id', fn (): Task => makeTask(['projectId' => 0]))
 it('rejects zero creator id', fn (): Task => makeTask(['creatorId' => 0]))
     ->throws(InvalidArgumentException::class, 'Task creatorId must be positive');
 
+it('rejects updatedAt earlier than createdAt', fn (): Task => makeTask([
+    'createdAt' => new DateTimeImmutable('2026-01-02T00:00:00Z'),
+    'updatedAt' => new DateTimeImmutable('2026-01-01T23:59:59Z'),
+]))->throws(InvalidArgumentException::class, 'Task updatedAt must not be earlier than createdAt');
+
 it('rejects zero assignee id', fn (): Task => makeTask(['assigneeId' => 0]))
     ->throws(InvalidArgumentException::class, 'Task assigneeId must be positive when set');
 

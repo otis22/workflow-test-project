@@ -37,6 +37,10 @@ final readonly class Task
         if (trim($title) === '') {
             throw new InvalidArgumentException('Task title must not be empty');
         }
+
+        if ($updatedAt->format('U.u') < $createdAt->format('U.u')) {
+            throw new InvalidArgumentException('Task updatedAt must not be earlier than createdAt');
+        }
     }
 
     public function withTitle(string $title, DateTimeImmutable $updatedAt): self
