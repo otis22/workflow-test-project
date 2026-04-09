@@ -53,13 +53,13 @@ it('throws ProjectNotFoundException for unknown project id', function (): void {
     $ctx = makeShowProjectFixture();
 
     $ctx['useCase']->execute(actorId: 1, projectId: 9999);
-})->throws(ProjectNotFoundException::class);
+})->throws(ProjectNotFoundException::class, 'Project with id 9999 not found');
 
 it('throws NotAProjectMemberException when actor is not a member of an existing project', function (): void {
     $ctx = makeShowProjectFixture();
 
     $ctx['useCase']->execute(actorId: 42, projectId: $ctx['project']->id);
-})->throws(NotAProjectMemberException::class);
+})->throws(NotAProjectMemberException::class, 'User 42 is not a member of project 1');
 
 it('checks project existence before membership, matching the current 404-before-403 ordering', function (): void {
     // An actor who is not a member AND queries an unknown project id should
@@ -67,4 +67,4 @@ it('checks project existence before membership, matching the current 404-before-
     // This pins the documented 2.r3 information disclosure until it is fixed.
     $ctx = makeShowProjectFixture();
     $ctx['useCase']->execute(actorId: 42, projectId: 9999);
-})->throws(ProjectNotFoundException::class);
+})->throws(ProjectNotFoundException::class, 'Project with id 9999 not found');
