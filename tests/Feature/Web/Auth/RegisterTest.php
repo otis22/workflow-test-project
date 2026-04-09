@@ -13,21 +13,30 @@ it('shows the registration form for guests', function (): void {
     $response = $this->get('/register');
 
     $response->assertStatus(200)
-        ->assertSee('Register')
         ->assertSee('Name')
         ->assertSee('Email')
-        ->assertSee('Password');
+        ->assertSee('Confirm password')
+        ->assertSee('name="password_confirmation"', false)
+        ->assertSee('method="POST"', false)
+        ->assertSee('action="'.route('register').'"', false);
+});
+
+it('exposes the register route link from the home page', function (): void {
+    $response = $this->get('/');
+
+    $response->assertStatus(200)
+        ->assertSee(route('register'));
 });
 
 it('redirects authenticated users away from the registration form', function (): void {
     /** @var SessionGuard $guard */
     $guard = app(SessionGuard::class);
-    UserModel::query()->create([
+    $existing = UserModel::query()->create([
         'name' => 'Existing',
         'email' => 'existing@example.com',
         'password_hash' => 'hash',
     ]);
-    $guard->login(1);
+    $guard->login((int) $existing->id);
 
     $response = $this->get('/register');
 
