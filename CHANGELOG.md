@@ -1,5 +1,60 @@
 # Changelog
 
+## Этап 4: Web/UI — Аутентификация
+
+**Статус:** завершён.
+
+### Добавлено
+
+#### 4.1 Layout и базовые Blade-компоненты
+- `<x-layouts.app>` Blade component — базовый layout с head/nav/main/footer.
+- 3 anonymous components: `<x-nav>`, `<x-button>` (primary/secondary variants), `<x-form-field>` (label + slot + error).
+- `welcome.blade.php` переписан под новый layout с guest landing.
+- CI `.github/workflows/ci.yml` расширен: Node 20 setup + `npm ci` + `npm run build` перед quality checks (требуется для `@vite` directive).
+- Первый `package-lock.json` зафиксирован (Vite 8 + Tailwind v4).
+
+#### 4.2.1 Laravel-адаптеры для портов Clock/PasswordHasher/SessionGuard
+- `App\Infrastructure\Clock\SystemClock` — тривиальный `new DateTimeImmutable`.
+- `App\Infrastructure\Hashing\LaravelPasswordHasher` — делегирует `Illuminate\Contracts\Hashing\Hasher` (bcrypt).
+- `App\Infrastructure\Auth\LaravelSessionGuard` — делегирует `Illuminate\Contracts\Session\Session`, плоский ключ `taskflow_auth_user_id`, `login()` делает `migrate(true)` против session fixation, `logout()` — `invalidate()`.
+- Bindings в `AppServiceProvider::register`.
+
+#### 4.2.2 Страница регистрации
+- `RegisterController` + `RegisterRequest` FormRequest + `register.blade.php`.
+- Domain exceptions маппятся в `ValidationException` с привязкой к полю (`EmailAlreadyTakenException` → email, `WeakPasswordException` → password).
+- После регистрации: `SessionGuard::login($user->id)` + redirect на `/`.
+
+#### 4.3 Страница входа
+- `LoginController` + `LoginRequest` + `login.blade.php`.
+- `InvalidCredentialsException` → единый generic error на email поле (no user enumeration для unknown email и wrong password).
+- `Login::execute` сам вызывает `SessionGuard::login()` — контроллер не дублирует.
+
+#### 4.4 Выход из системы
+- `LogoutController` + POST-only `/logout` route.
+- Кастомные Blade-директивы `@signedIn` / `@signedOut` в `AppServiceProvider::boot()` — Laravel `@auth`/`@guest` не привязаны к нашему `SessionGuard` port, эти директивы читают его напрямую.
+- `nav.blade.php` переведён на новые директивы, реальная POST logout форма с CSRF.
+
+### Принятые решения
+
+- **Контроллеры тонкие, use cases делают работу.** Exception mapping единственное, чем controllers занимаются помимо валидации через FormRequest.
+- **FormRequest `required`/`email`/`min:8`** дублирует domain-валидацию сознательно: Laravel даёт читаемые error messages до вызова use case; domain остаётся ultimate guarantee.
+- **No user enumeration в Login**: единое сообщение `'Invalid credentials.'` для unknown email и wrong password (симметрично AssumptionLog 2.2).
+- **Draft-пользователь после register** уже не нужен в web layer: use case вернул реальную User entity с id, контроллер передаёт `$user->id` в `SessionGuard::login`.
+- **Session fixation защита** — в `LaravelSessionGuard::login()` через `migrate(true)` (не в контроллере, это адаптерная ответственность).
+- **POST-only logout** — CSRF-safe; GET не регистрируется вообще, Laravel router возвращает 405.
+- **Custom `@signedIn` / `@signedOut`** вместо override Laravel `@auth`/`@guest` — семантически чисто и не ломает возможное будущее использование Laravel Auth guard.
+- **Placeholder href="#"** допустимы только на время реализации стадии 4; закрыты все в 4.4 (logout) и 4.3 (login). Оставшиеся `#` в nav (`Dashboard`, `Projects`) вне scope этапа 4 — появятся в 5.1/7.1.
+
+### Отложенные замечания (Codex review)
+
+- Hardening CSRF test в Logout — Laravel по умолчанию отключает CSRF middleware в feature тестах; nit не блокирующий.
+
+### Проверки
+
+- **233 теста** (Pest): 22 feature web/auth + предыдущие 211.
+- CI зелёный на всех задачах 4.1–4.4.
+- Smoke test локально: `/` → 200, `/login` → 200, `/register` → 200, `/logout` POST → 302, seeder идемпотентен.
+
 ## Этап 3: Инфраструктурный слой
 
 **Статус:** завершён.

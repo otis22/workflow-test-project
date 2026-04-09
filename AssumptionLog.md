@@ -204,6 +204,17 @@
   - reject (minor, F6): «update-path test gap» — Comment immutable по дизайну (AssumptionLog 1.5), симметрично 3.2.4 ProjectMember где тоже только stale-id throw покрывает id>0 ветку.
 - **Codex verdict:** REQUEST CHANGES, все замечания отклонены. По §10 push без фикса (все findings reject).
 
+## 4.4 Выход из системы
+
+- **POST-only маршрут** `/logout`. GET явно не регистрируется → 405 от Laravel router. Это CSRF-безопасная практика.
+- **Logout use case идемпотентен** через `LaravelSessionGuard::logout` → `$session->invalidate()`; вызов на guest сессии — no-op без exception.
+- **Контроллер тонкий**: вызов use case + `redirect('/')`. Без try/catch, т.к. `Logout::execute` не бросает.
+- **Custom Blade-директивы** `@signedIn` / `@signedOut` зарегистрированы в `AppServiceProvider::boot()` через `Blade::if`. Это критический фикс: Laravel дефолтные `@auth`/`@guest` используют `Auth` facade, который НЕ привязан к нашему кастомному `SessionGuard` — поэтому все auth-бранчи nav до 4.4 всегда показывали guest даже после `SessionGuard::login()`. В 4.1 я это пометил как отложенное в 4.3, но фактически закрыл только в 4.4 когда понадобилось вывести реальную logout-форму.
+- **Имена директив** `signedIn`/`signedOut` вместо override `@auth`/`@guest` — чтобы не ломать семантику Laravel для случаев, где может потребоваться Laravel Auth guard (например, Passport/Sanctum в будущем).
+- **Nav.blade.php** переведён с `@auth`/`@guest` на новые директивы. Существующие тесты LayoutTest (4.1) всё ещё проходят, т.к. они проверяют content (Sign in/Register на guest странице), а не имя директивы.
+- **4 feature теста**: happy path logout + session cleared, guest idempotence, GET 405, nav form presence when signed in.
+- **Codex verdict:** APPROVE с несколькими low-severity nits (CSRF middleware не проверяется в тестах — Laravel по умолчанию отключает его, не блокирующе; отсутствие method="POST"/csrf field assertions в nav test — hardening, не баг).
+
 ## 4.3 Страница входа
 
 - **Контроллер тонкий**, mirrors 4.2.2 RegisterController pattern.
