@@ -152,6 +152,20 @@
   - reject (nit): «вынести `normalizeEmail` в shared helper» — задокументированное решение PRD, см. выше.
 - **Codex verdict:** APPROVE. Re-review не требуется (все findings reject).
 
+## 2.r2 Actor-based authorization в application layer
+
+- **Решение пользователя:** authorization реализуется в use cases, не в Laravel policies. `actorId` — первый параметр use case. Use case проверяет membership/ownership через `ProjectMemberRepository`, бросает существующий `NotAProjectMemberException` (тот же, что используется `CreateTask` для creator/assignee).
+- **Декомпозиция на 2 подзадачи** для соблюдения бюджета ≤150 LoC: 2.r2.A (UpdateTask + ListProjectTasks), 2.r2.B (ListUserTasks rename + ListTaskComments).
+- **`ListUserTasks` — semantic-only переименование** `userId` → `actorId`. Параметр всегда был identity актёра (use case никогда не позволял запрашивать чужие задачи); rename + doc-комментарий фиксируют контракт. Authentication «actor действительно тот, за кого себя выдаёт» — ответственность session/controller слоя (вне scope use case).
+- **`ListProjectTasks` и `ListTaskComments`** получили новую DI-зависимость на `ProjectMemberRepository` (и `TaskRepository` для второго).
+- **404 vs 403 leak (2.r2.A finding):** UpdateTask и ListTaskComments используют `findById(...)` до проверки членства, поэтому неавторизованный actor различает «task не существует» (TaskNotFoundException) от «task существует, но нет membership» (NotAProjectMemberException). Codex поднял это в review 2.r2.A. Триаж: defer (выходит за scope исходного 2.11 finding). Оформлено как `2.r3 [review]` в Roadmap.
+- **Codex triage 2.r2.A:**
+  - defer (major): 404 vs 403 information disclosure → `2.r3 [review]`
+- **Codex triage 2.r2.B:**
+  - 1-я попытка: «Review blocked» (Codex не увидел встроенный diff) → невалидный, бюджет не считается потраченным.
+  - 2-я попытка с полным телом файлов вместо diff: APPROVE.
+  - reject (minor): «нет позитивного теста для ListUserTasks после rename» — существующие тесты `ListUserTasksTest.php` уже покрывают позитивный путь; rename чисто семантический, поведение не менялось. Codex видел только diff, не существующие тесты.
+
 ## 3.1 Миграции БД
 
 - **Заменена дефолтная Laravel `users`-миграция**: оставлены только domain-aligned поля (`name`, `email` unique, `password_hash`, timestamps). Удалены `email_verified_at`, `remember_token` — Laravel-auth scaffolding не используется (кастомный `SessionGuard` из 2.2). Таблица `password_reset_tokens` удалена полностью — восстановление пароля не входит в MVP (см. `artifacts/prd-taskflow-ru.md` §7). Таблица `sessions` сохранена без изменений как ортогональная Laravel session-инфраструктура.
