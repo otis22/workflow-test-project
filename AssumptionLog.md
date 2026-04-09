@@ -166,6 +166,15 @@
   - 2-я попытка с полным телом файлов вместо diff: APPROVE.
   - reject (minor): «нет позитивного теста для ListUserTasks после rename» — существующие тесты `ListUserTasksTest.php` уже покрывают позитивный путь; rename чисто семантический, поведение не менялось. Codex видел только diff, не существующие тесты.
 
+## 3.2.3 EloquentProjectRepository
+
+- **Симметрично 3.2.2**: draft-паттерн (`save(id=0)` insert, `save(id>0)` update-or-throw), отдельный `ProjectMapper` класс, feature тесты через container binding.
+- **Фикстура owner'а** через raw `UserModel::query()->create([...])` — `UserFactory` не совместим с domain-aligned миграциями (она ссылается на `password` и `email_verified_at`, которых нет в 3.1 schema). Замена UserFactory — отдельная задача 3.3.
+- **Решение по 1.r2**: принято следовать прецеденту 3.2.2 (draft pattern) — самостоятельно агентом на основе AGENTS.md §13 (симметрия с существующим паттерном). Формальное закрытие 1.r2 [blocked] в подзадаче 3.2.7.
+- **Codex triage:**
+  - accept (minor): round-trip тест расширен до всех маппинговых полей (id, ownerId, name, description) — не только timestamp types.
+- **Codex re-review:** APPROVE. Бюджет 2/2.
+
 ## 3.1 Миграции БД
 
 - **Заменена дефолтная Laravel `users`-миграция**: оставлены только domain-aligned поля (`name`, `email` unique, `password_hash`, timestamps). Удалены `email_verified_at`, `remember_token` — Laravel-auth scaffolding не используется (кастомный `SessionGuard` из 2.2). Таблица `password_reset_tokens` удалена полностью — восстановление пароля не входит в MVP (см. `artifacts/prd-taskflow-ru.md` §7). Таблица `sessions` сохранена без изменений как ортогональная Laravel session-инфраструктура.
