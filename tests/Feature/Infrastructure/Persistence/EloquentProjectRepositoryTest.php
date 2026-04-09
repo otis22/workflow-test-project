@@ -94,13 +94,17 @@ it('throws when saving a project with a positive id that does not exist', functi
     $repo->save($stale);
 })->throws(RuntimeException::class, 'Project with id 999 not found for update');
 
-it('preserves createdAt and updatedAt as DateTimeImmutable on round-trip', function (): void {
+it('preserves all mapped fields and timestamp types on round-trip', function (): void {
     /** @var ProjectRepository $repo */
     $repo = app(ProjectRepository::class);
     $saved = $repo->save(makeDomainProject());
 
     $loaded = $repo->findById($saved->id);
 
-    expect($loaded->createdAt)->toBeInstanceOf(DateTimeImmutable::class)
+    expect($loaded->id)->toBe($saved->id)
+        ->and($loaded->ownerId)->toBe($saved->ownerId)
+        ->and($loaded->name)->toBe('TaskFlow')
+        ->and($loaded->description)->toBe('MVP project')
+        ->and($loaded->createdAt)->toBeInstanceOf(DateTimeImmutable::class)
         ->and($loaded->updatedAt)->toBeInstanceOf(DateTimeImmutable::class);
 });
