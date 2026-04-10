@@ -12,6 +12,7 @@ use App\Application\Task\CreateTask;
 use App\Application\Task\Exception\NotAProjectMemberException;
 use App\Application\Task\Exception\TaskNotFoundException;
 use App\Application\Task\ListTaskComments;
+use App\Application\Task\UpdateTask;
 use App\Domain\Project\ProjectRepository;
 use App\Domain\Task\DueDate;
 use App\Domain\Task\Priority;
@@ -19,6 +20,7 @@ use App\Domain\Task\Status;
 use App\Domain\Task\Task;
 use App\Domain\Task\TaskRepository;
 use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use DateTimeImmutable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -105,6 +107,67 @@ final class TasksController extends Controller
             'project' => $project,
             'comments' => $comments,
         ]);
+    }
+
+    public function edit(
+        int $task,
+        SessionGuard $session,
+        TaskRepository $tasks,
+        ProjectRepository $projects,
+        ListTaskComments $listComments,
+    ): View {
+        $actorId = $this->requireActor($session);
+
+        $taskEntity = $tasks->findById($task);
+        if (! $taskEntity instanceof Task) {
+            abort(404);
+        }
+
+        try {
+            $listComments->execute($actorId, $task);
+        } catch (TaskNotFoundException|NotAProjectMemberException) {
+            abort(404);
+        }
+
+        $project = $projects->findById($taskEntity->projectId);
+
+        return view('tasks.edit', [
+            'task' => $taskEntity,
+            'project' => $project,
+            'statuses' => Status::cases(),
+            'priorities' => Priority::cases(),
+        ]);
+    }
+
+    public function update(
+        int $task,
+        UpdateTaskRequest $request,
+        SessionGuard $session,
+        UpdateTask $useCase,
+    ): RedirectResponse {
+        $actorId = $this->requireActor($session);
+
+        $dueDateRaw = $request->input('due_date');
+        $dueDate = is_string($dueDateRaw) && $dueDateRaw !== ''
+            ? new DueDate(new DateTimeImmutable($dueDateRaw))
+            : null;
+
+        try {
+            $useCase->execute(
+                actorId: $actorId,
+                taskId: $task,
+                title: (string) $request->input('title'),
+                description: (string) ($request->input('description') ?? ''),
+                status: Status::from((string) $request->input('status')),
+                priority: Priority::from((string) $request->input('priority')),
+                changeDueDate: true,
+                dueDate: $dueDate,
+            );
+        } catch (TaskNotFoundException|NotAProjectMemberException) {
+            abort(404);
+        }
+
+        return redirect()->route('tasks.show', $task);
     }
 
     public function storeComment(

@@ -9,7 +9,12 @@
         @endif
 
         <div class="mt-4 mb-6">
-            <h1 class="text-2xl font-semibold text-gray-900">{{ $task->title }}</h1>
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-semibold text-gray-900">{{ $task->title }}</h1>
+                <a href="{{ route('tasks.edit', $task->id) }}" class="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                    Edit
+                </a>
+            </div>
             <div class="mt-2 flex items-center gap-3 text-xs font-medium text-gray-600">
                 <span class="rounded-full bg-gray-100 px-2 py-1">{{ $task->status->value }}</span>
                 <span class="rounded-full bg-gray-100 px-2 py-1">{{ $task->priority->value }}</span>
