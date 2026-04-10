@@ -94,7 +94,7 @@
 
 | # | Задача | Описание | Статус |
 |---|--------|----------|--------|
-| 9.1 | Настройка Infection | Конфигурация Infection для Domain и Application слоёв. Первый прогон, определение baseline MSI | `todo` |
+| 9.1 | Настройка Infection | Конфигурация Infection для Domain и Application слоёв. BLOCKED: Infection 0.29 несовместим с Pest 4 + PHPUnit 12 (JUnit naming + XML filter). Ждём Infection 0.30+ или Pest adapter | \`todo\` |
 | 9.2 | Coverage gate | Настройка порога покрытия (≥80% для Domain и Application). Ratchet-принцип: покрытие не падает между коммитами | `todo` |
 | 9.3 | Усиление тестов | Доработка тестов по результатам мутационного тестирования: убрать выжившие мутанты | `todo` |
 

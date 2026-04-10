@@ -1,0 +1,564 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="EloquentCommentRepository.php" path="/Infrastructure/Persistence/Eloquent" hash="d0cefa851ef9d26d23ff4024a907ca2345d6fbc2">
+    <totals>
+      <lines total="52" comments="1" code="51" executable="18" executed="17" percent="94.44"/>
+      <methods count="4" tested="3" percent="75.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Infrastructure\Persistence\Eloquent\EloquentCommentRepository" start="12" executable="18" executed="17" crap="6.01">
+      <namespace name="App\Infrastructure\Persistence\Eloquent"/>
+      <method name="__construct" signature="__construct(CommentMapper $mapper)" start="14" end="14" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="save" signature="save(Comment $comment): Comment" start="16" end="24" crap="1" executable="4" executed="4" coverage="100"/>
+      <method name="listByTask" signature="listByTask(int $taskId): array" start="27" end="36" crap="1" executable="7" executed="7" coverage="100"/>
+      <method name="resolveModelForSave" signature="resolveModelForSave(int $id): CommentModel" start="38" end="50" crap="3.04" executable="6" executed="5" coverage="83.333333333333"/>
+    </class>
+    <coverage>
+      <line nr="14">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_throws_when_saving_a_comment_with_a_positive_id_that_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_for_an_unknown_task_id"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_rejects_an_empty_comment_body"/>
+      </line>
+      <line nr="18">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_throws_when_saving_a_comment_with_a_positive_id_that_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="20">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="21">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="23">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="29">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="30">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="31">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="32">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="33">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="34">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="35">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_empty_list_for_unknown_task"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="40">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_throws_when_saving_a_comment_with_a_positive_id_that_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="41">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_saves_a_new_comment_and_returns_entity_with_assigned_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_preserves_all_mapped_fields_on_round_trip"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_returns_comments_for_the_task_ordered_by_id"/>
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_listByTask_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="44">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_throws_when_saving_a_comment_with_a_positive_id_that_does_not_exist"/>
+      </line>
+      <line nr="45">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_throws_when_saving_a_comment_with_a_positive_id_that_does_not_exist"/>
+      </line>
+      <line nr="46">
+        <covered by="P\Tests\Feature\Infrastructure\Persistence\EloquentCommentRepositoryTest::__pest_evaluable_it_throws_when_saving_a_comment_with_a_positive_id_that_does_not_exist"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Infrastructure\Persistence\Eloquent</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\Comment</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\CommentRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Infrastructure\Persistence\Eloquent\Model\CommentModel</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RuntimeException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11"/>
+      <line no="12">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">EloquentCommentRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IMPLEMENTS">implements</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentRepository</token>
+      </line>
+      <line no="13">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentMapper</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$mapper</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">save</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">Comment</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$comment</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Comment</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$model</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">resolveModelForSave</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$comment</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$model</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">fill</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mapper</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">toRow</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$comment</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$model</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">save</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="22"/>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mapper</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">toDomain</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$model</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">refresh</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="25"/>
+      <line no="26">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/** @return list&lt;Comment&gt; */</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">listByTask</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$taskId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentModel</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">query</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">where</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'task_id'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$taskId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">orderBy</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'id'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">get</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">map</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">CommentModel</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$model</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Comment</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">mapper</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">toDomain</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$model</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">values</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">all</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="37"/>
+      <line no="38">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">resolveModelForSave</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentModel</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$id</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_SMALLER_OR_EQUAL">&lt;=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentModel</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="43"/>
+      <line no="44">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$existing</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentModel</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">query</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">find</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$existing</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentModel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">sprintf</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Comment with id %d not found for update'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="48"/>
+      <line no="49">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$existing</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="50">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="51">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="52"/>
+    </source>
+  </file>
+</phpunit>

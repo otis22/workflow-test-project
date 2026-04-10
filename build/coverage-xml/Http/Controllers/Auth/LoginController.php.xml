@@ -1,0 +1,379 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="LoginController.php" path="/Http/Controllers/Auth" hash="86ad42805790117866679985499fe9dfe1b05f19">
+    <totals>
+      <lines total="45" comments="2" code="43" executable="12" executed="12" percent="100.00"/>
+      <methods count="2" tested="2" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Http\Controllers\Auth\LoginController" start="16" executable="12" executed="12" crap="4">
+      <namespace name="App\Http\Controllers\Auth"/>
+      <method name="show" signature="show(SessionGuard $session): View|RedirectResponse" start="18" end="25" crap="2" executable="3" executed="3" coverage="100"/>
+      <method name="store" signature="store(LoginRequest $request, Login $useCase): RedirectResponse" start="27" end="43" crap="2" executable="9" executed="9" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="20">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_shows_the_login_form_for_guests"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_redirects_authenticated_users_away_from_the_login_form"/>
+      </line>
+      <line nr="21">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_redirects_authenticated_users_away_from_the_login_form"/>
+      </line>
+      <line nr="24">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_shows_the_login_form_for_guests"/>
+      </line>
+      <line nr="30">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="31">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="32">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="34">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+      </line>
+      <line nr="36">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+      </line>
+      <line nr="37">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+      </line>
+      <line nr="42">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="33">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="38">
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Controllers\Auth</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth\Exception\InvalidCredentialsException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth\Login</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth\SessionGuard</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Controllers\Controller</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Requests\LoginRequest</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Http\RedirectResponse</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Validation\ValidationException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="14">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\View\View</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">LoginController</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Controller</token>
+      </line>
+      <line no="17">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">show</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">View</token>
+        <token name="T_PIPE">|</token>
+        <token name="T_STRING">RedirectResponse</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">currentUserId</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">redirect</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'/'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="23"/>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">view</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'auth.login'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="26"/>
+      <line no="27">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">store</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">LoginRequest</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Login</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$useCase</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RedirectResponse</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_TRY">try</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$useCase</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_STRING">email</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">input</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'email'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_STRING">plainPassword</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">input</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'password'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CATCH">catch</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">InvalidCredentialsException</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_COMMENT">// Single generic error attached to the email field — no user enumeration.</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ValidationException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">withMessages</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'email'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'Invalid credentials.'</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="40"/>
+      <line no="41">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// Login use case already calls SessionGuard::login() on success.</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">redirect</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">route</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'dashboard'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="44">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="45"/>
+    </source>
+  </file>
+</phpunit>

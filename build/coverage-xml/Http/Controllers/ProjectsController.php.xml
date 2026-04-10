@@ -1,0 +1,976 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ProjectsController.php" path="/Http/Controllers" hash="3364ffd0e2dfbd90a36060079503a1c8376f4f51">
+    <totals>
+      <lines total="101" comments="6" code="95" executable="29" executed="28" percent="96.55"/>
+      <methods count="6" tested="5" percent="83.33"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Http\Controllers\ProjectsController" start="21" executable="29" executed="28" crap="10">
+      <namespace name="App\Http\Controllers"/>
+      <method name="index" signature="index(SessionGuard $session, ListUserProjects $useCase): View" start="23" end="29" crap="1" executable="3" executed="3" coverage="100"/>
+      <method name="create" signature="create(): View" start="31" end="34" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="store" signature="store(CreateProjectRequest $request, SessionGuard $session, CreateProject $useCase): RedirectResponse" start="36" end="50" crap="1" executable="7" executed="7" coverage="100"/>
+      <method name="show" signature="show(int $project, Request $request, SessionGuard $session, ShowProject $showProject, ListProjectTasks $listTasks): View" start="52" end="76" crap="2" executable="10" executed="10" coverage="100"/>
+      <method name="parseStatus" signature="parseStatus(Request $request): ?Status" start="78" end="86" crap="3" executable="4" executed="4" coverage="100"/>
+      <method name="requireActor" signature="requireActor(SessionGuard $session): int" start="88" end="99" crap="2.06" executable="4" executed="3" coverage="75"/>
+    </class>
+    <coverage>
+      <line nr="25">
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_an_empty_state_when_the_user_has_no_projects"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_only_the_projects_the_user_is_a_member_of"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_projects_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_projects_index_links_to_the_show_page_for_each_project"/>
+      </line>
+      <line nr="26">
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_an_empty_state_when_the_user_has_no_projects"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_only_the_projects_the_user_is_a_member_of"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_projects_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_projects_index_links_to_the_show_page_for_each_project"/>
+      </line>
+      <line nr="28">
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_an_empty_state_when_the_user_has_no_projects"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_only_the_projects_the_user_is_a_member_of"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_projects_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_projects_index_links_to_the_show_page_for_each_project"/>
+      </line>
+      <line nr="33">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_shows_the_create_project_form_to_authenticated_users"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_routes__projects_create_before__projects__project_"/>
+      </line>
+      <line nr="41">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="43">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="45">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="46">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="49">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="59">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="65">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="66">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="67">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+      </line>
+      <line nr="68">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+      </line>
+      <line nr="71">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="72">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="73">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="74">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="80">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="81">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="82">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="85">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+      </line>
+      <line nr="90">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_an_empty_state_when_the_user_has_no_projects"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_only_the_projects_the_user_is_a_member_of"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_projects_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_projects_index_links_to_the_show_page_for_each_project"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="91">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_an_empty_state_when_the_user_has_no_projects"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_only_the_projects_the_user_is_a_member_of"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_projects_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_projects_index_links_to_the_show_page_for_each_project"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="98">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_an_empty_state_when_the_user_has_no_projects"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_only_the_projects_the_user_is_a_member_of"/>
+        <covered by="P\Tests\Feature\Web\ProjectsTest::__pest_evaluable_it_shows_projects_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_projects_index_links_to_the_show_page_for_each_project"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="44">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="47">
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_creates_a_new_project_and_redirects_to_the_list"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_registers_the_creator_as_the_first_project_member"/>
+        <covered by="P\Tests\Feature\Web\CreateProjectTest::__pest_evaluable_it_accepts_an_empty_description"/>
+      </line>
+      <line nr="75">
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Controllers</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth\SessionGuard</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project\CreateProject</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project\Exception\ProjectNotFoundException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project\ListUserProjects</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project\ShowProject</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task\Exception\NotAProjectMemberException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task\ListProjectTasks</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="14">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\Status</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Requests\CreateProjectRequest</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="16">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Http\RedirectResponse</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="17">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\Http\Request</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="18">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\View\View</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="19">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RuntimeException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="20"/>
+      <line no="21">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectsController</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Controller</token>
+      </line>
+      <line no="22">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">index</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListUserProjects</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$useCase</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">View</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">requireActor</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$projects</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$useCase</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="27"/>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">view</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'projects.index'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'projects'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projects</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="30"/>
+      <line no="31">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">View</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">view</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'projects.create'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="35"/>
+      <line no="36">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">store</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">CreateProjectRequest</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">CreateProject</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$useCase</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RedirectResponse</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">requireActor</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="42"/>
+      <line no="43">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$useCase</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="44">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">ownerId</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">name</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">input</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'name'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">description</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING_CAST">(string)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">input</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'description'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COALESCE">??</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">''</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="48"/>
+      <line no="49">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">redirect</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">route</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'projects.index'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="50">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="51"/>
+      <line no="52">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">show</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="53">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$project</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">Request</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="56">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ShowProject</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$showProject</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="57">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ListProjectTasks</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listTasks</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">View</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">requireActor</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="60"/>
+      <line no="61">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// Both "project not found" and "actor not a member" map to 404 at the</token>
+      </line>
+      <line no="62">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// web layer to avoid the 404-vs-403 information disclosure leaked by</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_COMMENT">// the underlying use cases (documented as review debt 2.r3).</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_TRY">try</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$projectEntity</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$showProject</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$project</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$tasks</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listTasks</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$project</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">parseStatus</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="67">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CATCH">catch</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ProjectNotFoundException</token>
+        <token name="T_PIPE">|</token>
+        <token name="T_STRING">NotAProjectMemberException</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="68">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">abort</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_LNUMBER">404</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="70"/>
+      <line no="71">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">view</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'projects.show'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="72">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'project'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projectEntity</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="73">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'tasks'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$tasks</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="74">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'activeStatus'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">parseStatus</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="75">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="76">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="77"/>
+      <line no="78">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">parseStatus</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">Request</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">Status</token>
+      </line>
+      <line no="79">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="80">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$request</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">query</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'status'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">is_string</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_BOOLEAN_OR">||</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">''</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="82">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="83">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="84"/>
+      <line no="85">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Status</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">tryFrom</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$raw</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="86">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="87"/>
+      <line no="88">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">requireActor</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+      </line>
+      <line no="89">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="90">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">currentUserId</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="91">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="92">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_COMMENT">// Middleware auth.session should have already redirected guests.</token>
+      </line>
+      <line no="93">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_COMMENT">// Defensive guard so a controller wired without middleware still</token>
+      </line>
+      <line no="94">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_COMMENT">// fails loudly instead of querying with a null id.</token>
+      </line>
+      <line no="95">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'ProjectsController requires an authenticated actor'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="96">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="97"/>
+      <line no="98">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="99">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="100">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="101"/>
+    </source>
+  </file>
+</phpunit>

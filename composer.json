@@ -55,7 +55,7 @@
         ],
         "test:coverage": [
             "@php artisan config:clear --ansi",
-            "./vendor/bin/pest --coverage --min=0"
+            "./vendor/bin/pest --coverage --min=80"
         ],
         "format": "./vendor/bin/pint",
         "format:check": "./vendor/bin/pint --test",

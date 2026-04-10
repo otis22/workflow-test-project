@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ListTaskComments.php" path="/Application/Task" hash="4c4cb78d03e1fdb975afe8ac64d358a9f19f0498">
+    <totals>
+      <lines total="39" comments="1" code="38" executable="7" executed="7" percent="100.00"/>
+      <methods count="2" tested="2" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Application\Task\ListTaskComments" start="16" executable="7" executed="7" crap="4">
+      <namespace name="App\Application\Task"/>
+      <method name="__construct" signature="__construct(CommentRepository $comments, TaskRepository $tasks, ProjectMemberRepository $members)" start="18" end="22" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="execute" signature="execute(int $actorId, int $taskId): array" start="25" end="37" crap="3" executable="6" executed="6" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="22">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_returns_comments_for_a_task_in_id_order"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_for_unknown_task"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_for_an_unknown_task_id"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="27">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_returns_comments_for_a_task_in_id_order"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_for_unknown_task"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="28">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_returns_comments_for_a_task_in_id_order"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_for_unknown_task"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="29">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_for_unknown_task"/>
+      </line>
+      <line nr="32">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_returns_comments_for_a_task_in_id_order"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+      <line nr="33">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_rejects_listing_comments_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_project_member"/>
+      </line>
+      <line nr="36">
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_returns_comments_for_a_task_in_id_order"/>
+        <covered by="P\Tests\Unit\Application\Task\ListTaskCommentsTest::__pest_evaluable_it_does_not_return_comments_from_other_tasks"/>
+        <covered by="P\Tests\Feature\Web\EditTaskTest::__pest_evaluable_it_shows_edit_form_pre_filled_with_current_task_values"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_the_task_fields_for_a_project_member"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_shows_existing_comments_on_the_task"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_adds_a_comment_and_redirects_back_to_the_task"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task\Exception\NotAProjectMemberException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task\Exception\TaskNotFoundException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Project\ProjectMember</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Project\ProjectMemberRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\Comment</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\CommentRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\Task</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="14">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\TaskRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ListTaskComments</token>
+      </line>
+      <line no="17">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommentRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$comments</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">TaskRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$tasks</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectMemberRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$members</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="23"/>
+      <line no="24">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/** @return list&lt;Comment&gt; */</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$taskId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="27">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$task</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">tasks</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">findById</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$taskId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$task</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Task</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">TaskNotFoundException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">forId</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$taskId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="31"/>
+      <line no="32">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">members</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">findByProjectAndUser</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$task</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">projectId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectMember</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">NotAProjectMemberException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">forUserAndProject</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$task</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">projectId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="35"/>
+      <line no="36">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">comments</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">listByTask</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$taskId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="38">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="39"/>
+    </source>
+  </file>
+</phpunit>

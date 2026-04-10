@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="Login.php" path="/Application/Auth" hash="591333e7cbc971be4ea4294b413da842c759fd11">
+    <totals>
+      <lines total="42" comments="0" code="42" executable="9" executed="9" percent="100.00"/>
+      <methods count="3" tested="3" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Application\Auth\Login" start="12" executable="9" executed="9" crap="5">
+      <namespace name="App\Application\Auth"/>
+      <method name="__construct" signature="__construct(UserRepository $users, PasswordHasher $hasher, SessionGuard $session)" start="14" end="18" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="execute" signature="execute(string $email, string $plainPassword): User" start="20" end="35" crap="3" executable="7" executed="7" coverage="100"/>
+      <method name="normalizeEmail" signature="normalizeEmail(string $email): string" start="37" end="40" crap="1" executable="1" executed="1" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="18">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_does_not_establish_session_on_failure"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="22">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_does_not_establish_session_on_failure"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="24">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_does_not_establish_session_on_failure"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="25">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+      </line>
+      <line nr="28">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_does_not_establish_session_on_failure"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="29">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_does_not_establish_session_on_failure"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+      </line>
+      <line nr="32">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="34">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+      <line nr="39">
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_sets_session_user_id"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_InvalidCredentialsException"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_does_not_establish_session_on_failure"/>
+        <covered by="P\Tests\Unit\Application\Auth\LoginTest::__pest_evaluable_it_uses_identical_exception_messages_for_unknown_email_and_wrong_password__no_enumeration_"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_correct_credentials_and_redirects"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_logs_in_with_case_insensitive_email_and_surrounding_whitespace"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_unknown_email_with_a_generic_credentials_error"/>
+        <covered by="P\Tests\Feature\Web\Auth\LoginTest::__pest_evaluable_it_rejects_wrong_password_with_the_same_generic_error_as_unknown_email"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_redirects_to_dashboard_after_login"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth\Exception\InvalidCredentialsException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Hashing\PasswordHasher</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\User\User</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\User\UserRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11"/>
+      <line no="12">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Login</token>
+      </line>
+      <line no="13">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="14">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="15">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">UserRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$users</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">PasswordHasher</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$hasher</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$plainPassword</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">User</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">users</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">findByEmail</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">normalizeEmail</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="23"/>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">User</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">InvalidCredentialsException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="27"/>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">hasher</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">verify</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$plainPassword</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passwordHash</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">InvalidCredentialsException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="31"/>
+      <line no="32">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">session</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">login</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">id</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="33"/>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$user</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="36"/>
+      <line no="37">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">normalizeEmail</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="39">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">strtolower</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">trim</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$email</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="41">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="42"/>
+    </source>
+  </file>
+</phpunit>

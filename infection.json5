@@ -2,7 +2,8 @@
     "$schema": "./vendor/infection/infection/resources/schema.json",
     "source": {
         "directories": [
-            "app"
+            "app/Domain",
+            "app/Application"
         ]
     },
     "logs": {
@@ -13,6 +14,9 @@
         "@default": true
     },
     "testFramework": "phpunit",
+    "phpUnit": {
+        "customPath": "./vendor/bin/pest"
+    },
     "minMsi": 0,
     "minCoveredMsi": 0
 }

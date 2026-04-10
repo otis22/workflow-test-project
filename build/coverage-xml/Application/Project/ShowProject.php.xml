@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="ShowProject.php" path="/Application/Project" hash="d60435d2270662c821cb918cfb834062c001f38d">
+    <totals>
+      <lines total="35" comments="0" code="35" executable="7" executed="7" percent="100.00"/>
+      <methods count="2" tested="2" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Application\Project\ShowProject" start="14" executable="7" executed="7" crap="4">
+      <namespace name="App\Application\Project"/>
+      <method name="__construct" signature="__construct(ProjectRepository $projects, ProjectMemberRepository $members)" start="16" end="19" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="execute" signature="execute(int $actorId, int $projectId): Project" start="21" end="33" crap="3" executable="6" executed="6" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="19">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_returns_the_project_when_actor_is_a_member"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_ProjectNotFoundException_for_unknown_project_id"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_NotAProjectMemberException_when_actor_is_not_a_member_of_an_existing_project"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_checks_project_existence_before_membership__matching_the_current_404_before_403_ordering"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_returns_404_for_non_member_on_GET__projects__id__tasks_create"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_shows_the_create_task_form_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="23">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_returns_the_project_when_actor_is_a_member"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_ProjectNotFoundException_for_unknown_project_id"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_NotAProjectMemberException_when_actor_is_not_a_member_of_an_existing_project"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_checks_project_existence_before_membership__matching_the_current_404_before_403_ordering"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_returns_404_for_non_member_on_GET__projects__id__tasks_create"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_shows_the_create_task_form_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="24">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_returns_the_project_when_actor_is_a_member"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_ProjectNotFoundException_for_unknown_project_id"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_NotAProjectMemberException_when_actor_is_not_a_member_of_an_existing_project"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_checks_project_existence_before_membership__matching_the_current_404_before_403_ordering"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_returns_404_for_non_member_on_GET__projects__id__tasks_create"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_shows_the_create_task_form_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="25">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_ProjectNotFoundException_for_unknown_project_id"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_checks_project_existence_before_membership__matching_the_current_404_before_403_ordering"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_the_project_does_not_exist"/>
+      </line>
+      <line nr="28">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_returns_the_project_when_actor_is_a_member"/>
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_NotAProjectMemberException_when_actor_is_not_a_member_of_an_existing_project"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_returns_404_for_non_member_on_GET__projects__id__tasks_create"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_shows_the_create_task_form_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+      <line nr="29">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_throws_NotAProjectMemberException_when_actor_is_not_a_member_of_an_existing_project"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_returns_404_for_non_member_on_GET__projects__id__tasks_create"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_returns_404_when_actor_is_not_a_member_of_the_project"/>
+      </line>
+      <line nr="32">
+        <covered by="P\Tests\Unit\Application\Project\ShowProjectTest::__pest_evaluable_it_returns_the_project_when_actor_is_a_member"/>
+        <covered by="P\Tests\Feature\Web\CreateTaskTest::__pest_evaluable_it_shows_the_create_task_form_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_name_and_description_for_members"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_the_project_tasks_in_stable_id_order"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_shows_an_empty_state_when_the_project_has_no_tasks"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_filters_tasks_by_status_via_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowProjectTest::__pest_evaluable_it_ignores_an_invalid_status_query_parameter"/>
+        <covered by="P\Tests\Feature\Web\ShowTaskTest::__pest_evaluable_it_task_titles_in_project_show_link_to_the_task_detail_page"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project\Exception\ProjectNotFoundException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task\Exception\NotAProjectMemberException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Project\Project</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Project\ProjectMember</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Project\ProjectMemberRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Project\ProjectRepository</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13"/>
+      <line no="14">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_READONLY">readonly</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ShowProject</token>
+      </line>
+      <line no="15">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projects</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectMemberRepository</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$members</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="20"/>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projectId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Project</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$project</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">projects</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">findById</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$projectId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$project</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Project</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectNotFoundException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">forId</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$projectId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="26">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="27"/>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">members</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">findByProjectAndUser</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$projectId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">ProjectMember</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">NotAProjectMemberException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">forUserAndProject</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projectId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="31"/>
+      <line no="32">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$project</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="34">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="35"/>
+    </source>
+  </file>
+</phpunit>

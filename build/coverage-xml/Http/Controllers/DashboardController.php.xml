@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="DashboardController.php" path="/Http/Controllers" hash="100cb1156e4fa52b92c8348326c5eecf8f685baa">
+    <totals>
+      <lines total="47" comments="0" code="47" executable="19" executed="18" percent="94.74"/>
+      <methods count="1" tested="0" percent="0.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="App\Http\Controllers\DashboardController" start="15" executable="19" executed="18" crap="2">
+      <namespace name="App\Http\Controllers"/>
+      <method name="index" signature="index(SessionGuard $session, ListUserTasks $listTasks, ListUserProjects $listProjects): View" start="17" end="45" crap="2.00" executable="19" executed="18" coverage="94.736842105263"/>
+    </class>
+    <coverage>
+      <line nr="22">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="23">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="27">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="28">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="30">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="32">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="34">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="36">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="38">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="40">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="41">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="42">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="43">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="31">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="33">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="35">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="37">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+      <line nr="44">
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_assigned_tasks_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_upcoming_deadlines_sorted_by_date"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_project_links_on_the_dashboard"/>
+        <covered by="P\Tests\Feature\Web\DashboardTest::__pest_evaluable_it_shows_empty_state_when_no_tasks_or_projects"/>
+      </line>
+    </coverage>
+    <source xmlns="https://schema.phpunit.de/coverage/1.0">
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2"/>
+      <line no="3">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="4"/>
+      <line no="5">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Http\Controllers</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="6"/>
+      <line no="7">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Auth\SessionGuard</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="8">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Project\ListUserProjects</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Application\Task\ListUserTasks</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="10">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\DueDate</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="11">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">App\Domain\Task\Task</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="12">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NAME_QUALIFIED">Illuminate\View\View</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="13">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RuntimeException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="14"/>
+      <line no="15">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DashboardController</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EXTENDS">extends</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Controller</token>
+      </line>
+      <line no="16">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">index</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">SessionGuard</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="19">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ListUserTasks</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listTasks</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="20">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">ListUserProjects</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listProjects</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">View</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$session</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">currentUserId</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">null</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">RuntimeException</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'DashboardController requires an authenticated actor'</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="26"/>
+      <line no="27">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$myTasks</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listTasks</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$projects</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$listProjects</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">execute</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$actorId</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="29"/>
+      <line no="30">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$upcomingDeadlines</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">array_filter</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$myTasks</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="32">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">Task</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$task</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$task</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">dueDate</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_INSTANCEOF">instanceof</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">DueDate</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="33">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">usort</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$upcomingDeadlines</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_FN">fn</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">Task</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$first</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Task</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$second</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$first</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">dueDate</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_SPACESHIP">&lt;=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$second</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">dueDate</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">value</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="38">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$upcomingDeadlines</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">array_slice</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$upcomingDeadlines</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">5</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="39"/>
+      <line no="40">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">view</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'dashboard'</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_SQUARE">[</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'myTasks'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$myTasks</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'upcomingDeadlines'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$upcomingDeadlines</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'projects'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projects</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="44">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="45">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="46">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="47"/>
+    </source>
+  </file>
+</phpunit>
