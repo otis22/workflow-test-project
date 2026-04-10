@@ -39,6 +39,6 @@ final class LoginController extends Controller
         }
 
         // Login use case already calls SessionGuard::login() on success.
-        return redirect('/');
+        return redirect()->route('dashboard');
     }
 }

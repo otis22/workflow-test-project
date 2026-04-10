@@ -11,7 +11,7 @@
             @endsignedOut
 
             @signedIn
-                <a href="#" class="text-gray-600 hover:text-gray-900">Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-900">Dashboard</a>
                 <a href="{{ route('projects.index') }}" class="text-gray-600 hover:text-gray-900">Projects</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf

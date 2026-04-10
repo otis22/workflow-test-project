@@ -61,7 +61,7 @@ it('logs in with correct credentials and redirects', function (): void {
         'password' => 'super-secret',
     ]);
 
-    $response->assertStatus(302)->assertRedirect('/');
+    $response->assertStatus(302)->assertRedirect(route('dashboard'));
 
     /** @var SessionGuard $guard */
     $guard = app(SessionGuard::class);
@@ -77,7 +77,7 @@ it('logs in with case-insensitive email and surrounding whitespace', function ()
         'password' => 'super-secret',
     ]);
 
-    $response->assertStatus(302)->assertRedirect('/');
+    $response->assertStatus(302)->assertRedirect(route('dashboard'));
 
     /** @var SessionGuard $guard */
     $guard = app(SessionGuard::class);

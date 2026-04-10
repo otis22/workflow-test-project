@@ -48,6 +48,6 @@ final class RegisterController extends Controller
 
         $session->login($user->id);
 
-        return redirect('/');
+        return redirect()->route('dashboard');
     }
 }

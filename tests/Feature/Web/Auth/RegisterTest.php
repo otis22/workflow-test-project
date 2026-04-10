@@ -51,7 +51,7 @@ it('registers a new user and logs them in', function (): void {
         'password_confirmation' => 'super-secret',
     ]);
 
-    $response->assertStatus(302)->assertRedirect('/');
+    $response->assertStatus(302)->assertRedirect(route('dashboard'));
 
     /** @var UserRepository $users */
     $users = app(UserRepository::class);
