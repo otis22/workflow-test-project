@@ -7,14 +7,21 @@ namespace App\Http\Controllers;
 use App\Application\Auth\SessionGuard;
 use App\Application\Project\Exception\ProjectNotFoundException;
 use App\Application\Project\ShowProject;
+use App\Application\Task\AddComment;
 use App\Application\Task\CreateTask;
 use App\Application\Task\Exception\NotAProjectMemberException;
+use App\Application\Task\Exception\TaskNotFoundException;
+use App\Application\Task\ListTaskComments;
+use App\Domain\Project\ProjectRepository;
 use App\Domain\Task\DueDate;
 use App\Domain\Task\Priority;
 use App\Domain\Task\Status;
+use App\Domain\Task\Task;
+use App\Domain\Task\TaskRepository;
 use App\Http\Requests\CreateTaskRequest;
 use DateTimeImmutable;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use RuntimeException;
 
@@ -69,6 +76,56 @@ final class TasksController extends Controller
         }
 
         return redirect()->route('projects.show', $project);
+    }
+
+    public function show(
+        int $task,
+        SessionGuard $session,
+        TaskRepository $tasks,
+        ProjectRepository $projects,
+        ListTaskComments $listComments,
+    ): View {
+        $actorId = $this->requireActor($session);
+
+        $taskEntity = $tasks->findById($task);
+        if (! $taskEntity instanceof Task) {
+            abort(404);
+        }
+
+        try {
+            $comments = $listComments->execute($actorId, $task);
+        } catch (TaskNotFoundException|NotAProjectMemberException) {
+            abort(404);
+        }
+
+        $project = $projects->findById($taskEntity->projectId);
+
+        return view('tasks.show', [
+            'task' => $taskEntity,
+            'project' => $project,
+            'comments' => $comments,
+        ]);
+    }
+
+    public function storeComment(
+        int $task,
+        Request $request,
+        SessionGuard $session,
+        AddComment $useCase,
+    ): RedirectResponse {
+        $actorId = $this->requireActor($session);
+
+        $request->validate([
+            'body' => ['required', 'string', 'max:5000'],
+        ]);
+
+        try {
+            $useCase->execute($task, $actorId, (string) $request->input('body'));
+        } catch (TaskNotFoundException|NotAProjectMemberException) {
+            abort(404);
+        }
+
+        return redirect()->route('tasks.show', $task);
     }
 
     private function requireActor(SessionGuard $session): int

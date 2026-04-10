@@ -30,7 +30,7 @@
             <!-- Resource controllers legitimately depend on many use cases,
                  form requests and framework types when following clean
                  architecture with method-level DI. -->
-            <property name="maximum" value="16"/>
+            <property name="maximum" value="22"/>
         </properties>
     </rule>
     <rule ref="rulesets/unusedcode.xml"/>

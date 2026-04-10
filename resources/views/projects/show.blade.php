@@ -52,7 +52,7 @@
                 @foreach ($tasks as $task)
                     <li class="flex items-center justify-between p-4">
                         <div>
-                            <p class="text-base font-medium text-gray-900">{{ $task->title }}</p>
+                            <a href="{{ route('tasks.show', $task->id) }}" class="text-base font-medium text-gray-900 hover:underline">{{ $task->title }}</a>
                             @if ($task->description !== '')
                                 <p class="text-sm text-gray-600">{{ $task->description }}</p>
                             @endif

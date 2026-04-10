@@ -35,4 +35,11 @@ Route::middleware('auth.session')->group(function (): void {
     Route::post('/projects/{project}/tasks', [TasksController::class, 'store'])
         ->whereNumber('project')
         ->name('tasks.store');
+
+    Route::get('/tasks/{task}', [TasksController::class, 'show'])
+        ->whereNumber('task')
+        ->name('tasks.show');
+    Route::post('/tasks/{task}/comments', [TasksController::class, 'storeComment'])
+        ->whereNumber('task')
+        ->name('tasks.comments.store');
 });
