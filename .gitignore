@@ -33,3 +33,4 @@ tests/Browser/screenshots
 tests/Browser/console
 tests/Browser/source
 .env.dusk.local
+/build
