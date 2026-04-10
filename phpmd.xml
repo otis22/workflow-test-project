@@ -22,7 +22,17 @@
             <property name="minimum" value="12"/>
         </properties>
     </rule>
-    <rule ref="rulesets/design.xml"/>
+    <rule ref="rulesets/design.xml">
+        <exclude name="CouplingBetweenObjects"/>
+    </rule>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <properties>
+            <!-- Resource controllers legitimately depend on many use cases,
+                 form requests and framework types when following clean
+                 architecture with method-level DI. -->
+            <property name="maximum" value="16"/>
+        </properties>
+    </rule>
     <rule ref="rulesets/unusedcode.xml"/>
 
     <rule ref="rulesets/naming.xml">

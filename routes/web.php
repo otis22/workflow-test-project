@@ -24,4 +24,7 @@ Route::middleware('auth.session')->group(function (): void {
     Route::get('/projects', [ProjectsController::class, 'index'])->name('projects.index');
     Route::get('/projects/create', [ProjectsController::class, 'create'])->name('projects.create');
     Route::post('/projects', [ProjectsController::class, 'store'])->name('projects.store');
+    Route::get('/projects/{project}', [ProjectsController::class, 'show'])
+        ->whereNumber('project')
+        ->name('projects.show');
 });

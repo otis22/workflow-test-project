@@ -21,8 +21,7 @@
                 @foreach ($projects as $project)
                     <li class="flex items-center justify-between p-4">
                         <div>
-                            {{-- Placeholder href — project detail page wired in 5.3 --}}
-                            <a href="#" class="text-base font-medium text-gray-900 hover:underline">
+                            <a href="{{ route('projects.show', $project->id) }}" class="text-base font-medium text-gray-900 hover:underline">
                                 {{ $project->name }}
                             </a>
                             @if ($project->description !== '')
