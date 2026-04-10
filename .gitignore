@@ -27,3 +27,9 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Dusk
+tests/Browser/screenshots
+tests/Browser/console
+tests/Browser/source
+.env.dusk.local

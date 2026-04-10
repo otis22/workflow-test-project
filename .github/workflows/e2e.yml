@@ -1,8 +1,10 @@
-# E2E tests (Laravel Dusk). Skeleton — будет активирован в задаче 8.1.
 name: E2E tests
 
 on:
-  workflow_dispatch:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -11,6 +13,87 @@ jobs:
   e2e:
     name: Dusk e2e
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: taskflow
+          POSTGRES_USER: taskflow
+          POSTGRES_PASSWORD: taskflow
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U taskflow"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: taskflow
+      DB_USERNAME: taskflow
+      DB_PASSWORD: taskflow
+      APP_URL: http://127.0.0.1:8000
+      DUSK_DRIVER_URL: http://localhost:9515
+
     steps:
-      - name: Placeholder
-        run: echo "E2E suite will be enabled in task 8.1"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_pgsql, pgsql, bcmath, mbstring, xml, ctype, zip, pcntl
+          tools: composer:v2
+
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Detect ChromeDriver version
+        run: php artisan dusk:chrome-driver --detect
+
+      - name: Start application server
+        run: php artisan serve --port=8000 &
+
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 15); do
+            curl -s http://127.0.0.1:8000/ > /dev/null && break
+            sleep 1
+          done
+
+      - name: Run Dusk tests
+        run: php artisan dusk
+
+      - name: Upload Dusk screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dusk-screenshots
+          path: tests/Browser/screenshots
+          retention-days: 3
