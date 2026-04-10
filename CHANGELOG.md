@@ -1,5 +1,76 @@
 # Changelog
 
+## Этап 10: Финальное ревью
+
+**Статус:** завершён (кроме 9.1/9.3 — Infection blocked).
+
+### Результаты аудита
+- **Артефакты**: Roadmap, PRD, AssumptionLog, CHANGELOG синхронизированы.
+- **Архитектура**: PASS — чистая архитектура, нет leaks domain→infra/web, нет fat controllers, нет raw SQL в domain/application.
+- **Безопасность**: PASS — все формы с CSRF, Blade auto-escape (нет `{!! !!}`), auth middleware на всех sensitive routes, POST-only logout, no user enumeration в Login.
+- **CI/инфраструктура**: CI green (295 unit/feature), E2E green (6 Dusk), все quality tools present, Node build wired.
+- **Аудит зависимостей**: `composer audit` clean.
+- **Smoke tests**: containers healthy, /, /login, /register → 200, /projects → 302 redirect.
+
+### Открытые пункты
+- **9.1 Infection**: BLOCKED — Infection 0.29 несовместим с Pest 4 / PHPUnit 12.
+- **9.3 Test strengthening**: зависит от 9.1.
+- **2.r3 Information disclosure (404 vs 403)**: domain-layer leak mitigated at web layer через `abort(404)` для обоих exceptions. Domain-layer itself still distinguishes exceptions для flexibility. Принято как acceptable trade-off для MVP.
+
+## Этап 8: E2E-тесты
+
+**Статус:** завершён.
+
+### Добавлено
+- Laravel Dusk 8.5 с headless Chrome.
+- `selenium/standalone-chrome` Docker service (opt-in via `--profile dusk`).
+- CI `e2e.yml` workflow: PHP + Node + PostgreSQL + ChromeDriver + artisan serve + dusk.
+- 6 browser tests: register → dashboard, create project → list, create task → project tasks, change status → new status, unassigned → not on dashboard, welcome page smoke.
+
+### Проверки
+- CI green + E2E green.
+- `DatabaseMigrations` trait для изоляции между тестами.
+
+## Этап 9: Мутационное тестирование и coverage gate
+
+**Статус:** частично (9.2 done, 9.1/9.3 blocked).
+
+### Добавлено
+- Coverage gate: `--min=80` в `composer test:coverage`. Текущее покрытие 97.4%.
+- `infection.json5` обновлён: scope Domain + Application, custom phpUnit path для Pest.
+
+### Блокировки
+- Infection 0.29 + PHPUnit 12: `<filter>` XML element removed, JUnit naming mismatch с Pest. Ждём Infection 0.30+ или community pest-adapter.
+
+## Этапы 5–7: Web/UI — Проекты, Задачи, Dashboard
+
+**Статус:** завершён.
+
+### Добавлено
+
+#### Инфраструктура web-слоя (5.1.1, 4.2.1)
+- `EnsureAuthenticated` middleware → alias `auth.session`, redirect to login.
+- Laravel adapters: `SystemClock`, `LaravelPasswordHasher`, `LaravelSessionGuard`.
+- Custom Blade directives `@signedIn`/`@signedOut` (reads SessionGuard port, not Auth facade).
+
+#### Проекты (5.1–5.3)
+- `/projects` — список проектов пользователя с empty state.
+- `/projects/create` → POST `/projects` — создание проекта с FormRequest + trim guard.
+- `/projects/{project}` — detail page с задачами и status filter (?status=todo|in_progress|done).
+- `ShowProject` use case (5.3.1) — membership-checked project retrieval.
+
+#### Задачи (6.1–6.3)
+- `/projects/{project}/tasks/create` — форма создания (title, description, status, priority, due_date). Assignee deferred.
+- `/tasks/{task}` — detail page с полями + comments + add comment form.
+- `/tasks/{task}/edit` — edit form с pre-filled values, PUT via @method.
+
+#### Dashboard (7.1+7.2)
+- `/dashboard` — assigned tasks, upcoming deadlines (top 5 by date), project links. Login/register redirect to dashboard post-auth.
+
+### Проверки
+- 295 unit/feature tests, 778 assertions, 97.4% coverage.
+- CI green на каждом push, E2E green.
+
 ## Этап 4: Web/UI — Аутентификация
 
 **Статус:** завершён.

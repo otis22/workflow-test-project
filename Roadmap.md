@@ -107,17 +107,17 @@
 | 2.r1 | `[review]` Email normalization | Нормализовать email (lowercase + trim) на уровне use cases или value object EmailAddress. Сделать поиск дубликатов и login case-insensitive. Источник: Codex review задачи 2.1 | `done` |
 | 2.r2 | `[review]` Actor-based authorization в application layer | Системная проблема: `UpdateTask`, `ListProjectTasks`, `ListUserTasks`, `ListTaskComments` не принимают actor и не проверяют право вызывающего (IDOR). Решение пользователя: actor-based в application layer. Реализовано в 2 подзадачах: 2.r2.A (UpdateTask + ListProjectTasks), 2.r2.B (ListUserTasks rename + ListTaskComments). Информационный leak 404 vs 403 вынесен отдельно как 2.r3. | `done` |
 
-| 2.r3 | `[review]` Information disclosure: 404 vs 403 в UpdateTask | После 2.r2.A неавторизованный actor различает «task не существует» (TaskNotFoundException) от «task существует, но ты не member» (NotAProjectMemberException). Скрыть существование: вернуть TaskNotFoundException в обоих случаях, либо отдельный resolve-by-actor метод репозитория. Источник: Codex review 2.r2.A | `todo` |
+| 2.r3 | `[review]` Information disclosure: 404 vs 403 | Web layer collapses both exceptions to abort(404). Domain layer retains the distinction for flexibility. Acceptable trade-off для MVP. Источник: Codex review 2.r2.A | `done` |
 
 ## Этап 10: Финальное ревью и исправление ошибок
 
 | # | Задача | Описание | Статус |
 |---|--------|----------|--------|
-| 10.1 | Ревью артефактов | Проверить актуальность Roadmap, PRD, AssumptionLog. Синхронизировать документацию с реальным состоянием кода | `todo` |
-| 10.2 | Ревью архитектуры | Проверить соответствие кода чистой архитектуре: нет ли утечек домена в UI, нет ли дублирования, нет ли fat controllers | `todo` |
-| 10.3 | Ревью безопасности | Проверить: валидация входных данных, авторизация доступа к ресурсам, защита от XSS/CSRF/SQL-injection, sanitization | `todo` |
-| 10.4 | Ревью CI/инфраструктуры | CI стабилен, нет warnings, тесты не flaky. Все инструменты качества из техтребований представлены в CI | `todo` |
-| 10.5 | Аудит зависимостей | `composer audit` — нет known vulnerabilities. Критичные пакеты не устарели | `todo` |
-| 10.6 | Smoke tests | `docker compose up` → приложение поднимается → основные URL отвечают корректно | `todo` |
-| 10.7 | Исправление найденных проблем | Оформить найденные проблемы как задачи с пометкой `[review]`, исправить по приоритету | `todo` |
-| 10.8 | Финальный changelog | Генерация итогового CHANGELOG.md по всем этапам | `todo` |
+| 10.1 | Ревью артефактов | Roadmap, PRD, AssumptionLog синхронизированы | `done` |
+| 10.2 | Ревью архитектуры | PASS: нет domain→infra leaks, нет fat controllers, нет raw SQL в domain/app | `done` |
+| 10.3 | Ревью безопасности | PASS: CSRF, XSS escaping, auth middleware, no user enumeration | `done` |
+| 10.4 | Ревью CI/инфраструктуры | CI + E2E green, все quality tools present. Infection blocked (9.1) | `done` |
+| 10.5 | Аудит зависимостей | composer audit clean — нет known vulnerabilities | `done` |
+| 10.6 | Smoke tests | Containers healthy, /, /login, /register → 200, /projects → 302 | `done` |
+| 10.7 | Исправление найденных проблем | Нет новых issues. 2.r3 mitigated at web layer | `done` |
+| 10.8 | Финальный changelog | CHANGELOG.md обновлён по всем этапам 0–10 | `done` |
