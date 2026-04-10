@@ -13,8 +13,7 @@
                     <p class="mt-2 text-gray-600">{{ $project->description }}</p>
                 @endif
             </div>
-            {{-- Placeholder href — wired in 6.1 --}}
-            <a href="#" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
+            <a href="{{ route('tasks.create', $project->id) }}" class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800">
                 Create task
             </a>
         </div>

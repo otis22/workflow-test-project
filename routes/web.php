@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,4 +28,11 @@ Route::middleware('auth.session')->group(function (): void {
     Route::get('/projects/{project}', [ProjectsController::class, 'show'])
         ->whereNumber('project')
         ->name('projects.show');
+
+    Route::get('/projects/{project}/tasks/create', [TasksController::class, 'create'])
+        ->whereNumber('project')
+        ->name('tasks.create');
+    Route::post('/projects/{project}/tasks', [TasksController::class, 'store'])
+        ->whereNumber('project')
+        ->name('tasks.store');
 });
