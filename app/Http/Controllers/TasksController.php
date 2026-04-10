@@ -162,6 +162,7 @@ final class TasksController extends Controller
                 priority: Priority::from((string) $request->input('priority')),
                 changeDueDate: true,
                 dueDate: $dueDate,
+                changeAssignee: false,
             );
         } catch (TaskNotFoundException|NotAProjectMemberException) {
             abort(404);
